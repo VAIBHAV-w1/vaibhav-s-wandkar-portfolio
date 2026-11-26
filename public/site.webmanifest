@@ -1,0 +1,20 @@
+{
+  "name": "Vaibhav S. Wandkar — Portfolio",
+  "short_name": "VSW Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0e0c",
+  "theme_color": "#0d0e0c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

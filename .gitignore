@@ -11,6 +11,7 @@ out/
 .vercel/
 .netlify/
 coverage/
+*.tsbuildinfo
 
 # Environment & secrets
 .env

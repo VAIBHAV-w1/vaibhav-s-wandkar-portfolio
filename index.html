@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Vaibhav S. Wandkar — Software Developer · AI/ML · Cybersecurity</title>
+    <meta
+      name="description"
+      content="Portfolio of Vaibhav S. Wandkar, a Computer Science and Design engineering student at BIET Davangere building software across AI/ML, computer vision, cybersecurity and web development."
+    />
+    <meta name="author" content="Vaibhav S. Wandkar" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0e0c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vaibhav S. Wandkar" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content="Vaibhav S. Wandkar — Software Developer · AI/ML · Cybersecurity" />
+    <meta
+      property="og:description"
+      content="Computer Science and Design engineering student building intelligent, secure software — computer vision, AI/ML, cybersecurity and web."
+    />
+    <meta property="og:image" content="%OG_IMAGE%" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vaibhav S. Wandkar — portfolio" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vaibhav S. Wandkar — Software Developer · AI/ML · Cybersecurity" />
+    <meta
+      name="twitter:description"
+      content="Computer Science and Design engineering student building intelligent, secure software — computer vision, AI/ML, cybersecurity and web."
+    />
+    <meta name="twitter:image" content="%OG_IMAGE%" />
+    <!--SITE_META-->
+
+    <script>
+      ;(function () {
+        var d = document.documentElement
+        try {
+          var s = localStorage.getItem('vsw-theme')
+          var t = s === 'light' || s === 'dark' ? s : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+          d.dataset.theme = t
+          var m = document.querySelector('meta[name="theme-color"]')
+          if (m) m.setAttribute('content', t === 'light' ? '#f2efe6' : '#0d0e0c')
+        } catch (e) {}
+        d.classList.add('js')
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; max-width: 40rem">
+        <h1>Vaibhav S. Wandkar</h1>
+        <p>Computer Science and Design engineering student · Software Developer · AI/ML and Cybersecurity enthusiast.</p>
+        <p>
+          <a href="https://github.com/VAIBHAV-w1">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/vaibhavswandkar/">LinkedIn</a> ·
+          <a href="mailto:vaibhavwandkar5@gmail.com">Email</a>
+        </p>
+        <p>This site uses JavaScript for its interactive experience.</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
