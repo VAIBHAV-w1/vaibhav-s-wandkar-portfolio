@@ -83,11 +83,11 @@ export function Navbar({
           <button
             type="button"
             onClick={handleBrandClick}
-            className="group inline-flex shrink-0 items-center gap-3 text-left"
+            className="group inline-flex shrink-0 items-center gap-2.5 text-left xl:gap-3"
             aria-label={`${profile.name} — back to top`}
           >
             <BrandLogo size="md" />
-            <span className="hidden text-[15px] font-semibold tracking-tight text-ink sm:inline xl:text-base">
+            <span className="hidden text-[15px] font-semibold tracking-tight text-ink sm:inline lg:hidden xl:inline xl:text-base">
               {profile.name}
             </span>
           </button>
@@ -118,7 +118,7 @@ export function Navbar({
             <a
               href={social.github.href}
               target="_blank"
-              rel="noreferrer noopener"
+              rel="noopener noreferrer"
               className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-full border border-line-strong px-4 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface sm:inline-flex"
             >
               <span>GitHub</span>

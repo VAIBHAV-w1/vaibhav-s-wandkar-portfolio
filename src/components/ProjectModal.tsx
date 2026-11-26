@@ -104,9 +104,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   {project.title}
                   {project.alias ? <span className="ml-2 font-serif italic font-normal text-muted">/ {project.alias}</span> : null}
                 </h2>
-                {project.context ? (
-                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.context}</p>
-                ) : null}
+                <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.ownership}</p>
                 <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{project.summary}</p>
               </div>
 

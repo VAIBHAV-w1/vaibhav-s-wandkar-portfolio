@@ -1,18 +1,24 @@
 /**
- * Core identity synced with VaibhavSWandkarResume (2).pdf and verified GitHub profile (github.com/VAIBHAV-w1).
+ * Core personal identity & editorial narrative — synced with VaibhavSWandkarResume (2).pdf
+ * and verified public GitHub repositories (github.com/VAIBHAV-w1).
  */
 export const profile = {
   name: 'Vaibhav S. Wandkar',
   firstName: 'Vaibhav',
   middleInitial: 'S.',
   lastName: 'Wandkar',
-  initials: 'VW',
+  initials: 'VSW',
   location: 'Hubli, Karnataka, India',
   positioning: 'Python Developer | Django Full-Stack Developer | Software Engineer',
-  roles: ['Python Developer', 'Django Full-Stack', 'Backend Architecture', 'Database Systems', 'AI / ML', 'Cybersecurity'],
-  headline: 'Building intelligent digital experiences with Python and Django.',
+  headline: 'Building intelligent applications through thoughtful engineering.',
   intro:
-    "I'm a Computer Science and Design engineering student focused on Python, Django and full-stack development. I enjoy building practical applications that combine thoughtful interfaces, reliable backend systems and meaningful technology.",
+    "I'm a Computer Science and Design undergraduate focused on Python, Django and full-stack development. I enjoy turning ideas into practical software through reliable backend systems, thoughtful interfaces and emerging technologies.",
+  focusAreas: [
+    { index: '01', label: 'Python & Django', detail: 'Full-stack architecture & server logic' },
+    { index: '02', label: 'Database Systems', detail: 'Relational schemas with MySQL & SQLite' },
+    { index: '03', label: 'Web Engineering', detail: 'Responsive interfaces & secure auth' },
+    { index: '04', label: 'AI & Security', detail: 'Computer vision, ML & web security' },
+  ],
   education: {
     degree: 'B.E. Computer Science and Design',
     institution: 'Bapuji Institute of Engineering and Technology, Davangere',
@@ -22,23 +28,26 @@ export const profile = {
   },
   languages: ['English', 'Hindi', 'Kannada', 'Marathi'],
   interests: [
-    'Python & Django Full-Stack Development',
-    'Backend Architecture & Software Systems',
-    'Database Design & Integration',
+    'Python & Django Development',
+    'Backend Architecture',
+    'Full-Stack Application Development',
+    'Database Design',
     'Artificial Intelligence & Machine Learning',
     'Computer Vision',
     'Cybersecurity',
   ],
-  /** From the "Currently learning more about" list on his GitHub profile README. */
-  exploring: ['Backend architecture', 'AI/ML systems', 'Secure application development', 'Production-ready software engineering'],
+  exploring: [
+    'Production backend architecture',
+    'Applied AI & computer vision systems',
+    'Secure web application engineering',
+    'Cloud deployment workflows',
+  ],
   about: {
     statement:
-      'I am a Computer Science and Design undergraduate with hands-on experience across internships, hackathons and real-world software projects — building practical, database-driven applications with Python and Django.',
+      'I build dependable, database-driven software with Python and Django — bridging structured backend engineering with interfaces designed for everyday clarity.',
     background:
-      "I'm pursuing a B.E. in Computer Science and Design at Bapuji Institute of Engineering and Technology (B.I.E.T.), Davangere (expected 2027, CGPA 7.78/10), following a Diploma in Computer Science and Engineering from K.L.E. Society's Smt. C.I. Munavalli Polytechnic (77.3%).",
+      'Currently pursuing a B.E. in Computer Science and Design at Bapuji Institute of Engineering and Technology, Davangere (expected 2027), I built my programming foundation through a Diploma in Computer Science and Engineering at K.L.E. Society’s Smt. C.I. Munavalli Polytechnic. Studying both design and systems engineering shapes how I plan data models alongside user flows.',
     approach:
-      'Across projects like DeepVision, Lost and Found Portal, Hospital Management System and CyberShield, I focus on structured relational schemas, authentication flows, form validation, CRUD workflows and application security — alongside applied work in AI/ML and vulnerability assessment.',
-    direction:
-      'My focus is writing clean, maintainable Python code and building intelligent, scalable software across full-stack engineering, AI and cybersecurity.',
+      'Across projects spanning surveillance intelligence, campus recovery portals, hospital scheduling and web security, I focus on clean schema design, role-based access control, input validation and maintainable code — complemented by internships in AI, cloud infrastructure, Android UI and vulnerability assessment.',
   },
 } as const

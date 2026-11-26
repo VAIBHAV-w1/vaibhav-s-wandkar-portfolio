@@ -141,7 +141,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
         <div className="grid gap-10 lg:grid-cols-12">
           {/* Direct channels */}
           <div className="space-y-4 lg:col-span-5" data-reveal="">
-            <div className="rounded-3xl border border-line bg-bg-2 p-6">
+            <div className="rounded-2xl border border-line bg-bg-2 p-6">
               <p className="eyebrow text-faint">Direct Email</p>
               <a
                 href={social.email.href}
@@ -170,7 +170,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
 
             <a
               href={social.phone.href}
-              className="flex items-center justify-between rounded-3xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -190,8 +190,8 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
             <a
               href={social.github.href}
               target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center justify-between rounded-3xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -208,8 +208,8 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
             <a
               href={social.linkedin.href}
               target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center justify-between rounded-3xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -225,7 +225,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
           </div>
 
           {/* Form */}
-          <div className="rounded-3xl border border-line bg-bg-2 p-6 sm:p-8 lg:col-span-7" data-reveal="">
+          <div className="rounded-2xl border border-line bg-bg-2 p-6 sm:p-8 lg:col-span-7" data-reveal="">
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               {/* Honeypot anti-spam field */}
               <div className="hidden" aria-hidden="true">

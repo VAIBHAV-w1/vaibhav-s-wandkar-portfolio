@@ -1,10 +1,12 @@
 /**
  * Internships, certifications and achievements verified directly from VaibhavSWandkarResume (2).pdf.
+ * Written in natural, clear portfolio language while preserving exact roles, dates, organizations and verified figures.
  */
 export interface ExperienceItem {
   role: string
   org: string
   period: string
+  summary: string
   highlights: string[]
   relatedProject?: string
 }
@@ -13,38 +15,42 @@ export const experience: ExperienceItem[] = [
   {
     role: 'Android App Development Intern',
     org: 'Corizo Edutech Pvt. Ltd.',
-    period: 'May 2025 – Jun 2025',
+    period: 'May 2025 – June 2025',
+    summary: 'Built responsive mobile interfaces and stabilized Android navigation flows across multiple screen dimensions.',
     highlights: [
-      'Designed and developed 5+ responsive Android UI screens for multiple device sizes and resolutions.',
-      'Resolved activity lifecycle bugs across 3 application modules, improving navigation stability and reducing app crashes.',
+      'Designed and implemented 5+ responsive Android UI screens tailored for varied device sizes and resolutions.',
+      'Diagnosed and resolved activity lifecycle issues across 3 application modules, improving navigation stability and reducing crashes.',
     ],
   },
   {
     role: 'Cloud Computing Intern',
     org: 'Corizo Edutech Pvt. Ltd.',
-    period: 'Apr 2025 – Jun 2025',
+    period: 'April 2025 – June 2025',
+    summary: 'Worked hands-on with core cloud service models, virtualization and repeatable deployment setups.',
     highlights: [
-      'Applied cloud computing concepts including IaaS, PaaS, SaaS, virtualization and deployment workflows through 10+ practical lab exercises.',
-      'Configured 3 cloud deployment environments and created clear documentation to standardize deployment steps for the team.',
+      'Applied IaaS, PaaS, SaaS and virtualization workflows across 10+ practical cloud lab exercises.',
+      'Configured 3 cloud deployment environments and authored clear documentation to standardize team setup.',
     ],
   },
   {
     role: 'Artificial Intelligence Intern',
     org: 'Internz Learn',
-    period: 'Nov 2024 – Dec 2024',
+    period: 'November 2024 – December 2024',
+    summary: 'Prepared structured training datasets and benchmarked machine learning models for predictive accuracy.',
     highlights: [
-      'Evaluated and compared 4+ machine learning models for predictive analysis to select the best-performing model based on accuracy.',
-      'Cleaned and prepared 10,000+ structured records using Pandas and NumPy to improve data quality for model training.',
+      'Cleaned and structured 10,000+ records using Pandas and NumPy to improve downstream model quality.',
+      'Evaluated and compared 4+ machine learning models to identify the strongest predictive baseline.',
     ],
     relatedProject: 'resume-screening',
   },
   {
     role: 'Cybersecurity Intern',
     org: 'HAEGL Technologies Pvt. Ltd.',
-    period: 'Jan 2024 – Apr 2024',
+    period: 'January 2024 – April 2024',
+    summary: 'Conducted web application security testing and documented practical remediation steps.',
     highlights: [
-      'Performed vulnerability assessment and penetration testing (VAPT) on web applications and identified SQL Injection, XSS and CSRF vulnerabilities.',
-      'Prepared detailed remediation reports covering 15+ vulnerabilities with actionable recommendations to strengthen application security.',
+      'Executed vulnerability assessment and penetration testing (VAPT) against web applications, identifying SQL Injection, XSS and CSRF flaws.',
+      'Authored remediation reports covering 15+ vulnerabilities with concrete fixes to strengthen application security.',
     ],
   },
 ]

@@ -15,7 +15,7 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
   return (
     <article
       data-reveal=""
-      className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-bg-2 transition duration-300 hover:border-line-strong"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-bg-2 transition duration-300 hover:border-line-strong"
     >
       <div className="relative aspect-video overflow-hidden border-b border-line bg-surface">
         {project.image ? (
@@ -35,7 +35,7 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
           </div>
         )}
         <span className="pointer-events-none absolute right-3 top-3 rounded-full border border-line bg-bg/85 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted backdrop-blur-xs">
-          {project.visualType === 'screenshot' ? 'UI Screenshot' : 'Architecture Visual'}
+          {project.visualType === 'screenshot' ? 'UI Screenshot' : 'Architecture Illustration'}
         </span>
       </div>
 
@@ -59,6 +59,7 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
             {project.title}
             {project.alias ? <span className="ml-2 font-serif italic font-normal text-muted">/ {project.alias}</span> : null}
           </h3>
+          <p className="mt-1 font-mono text-[11px] text-faint">{project.ownership}</p>
           <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.summary}</p>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {project.stack.slice(0, featured ? 7 : 5).map((tech) => (
@@ -84,7 +85,7 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
               <a
                 href={project.demo}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel="noopener noreferrer"
                 className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-line-strong px-3.5 text-xs font-medium text-ink transition hover:border-accent-ink"
               >
                 <span>Live Demo</span>
@@ -95,7 +96,7 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
           <a
             href={project.repo}
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noopener noreferrer"
             aria-label={`${project.title} GitHub repository`}
             className="inline-flex min-h-[40px] items-center gap-1.5 text-xs text-muted transition hover:text-ink"
           >
@@ -179,7 +180,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
         {lead ? (
           <article
             data-reveal=""
-            className="group mb-6 overflow-hidden rounded-3xl border border-line bg-bg-2 transition duration-300 hover:border-line-strong"
+            className="group mb-6 overflow-hidden rounded-2xl border border-line bg-bg-2 transition duration-300 hover:border-line-strong"
           >
             <div className="grid lg:grid-cols-12">
               <div className="relative overflow-hidden border-b border-line bg-surface lg:col-span-7 lg:border-r lg:border-b-0">
@@ -208,11 +209,15 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
                     <span className="font-mono text-xs text-accent-ink">
                       {lead.index} · {lead.category}
                     </span>
-                    <span className="rounded-full border border-line bg-bg/70 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-                      {lead.status}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      {lead.period ? <span className="font-mono text-[10px] text-faint">{lead.period}</span> : null}
+                      <span className="rounded-full border border-line bg-bg/70 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                        {lead.status}
+                      </span>
+                    </div>
                   </div>
                   <h3 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">{lead.title}</h3>
+                  <p className="mt-1 font-mono text-[11px] text-faint">{lead.ownership}</p>
                   <p className="mt-3 text-sm leading-relaxed text-muted sm:text-[15px]">{lead.summary}</p>
                   <div className="mt-5 flex flex-wrap gap-1.5">
                     {lead.stack.slice(0, 9).map((tech) => (
@@ -237,7 +242,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
                     <a
                       href={lead.demo}
                       target="_blank"
-                      rel="noreferrer noopener"
+                      rel="noopener noreferrer"
                       className="inline-flex min-h-[42px] items-center gap-1.5 rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-accent-ink"
                     >
                       <span>Live Demo</span>
@@ -247,7 +252,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
                   <a
                     href={lead.repo}
                     target="_blank"
-                    rel="noreferrer noopener"
+                    rel="noopener noreferrer"
                     aria-label={`${lead.title} GitHub repository`}
                     className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-full border border-line text-muted transition hover:border-line-strong hover:text-ink"
                   >
@@ -285,7 +290,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
         </div>
 
         {/* Additional verified GitHub repositories */}
-        <div className="mt-12 rounded-3xl border border-line bg-bg-2 p-6 sm:p-8" data-reveal="">
+        <div className="mt-12 rounded-2xl border border-line bg-bg-2 p-6 sm:p-8" data-reveal="">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="eyebrow text-accent-ink">More on GitHub</p>
@@ -299,8 +304,8 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
                 key={repo.name}
                 href={repo.href}
                 target="_blank"
-                rel="noreferrer noopener"
-                className="group flex flex-col justify-between rounded-2xl border border-line bg-bg p-4 transition hover:border-line-strong"
+                rel="noopener noreferrer"
+                className="group flex flex-col justify-between rounded-xl border border-line bg-bg p-4 transition hover:border-line-strong"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">

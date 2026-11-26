@@ -26,25 +26,34 @@ export function Experience({ reducedMotion, onOpenProject }: Props) {
               <span className="font-serif italic font-normal text-accent-ink">milestones</span>
             </>
           }
-          aside={<p>Verified industry internships, technical certifications, hackathons and engineering achievements.</p>}
+          aside={<p>Verified internships, industry certifications, hackathons and project recognition.</p>}
         />
 
         <div className="grid gap-10 lg:grid-cols-12">
-          {/* Internships */}
+          {/* Internships Vertical Timeline */}
           <div className="lg:col-span-7" data-reveal="">
-            <h3 className="eyebrow mb-4 text-faint">Internships</h3>
-            <div className="divide-y divide-line border-y border-line">
-              {experience.map((item) => {
+            <h3 className="eyebrow mb-5 text-faint">Internships</h3>
+            <ol className="relative space-y-6 border-l border-line pl-6 sm:pl-7">
+              {experience.map((item, idx) => {
                 const related = item.relatedProject ? getProject(item.relatedProject) : undefined
                 return (
-                  <article key={`${item.role}-${item.org}-${item.period}`} className="py-6">
+                  <li
+                    key={`${item.role}-${item.org}-${item.period}`}
+                    className="relative rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -left-[31px] top-7 h-3 w-3 rounded-full border-2 border-bg sm:-left-[35px] ${
+                        idx === 0 ? 'bg-accent' : 'bg-line-strong'
+                      }`}
+                    />
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <h4 className="text-lg font-medium text-ink sm:text-xl">{item.role}</h4>
                         <p className="text-sm font-medium text-muted">{item.org}</p>
                       </div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full border border-line bg-bg-2 px-3 py-1 font-mono text-[11px] text-accent-ink">
+                        <span className="rounded-full border border-line bg-bg px-3 py-1 font-mono text-[11px] text-accent-ink">
                           {item.period}
                         </span>
                         {related ? (
@@ -60,18 +69,19 @@ export function Experience({ reducedMotion, onOpenProject }: Props) {
                       </div>
                     </div>
 
+                    <p className="mt-3 text-sm leading-relaxed text-ink">{item.summary}</p>
                     <ul className="mt-3 space-y-1.5 text-sm leading-relaxed text-muted">
-                      {item.highlights.map((bullet, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
+                      {item.highlights.map((bullet, bIdx) => (
+                        <li key={bIdx} className="flex items-start gap-2.5">
                           <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                           <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
-                  </article>
+                  </li>
                 )
               })}
-            </div>
+            </ol>
           </div>
 
           {/* Hackathons, Achievements & Certifications */}

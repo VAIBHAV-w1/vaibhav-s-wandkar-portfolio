@@ -72,7 +72,7 @@ export function Footer({ route, onNavigate, onScrollTo }: Props) {
             <a
               href={social.github.href}
               target="_blank"
-              rel="noreferrer noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1 hover:text-ink"
             >
               GitHub <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
@@ -80,7 +80,7 @@ export function Footer({ route, onNavigate, onScrollTo }: Props) {
             <a
               href={social.linkedin.href}
               target="_blank"
-              rel="noreferrer noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1 hover:text-ink"
             >
               LinkedIn <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
