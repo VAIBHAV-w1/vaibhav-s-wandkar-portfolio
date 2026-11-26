@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
-export type RoutePath = '/' | '/privacy'
+export type RoutePath = '/' | '/privacy' | '/404'
 
 function normalizePath(pathname: string): RoutePath {
-  return pathname.replace(/\/+$/, '') === '/privacy' ? '/privacy' : '/'
+  const clean = pathname.replace(/\/+$/, '') || '/'
+  if (clean === '/') return '/'
+  if (clean === '/privacy') return '/privacy'
+  return '/404'
 }
 
 export function useRouter() {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { profile } from '../data/profile'
+import { BrandLogo } from './BrandLogo'
 
 interface Props {
   reducedMotion: boolean
@@ -55,8 +56,8 @@ export function Loader({ reducedMotion, onDone }: Props) {
             className="flex flex-col items-center gap-5"
           >
             <div className="flex items-center gap-3">
-              <span className="h-2 w-2 rounded-full bg-accent" />
-              <span className="font-mono text-sm tracking-[0.28em] text-ink">{profile.initials}</span>
+              <BrandLogo size="md" />
+              <span className="font-mono text-xs tracking-[0.24em] text-muted">{profile.initials}</span>
             </div>
             <div className="h-[1px] w-36 overflow-hidden bg-line">
               <div className="loader-line h-full w-full bg-accent" />

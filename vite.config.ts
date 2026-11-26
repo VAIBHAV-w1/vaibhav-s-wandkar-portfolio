@@ -31,7 +31,7 @@ function siteMeta(siteUrl: string): Plugin {
         '@type': 'Person',
         name: profile.name,
         ...(siteUrl ? { url: `${siteUrl}/` } : {}),
-        jobTitle: 'Python & Django Backend Developer',
+        jobTitle: 'Python & Django Full-Stack Developer',
         description: profile.positioning,
         email: `mailto:${social.email.handle}`,
         sameAs: [social.github.href, social.linkedin.href],

@@ -6,6 +6,7 @@ import { profile } from '../data/profile'
 import { social } from '../data/social'
 import type { Theme } from '../hooks/useTheme'
 import type { RoutePath } from '../hooks/useRouter'
+import { BrandLogo } from './BrandLogo'
 import { ThemeToggle } from './ThemeToggle'
 
 interface Props {
@@ -85,9 +86,7 @@ export function Navbar({
             className="group inline-flex items-center gap-2.5 text-left"
             aria-label={`${profile.name} — back to top`}
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface font-mono text-[11px] font-semibold tracking-wider text-ink transition group-hover:border-accent-ink">
-              {profile.initials}
-            </span>
+            <BrandLogo size="sm" />
             <span className="hidden text-sm font-medium tracking-tight text-ink sm:inline">{profile.name}</span>
           </button>
 

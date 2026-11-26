@@ -1,4 +1,5 @@
 import { ArrowUp, ArrowUpRight } from 'lucide-react'
+import { BrandLogo } from '../components/BrandLogo'
 import { navItems } from '../data/navigation'
 import { profile } from '../data/profile'
 import { social } from '../data/social'
@@ -26,13 +27,11 @@ export function Footer({ route, onNavigate, onScrollTo }: Props) {
     <footer className="border-t border-line bg-bg-2 py-12">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface font-mono text-xs font-semibold text-ink">
-              {profile.initials}
-            </span>
+          <div className="group flex items-center gap-3">
+            <BrandLogo size="sm" />
             <div>
               <p className="text-sm font-medium text-ink">{profile.name}</p>
-              <p className="text-xs text-muted">Computer Science &amp; Design · BIET Davangere</p>
+              <p className="text-xs text-muted">Python &amp; Django Full-Stack Developer · BIET Davangere</p>
             </div>
           </div>
 

@@ -6,10 +6,10 @@ import { social } from './social'
  */
 export const site = {
   url: __SITE_URL__,
-  title: 'Vaibhav S. Wandkar — Python & Django Developer · Software Engineer',
+  title: 'Vaibhav S. Wandkar — Python & Django Full-Stack Developer · Software Engineer',
   description:
-    'Portfolio of Vaibhav S. Wandkar, a Python & Django Developer and Computer Science and Design student at BIET Davangere focused on backend engineering, database-driven applications, secure systems, AI/ML and cybersecurity.',
-  privacyUpdated: '26 November 2026',
+    'Portfolio of Vaibhav S. Wandkar — Python Developer, Django Full-Stack Developer and Software Engineer at BIET Davangere building reliable backend systems, full-stack web apps, AI/ML and security tools.',
+  privacyUpdated: '27 November 2026',
 }
 
 export type ContactProvider =

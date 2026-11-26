@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { MotionConfig } from 'motion/react'
+import { AnimatePresence, MotionConfig, motion } from 'motion/react'
 import { CustomCursor } from './components/CustomCursor'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { Loader } from './components/Loader'
@@ -13,6 +13,7 @@ import { useLenis } from './hooks/useLenis'
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useRouter } from './hooks/useRouter'
 import { useTheme } from './hooks/useTheme'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
@@ -67,19 +68,45 @@ export default function App() {
           />
 
           <main id="main" className="flex-1">
-            {route === '/privacy' ? (
-              <PrivacyPage onNavigate={navigate} />
-            ) : (
-              <>
-                <Hero theme={theme} reducedMotion={reducedMotion} onScrollTo={scrollTo} />
-                <About reducedMotion={reducedMotion} />
-                <Projects reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
-                <Skills reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
-                <Experience reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
-                <Education reducedMotion={reducedMotion} />
-                <Contact reducedMotion={reducedMotion} onNavigate={navigate} />
-              </>
-            )}
+            <AnimatePresence mode="wait">
+              {route === '/privacy' ? (
+                <motion.div
+                  key="privacy"
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reducedMotion ? undefined : { opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  <PrivacyPage onNavigate={navigate} />
+                </motion.div>
+              ) : route === '/404' ? (
+                <motion.div
+                  key="not-found"
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reducedMotion ? undefined : { opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  <NotFoundPage onNavigate={navigate} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="home"
+                  initial={reducedMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={reducedMotion ? undefined : { opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Hero theme={theme} reducedMotion={reducedMotion} onScrollTo={scrollTo} />
+                  <About reducedMotion={reducedMotion} />
+                  <Projects reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
+                  <Skills reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
+                  <Experience reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
+                  <Education reducedMotion={reducedMotion} />
+                  <Contact reducedMotion={reducedMotion} onNavigate={navigate} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </main>
 
           <Footer route={route} onNavigate={navigate} onScrollTo={scrollTo} />
