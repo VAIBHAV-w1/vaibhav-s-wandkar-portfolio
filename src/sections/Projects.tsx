@@ -45,9 +45,14 @@ function ProjectCard({ project, onOpenProject, featured = false }: { project: Pr
             <span className="font-mono text-xs text-accent-ink">
               {project.index} · {project.category}
             </span>
-            <span className="rounded-full border border-line bg-bg/70 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-              {project.status}
-            </span>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {project.period ? (
+                <span className="font-mono text-[10px] text-faint">{project.period}</span>
+              ) : null}
+              <span className="rounded-full border border-line bg-bg/70 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                {project.status}
+              </span>
+            </div>
           </div>
 
           <h3 className="text-xl font-medium tracking-tight text-ink sm:text-2xl">

@@ -76,21 +76,23 @@ export function Navbar({
     <>
       <header
         className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-          scrolled ? 'border-line bg-bg/95 backdrop-blur-sm' : 'border-transparent bg-bg/85'
+          scrolled ? 'border-line bg-bg/95 backdrop-blur-sm' : 'border-line/50 bg-bg/90'
         }`}
       >
-        <div className="container-x flex h-16 items-center justify-between gap-4">
+        <div className="container-x flex h-[74px] items-center justify-between gap-3 md:h-20">
           <button
             type="button"
             onClick={handleBrandClick}
-            className="group inline-flex items-center gap-2.5 text-left"
+            className="group inline-flex shrink-0 items-center gap-3 text-left"
             aria-label={`${profile.name} — back to top`}
           >
-            <BrandLogo size="sm" />
-            <span className="hidden text-sm font-medium tracking-tight text-ink sm:inline">{profile.name}</span>
+            <BrandLogo size="md" />
+            <span className="hidden text-[15px] font-semibold tracking-tight text-ink sm:inline xl:text-base">
+              {profile.name}
+            </span>
           </button>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
             {navItems.map((item) => {
               const isActive = route === '/' && activeSection === item.id
               return (
@@ -98,29 +100,29 @@ export function Navbar({
                   key={item.id}
                   type="button"
                   onClick={() => handleNavClick(item.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs transition ${
+                  className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
                     isActive
-                      ? 'bg-surface font-medium text-ink ring-1 ring-line-strong'
-                      : 'text-muted hover:text-ink'
+                      ? 'bg-surface text-ink ring-1 ring-line-strong'
+                      : 'text-ink/80 hover:bg-surface/60 hover:text-ink'
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-accent-ink">{item.index}</span>
+                  <span className="font-mono text-[11px] font-semibold text-accent-ink">{item.index}</span>
                   <span>{item.label}</span>
                 </button>
               )
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2.5">
             <ThemeToggle theme={theme} onToggle={onToggleTheme} />
             <a
               href={social.github.href}
               target="_blank"
               rel="noreferrer noopener"
-              className="hidden h-10 items-center gap-1.5 rounded-full border border-line px-3.5 text-xs font-medium text-ink transition hover:border-line-strong hover:bg-surface sm:inline-flex"
+              className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-full border border-line-strong px-4 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface sm:inline-flex"
             >
               <span>GitHub</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
+              <ArrowUpRight className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
             </a>
             <button
               ref={menuBtnRef}
@@ -129,9 +131,9 @@ export function Navbar({
               aria-expanded={open}
               aria-controls="mobile-nav-drawer"
               aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition hover:border-line-strong hover:bg-surface lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line-strong text-ink transition hover:border-accent-ink hover:bg-surface lg:hidden"
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -148,7 +150,7 @@ export function Navbar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 top-16 z-40 flex flex-col justify-between overflow-y-auto bg-bg px-6 py-8 lg:hidden"
+            className="fixed inset-0 top-[74px] z-40 flex flex-col justify-between overflow-y-auto bg-bg px-6 py-8 lg:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col divide-y divide-line border-y border-line">
               {navItems.map((item) => (
@@ -159,7 +161,7 @@ export function Navbar({
                   className="flex min-h-[56px] items-center justify-between py-3 text-left text-2xl font-medium tracking-tight text-ink transition hover:text-accent-ink"
                 >
                   <span>{item.label}</span>
-                  <span className="font-mono text-xs text-accent-ink">{item.index}</span>
+                  <span className="font-mono text-sm font-semibold text-accent-ink">{item.index}</span>
                 </button>
               ))}
             </nav>
@@ -171,7 +173,7 @@ export function Navbar({
                   href={social.github.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line px-4 text-sm text-ink"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-4 text-sm font-medium text-ink"
                 >
                   GitHub <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
@@ -179,13 +181,13 @@ export function Navbar({
                   href={social.linkedin.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line px-4 text-sm text-ink"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-4 text-sm font-medium text-ink"
                 >
                   LinkedIn <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
                 <a
                   href={social.email.href}
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line px-4 text-sm text-ink"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-4 text-sm font-medium text-ink"
                 >
                   Email
                 </a>

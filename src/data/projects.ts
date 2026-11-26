@@ -45,6 +45,7 @@ export interface Project {
   category: string
   filters: FilterId[]
   status: ProjectStatus
+  period?: string
   context?: string
   visualType: 'screenshot' | 'illustration'
   summary: string
@@ -71,6 +72,7 @@ export const projects: Project[] = [
     category: 'Django / Python AI Surveillance',
     filters: ['django-backend', 'ai-vision', 'security', 'web'],
     status: 'Ongoing',
+    period: 'Mar 2026 – Ongoing',
     visualType: 'screenshot',
     summary:
       'A decoupled intelligent surveillance platform pairing a Django 5.2 REST backend and 18-table relational database with an OpenCV + YOLO11n + ByteTrack vision pipeline and React SPA.',
@@ -115,6 +117,7 @@ export const projects: Project[] = [
     category: 'Cybersecurity Toolkit & Backend API',
     filters: ['django-backend', 'security', 'web'],
     status: 'Completed',
+    period: 'Jan 2026 – Apr 2026',
     visualType: 'screenshot',
     summary:
       'A full-stack cybersecurity toolkit with Express REST APIs, JWT + email OTP authentication, phishing URL scanning, password strength evaluation and threat monitoring.',
@@ -152,6 +155,7 @@ export const projects: Project[] = [
     category: 'Python FastAPI / Agricultural AI',
     filters: ['django-backend', 'ai-vision', 'web'],
     status: 'Ongoing',
+    period: 'Mar 2026 – Ongoing',
     context: 'Team project',
     visualType: 'illustration',
     summary:
@@ -243,6 +247,7 @@ export const projects: Project[] = [
     category: 'Django 5.2 Full-Stack Application',
     filters: ['django-backend', 'web'],
     status: 'Completed',
+    period: 'Apr 2025 – May 2025',
     visualType: 'illustration',
     summary:
       'A Django 5.2 asset-recovery platform with SQLite persistence, Leaflet geolocation, 10 km proximity matching, email OTP authentication, P2P chat and multilingual i18n.',
@@ -272,10 +277,11 @@ export const projects: Project[] = [
     category: 'Python / NLP Web Application',
     filters: ['django-backend', 'ai-vision'],
     status: 'Internship project',
+    period: 'Nov 2024 – Dec 2024',
     context: 'AI Internship · Internz Learn',
     visualType: 'illustration',
     summary:
-      'A Python Flask web application that extracts text from uploaded PDF and DOCX resumes and computes TF-IDF cosine similarity against a target job description.',
+      'A Python Flask web application that extracts text from uploaded PDF and DOCX resumes and computes TF-IDF cosine similarity against a target job description (500+ resumes ranked).',
     description: [
       'Developed during the Internz Learn AI internship. A Flask server provides an upload form accepting PDF/DOCX resumes and job descriptions, extracts structured text with pdfminer.six and python-docx, and computes a candidate match score.',
       'Text normalization and similarity scoring are powered by Scikit-learn TfidfVectorizer and cosine_similarity alongside NLTK, spaCy and BERT extractive summarization dependencies.',
@@ -299,6 +305,7 @@ export const projects: Project[] = [
     category: 'Django 5.0 Full-Stack Application',
     filters: ['django-backend', 'web'],
     status: 'Completed',
+    period: 'Oct 2023 – Dec 2023',
     visualType: 'illustration',
     summary:
       'A Django 5.0.3 healthcare web application with custom user/doctor/appointment models, booking workflows, doctor schedule dashboards, JSON APIs and printable invoices.',

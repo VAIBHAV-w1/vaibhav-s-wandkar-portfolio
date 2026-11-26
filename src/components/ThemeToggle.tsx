@@ -23,12 +23,12 @@ export function ThemeToggle({ theme, onToggle }: Props) {
       onClick={handleClick}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="group inline-flex h-10 items-center gap-2 rounded-full border border-line px-3.5 text-xs font-medium text-ink transition hover:border-line-strong hover:bg-surface"
+      className="group inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full border border-line-strong px-3.5 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface sm:px-4"
     >
       <span className="relative flex h-4 w-4 items-center justify-center">
-        {isDark ? <Sun className="h-3.5 w-3.5 text-accent-ink" /> : <Moon className="h-3.5 w-3.5 text-accent-ink" />}
+        {isDark ? <Sun className="h-4 w-4 text-accent-ink" /> : <Moon className="h-4 w-4 text-accent-ink" />}
       </span>
-      <span className="hidden font-mono text-[11px] uppercase tracking-[0.14em] text-muted sm:inline">
+      <span className="hidden font-mono text-xs font-medium uppercase tracking-[0.12em] text-ink sm:inline">
         {isDark ? 'Light' : 'Dark'}
       </span>
     </button>

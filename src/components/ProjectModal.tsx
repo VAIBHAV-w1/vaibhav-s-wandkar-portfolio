@@ -82,6 +82,9 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink">
                   {project.status}
                 </span>
+                {project.period ? (
+                  <span className="font-mono text-[11px] text-faint">{project.period}</span>
+                ) : null}
               </div>
               <button
                 ref={closeBtnRef}

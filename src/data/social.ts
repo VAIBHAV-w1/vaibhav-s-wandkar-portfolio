@@ -1,7 +1,5 @@
 /**
- * Social links.
- * - GitHub & LinkedIn: verified from the GitHub profile's linked social accounts.
- * - Email: the address configured for Vaibhav's own Git/GitHub account.
+ * Contact & social links verified from VaibhavSWandkarResume (2).pdf and github.com/VAIBHAV-w1.
  */
 export const social = {
   github: {
@@ -19,6 +17,12 @@ export const social = {
     handle: 'vaibhavwandkar5@gmail.com',
     href: 'mailto:vaibhavwandkar5@gmail.com',
   },
+  phone: {
+    label: 'Phone',
+    handle: '+91 8296835142',
+    href: 'tel:+918296835142',
+  },
+  location: 'Hubli, Karnataka, India',
 } as const
 
 export const socialList = [social.github, social.linkedin] as const

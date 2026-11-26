@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { ArrowUpRight, Check, Copy, Mail, Send } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { useSectionReveal } from '../animations/gsap'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { SectionHeader } from '../components/SectionHeader'
@@ -167,6 +167,25 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                 </button>
               </div>
             </div>
+
+            <a
+              href={social.phone.href}
+              className="flex items-center justify-between rounded-3xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+            >
+              <div className="flex items-center gap-3.5">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
+                  <Phone className="h-4 w-4 text-ink" />
+                </span>
+                <div>
+                  <p className="text-sm font-medium text-ink">Phone</p>
+                  <p className="font-mono text-xs text-muted">{social.phone.handle}</p>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-faint">
+                <MapPin className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
+                <span>{social.location}</span>
+              </span>
+            </a>
 
             <a
               href={social.github.href}

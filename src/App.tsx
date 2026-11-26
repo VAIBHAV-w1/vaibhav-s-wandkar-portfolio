@@ -97,7 +97,7 @@ export default function App() {
                   exit={reducedMotion ? undefined : { opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Hero theme={theme} reducedMotion={reducedMotion} onScrollTo={scrollTo} />
+                  <Hero reducedMotion={reducedMotion} onScrollTo={scrollTo} />
                   <About reducedMotion={reducedMotion} />
                   <Projects reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
                   <Skills reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
