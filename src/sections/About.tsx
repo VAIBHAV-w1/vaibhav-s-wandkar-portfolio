@@ -19,7 +19,7 @@ export function About({ reducedMotion }: Props) {
           kicker="About"
           title={
             <>
-              Engineering systems with{' '}
+              Backend-driven engineering with{' '}
               <span className="font-serif italic font-normal text-accent-ink">design clarity</span>
             </>
           }

@@ -8,12 +8,11 @@ export const profile = {
   middleInitial: 'S.',
   lastName: 'Wandkar',
   initials: 'VSW',
-  positioning:
-    'Computer Science and Design Engineering Student | Software Developer | AI/ML Enthusiast | Cybersecurity Enthusiast',
-  roles: ['Software Developer', 'AI / ML', 'Computer Vision', 'Cybersecurity', 'Web Development', 'Android Development'],
-  headline: 'Building intelligent experiences through code, creativity and technology.',
+  positioning: 'Python Developer | Django Backend Developer | Software Engineer',
+  roles: ['Python Developer', 'Django Backend', 'Backend Engineering', 'Database Systems', 'AI / ML', 'Cybersecurity'],
+  headline: 'Engineering intelligent applications with Python and Django.',
   intro:
-    "I'm a Computer Science and Design engineering student at BIET, Davangere, building software where AI, computer vision and security meet — from real-time surveillance pipelines to tools that help people stay safe online.",
+    'Python & Django Developer focused on backend engineering, database-driven applications, secure systems and practical software development.',
   education: {
     degree: 'Bachelor of Engineering — Computer Science and Design',
     institution: 'Bapuji Institute of Engineering and Technology (BIET), Davangere',
@@ -21,23 +20,23 @@ export const profile = {
   },
   languages: ['English', 'Hindi', 'Kannada'],
   interests: [
-    'Software Development',
-    'Artificial Intelligence and Machine Learning',
+    'Backend Development (Python & Django)',
+    'Database-Driven Applications',
+    'Secure Software Systems',
+    'Artificial Intelligence & Machine Learning',
     'Computer Vision',
     'Cybersecurity',
-    'Web Development',
-    'Android Application Development',
   ],
   /** From the "Currently learning more about" list on his GitHub profile README. */
   exploring: ['Backend architecture', 'AI/ML systems', 'Secure application development', 'Production-ready software engineering'],
   about: {
     statement:
-      'I like software that does real work. Most of what I build starts with a practical problem — watching a camera feed for incidents, helping a farmer choose a crop, catching a phishing link before someone clicks it — and ends with something people can actually run.',
+      'I build practical, database-driven applications with Python and Django — focusing on clean backend architecture, secure authentication and software that solves real problems.',
     background:
-      "I'm studying for a Bachelor of Engineering in Computer Science and Design at BIET, Davangere (VTU), after a Diploma in Computer Science from KLE Society's Smt. C.I. Munavalli Polytechnic, Hubli. The design half of the degree shapes how I think about interfaces; the engineering half shapes everything underneath them.",
+      "I'm a Computer Science and Design engineering student at Bapuji Institute of Engineering and Technology (BIET), Davangere (VTU), following a Diploma in Computer Science from KLE Society's Smt. C.I. Munavalli Polytechnic, Hubli. My background pairs software engineering fundamentals with thoughtful interface design.",
     approach:
-      'I enjoy building real-world applications that solve meaningful problems through clean, maintainable code. I would rather ship an honest working version, then harden it — tests, security, deployment — than describe something that does not exist yet.',
+      'Across projects like CyberShield, DeepVision, Hospital Management System and the BIET Lost & Found portal, I focus on structured data models, server-side validation, role-based workflows and reliable backend integration — alongside an active interest in AI/ML and cybersecurity.',
     direction:
-      "Where I'm heading: deeper into backend architecture and AI/ML systems, building software that is intelligent, secure and ready for production.",
+      'I enjoy solving problems through clean, maintainable Python code and continue to deepen my experience in backend architecture, relational databases and secure application engineering.',
   },
 } as const

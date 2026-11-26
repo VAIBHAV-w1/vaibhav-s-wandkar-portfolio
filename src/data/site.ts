@@ -6,9 +6,9 @@ import { social } from './social'
  */
 export const site = {
   url: __SITE_URL__,
-  title: 'Vaibhav S. Wandkar — Software Developer · AI/ML · Cybersecurity',
+  title: 'Vaibhav S. Wandkar — Python & Django Developer · Software Engineer',
   description:
-    'Portfolio of Vaibhav S. Wandkar, a Computer Science and Design engineering student at BIET Davangere building software across AI/ML, computer vision, cybersecurity and web development.',
+    'Portfolio of Vaibhav S. Wandkar, a Python & Django Developer and Computer Science and Design student at BIET Davangere focused on backend engineering, database-driven applications, secure systems, AI/ML and cybersecurity.',
   privacyUpdated: '26 November 2026',
 }
 

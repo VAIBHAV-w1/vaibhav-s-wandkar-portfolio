@@ -44,7 +44,7 @@ export function Hero({ theme, reducedMotion, onScrollTo }: Props) {
         <div data-hero-in="" className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5">
           <div className="flex items-center gap-2.5">
             <span className="pulse-dot h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-            <span className="eyebrow text-muted">Computer Science &amp; Design · BIET, Davangere</span>
+            <span className="eyebrow text-muted">Python &amp; Django Developer · BIET, Davangere</span>
           </div>
           <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
             {profile.name.toUpperCase()}
@@ -55,15 +55,15 @@ export function Hero({ theme, reducedMotion, onScrollTo }: Props) {
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             <p data-hero-in="" className="eyebrow mb-4 text-accent-ink">
-              {profile.name}
+              {profile.positioning}
             </p>
             <h1
               data-hero-in=""
               className="text-[clamp(2.4rem,5.4vw,4.75rem)] font-medium leading-[1.02] tracking-[-0.035em] text-ink"
             >
-              Building{' '}
+              Engineering{' '}
               <span className="font-serif italic font-normal text-accent-ink">intelligent</span>{' '}
-              experiences through code, creativity and technology.
+              applications with Python and Django.
             </h1>
 
             <p data-hero-in="" className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
@@ -122,7 +122,7 @@ export function Hero({ theme, reducedMotion, onScrollTo }: Props) {
             <div className="relative overflow-hidden rounded-3xl border border-line bg-bg-2 p-4 sm:p-6">
               <div className="flex items-center justify-between border-b border-line pb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
                 <span>SYS // INTERACTIVE MESH</span>
-                <span className="text-accent-ink">AI · CV · SEC</span>
+                <span className="text-accent-ink">PY · DJANGO · SQL</span>
               </div>
               <ErrorBoundary
                 fallback={

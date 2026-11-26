@@ -1,6 +1,6 @@
 # Vaibhav S. Wandkar — Portfolio
 
-Personal developer portfolio for **Vaibhav S. Wandkar** (Computer Science & Design Engineering student at Bapuji Institute of Engineering and Technology, Davangere — VTU).
+Personal developer portfolio for **Vaibhav S. Wandkar** — Python Developer, Django Backend Developer & Software Engineer (Computer Science & Design Engineering student at Bapuji Institute of Engineering and Technology, Davangere — VTU).
 
 Built with React, TypeScript, Vite, Tailwind CSS v4, GSAP (`ScrollTrigger`), Motion for React, Lenis, Three.js, and self-hosted variable typography (`Inter Tight`, `Instrument Serif`, `JetBrains Mono`).
 
@@ -8,10 +8,11 @@ Built with React, TypeScript, Vite, Tailwind CSS v4, GSAP (`ScrollTrigger`), Mot
 
 ## Features
 
+- **Python & Django Positioning**: Highlights backend engineering, database-driven applications, secure systems, and verified full-stack/AI/cybersecurity projects.
 - **Editorial Design & Dual Theme**: Graphite dark theme and warm ivory light theme with an electric-lime accent, OS preference detection on first visit, `localStorage` persistence (`vsw-theme`), and circular View Transitions API switching.
 - **Interactive 3D Hero Scene**: Lazy-loaded Three.js wireframe geometry with pointer parallax, theme-reactive materials, `IntersectionObserver` pausing when off-screen, WebGL resource disposal, and an accessible SVG fallback when WebGL is unavailable or reduced motion is enabled.
-- **Project Showcase & Case Studies**: Category filters (`All`, `AI & Vision`, `Security`, `Web`, `IoT`, `Research`), dedicated flagship layout for DeepVision, bespoke SVG editorial art for non-screenshot projects, verified GitHub/demo links, and keyboard-accessible project modals (`Escape`, `ArrowLeft`, `ArrowRight`).
-- **Interactive Skills Cross-Linking**: Grouped skills matrix linking directly to the projects where each technology is used (without fabricated proficiency bars).
+- **Backend-Prioritized Project Showcase & Case Studies**: Category filters (`All`, `Backend & Django`, `Security`, `Web`, `AI & Vision`, `IoT`, `Research`), dedicated featured showcase for backend-driven platforms, bespoke SVG editorial art, verified GitHub/demo links, and keyboard-accessible project modals (`Escape`, `ArrowLeft`, `ArrowRight`).
+- **Interactive Backend-First Skills Matrix**: Prominent Primary Backend Development showcase (`Python`, `Django`, `SQL`, `SQLite`, `MySQL`) paired with grouped capabilities that cross-link directly into project case studies (without fabricated proficiency bars).
 - **Experience & Education**: Verified internships, training programs, hackathon milestones, and academic timeline.
 - **Functional Contact Form & Privacy Disclosure**: Client-side validation, honeypot and dwell-time spam checks, live delivery via Web3Forms or FormSubmit, direct email copy/mailto fallback, and a dedicated `/privacy` disclosure route.
 - **Accessibility & SEO**: Skip link, semantic landmarks, `prefers-reduced-motion` support, focus-visible rings, self-hosted fonts, Open Graph / Twitter metadata, JSON-LD `Person` schema, `robots.txt`, and dynamic `sitemap.xml` generation.

@@ -30,8 +30,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
     [filter],
   )
 
-  const lead = filter === 'all' ? filtered.find((p) => p.slug === 'deepvision') : undefined
-  const secondary = filter === 'all' ? filtered.filter((p) => p.featured && p.slug !== 'deepvision') : []
+  const featuredList = filter === 'all' ? filtered.filter((p) => p.featured) : []
   const rest = filter === 'all' ? filtered.filter((p) => !p.featured) : filtered
 
   return (
@@ -42,14 +41,14 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
           kicker="Selected Work"
           title={
             <>
-              Systems built for{' '}
-              <span className="font-serif italic font-normal text-accent-ink">real problems</span>
+              Backend architectures &amp;{' '}
+              <span className="font-serif italic font-normal text-accent-ink">full-stack systems</span>
             </>
           }
           aside={
             <p>
-              Repository and live demo links are verified against public GitHub repositories. Statuses separate shipped
-              work from ongoing research.
+              Ordered to highlight Python, Django and backend database applications first. Repository and live demo
+              links are verified against GitHub.
             </p>
           }
         />
@@ -85,91 +84,10 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
           })}
         </div>
 
-        {/* Flagship DeepVision layout when viewing All */}
-        {lead ? (
-          <article
-            data-reveal=""
-            className="group mb-6 overflow-hidden rounded-3xl border border-line bg-bg-2 transition hover:border-line-strong"
-          >
-            <div className="grid lg:grid-cols-12">
-              <div className="relative overflow-hidden border-b border-line bg-surface lg:col-span-7 lg:border-r lg:border-b-0">
-                {lead.image ? (
-                  <img
-                    src={lead.image.src}
-                    srcSet={lead.image.srcSet}
-                    sizes="(max-width: 1024px) 100vw, 58vw"
-                    width={lead.image.width}
-                    height={lead.image.height}
-                    alt={lead.image.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
-                  />
-                ) : (
-                  <ProjectArt variant={lead.art} />
-                )}
-              </div>
-
-              <div className="flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
-                <div>
-                  <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                    <span className="font-mono text-xs text-accent-ink">
-                      {lead.index} · {lead.category}
-                    </span>
-                    <StatusBadge status={lead.status} />
-                  </div>
-                  <h3 className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">{lead.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted sm:text-[15px]">{lead.summary}</p>
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {lead.stack.slice(0, 8).map((tech) => (
-                      <span key={tech} className="rounded-full border border-line px-2.5 py-0.5 font-mono text-[11px] text-muted">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-line pt-5">
-                  <button
-                    type="button"
-                    onClick={() => onOpenProject(lead)}
-                    data-cursor="Open"
-                    className="inline-flex min-h-[42px] items-center gap-1.5 rounded-full bg-ink px-4 text-xs font-semibold text-bg transition hover:bg-accent hover:text-on-accent"
-                  >
-                    <span>Case Study</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </button>
-                  {lead.demo ? (
-                    <a
-                      href={lead.demo}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex min-h-[42px] items-center gap-1.5 rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-accent-ink"
-                    >
-                      <span>Live Demo</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                    </a>
-                  ) : null}
-                  {lead.repo ? (
-                    <a
-                      href={lead.repo}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${lead.title} GitHub repository`}
-                      className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-full border border-line text-muted transition hover:border-line-strong hover:text-ink"
-                    >
-                      <GithubIcon className="h-4 w-4" />
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </article>
-        ) : null}
-
-        {/* Featured pair (CyberShield & Cropify) */}
-        {secondary.length > 0 ? (
+        {/* Prioritized Featured Backend & Django Showcase (01 - 04) */}
+        {featuredList.length > 0 ? (
           <div className="mb-6 grid gap-6 md:grid-cols-2">
-            {secondary.map((project) => (
+            {featuredList.map((project) => (
               <article
                 key={project.slug}
                 data-reveal=""
@@ -217,15 +135,28 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
                   </div>
 
                   <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
-                    <button
-                      type="button"
-                      onClick={() => onOpenProject(project)}
-                      data-cursor="Open"
-                      className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full bg-surface px-4 text-xs font-medium text-ink ring-1 ring-line transition hover:bg-accent hover:text-on-accent hover:ring-accent"
-                    >
-                      <span>View Details</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                    </button>
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <button
+                        type="button"
+                        onClick={() => onOpenProject(project)}
+                        data-cursor="Open"
+                        className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full bg-surface px-4 text-xs font-medium text-ink ring-1 ring-line transition hover:bg-accent hover:text-on-accent hover:ring-accent"
+                      >
+                        <span>Case Study</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </button>
+                      {project.demo ? (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-line-strong px-3.5 text-xs font-medium text-ink transition hover:border-accent-ink"
+                        >
+                          <span>Live Demo</span>
+                          <ArrowUpRight className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
+                        </a>
+                      ) : null}
+                    </div>
                     {project.repo ? (
                       <a
                         href={project.repo}
