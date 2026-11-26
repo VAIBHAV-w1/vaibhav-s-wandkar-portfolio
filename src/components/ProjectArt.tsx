@@ -53,57 +53,36 @@ export function ProjectArt({ variant, className = 'h-full w-full' }: Props) {
         </svg>
       )
 
-    case 'document':
+    case 'vote':
       return (
         <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
-          <rect x="78" y="42" width="142" height="196" rx="10" stroke="currentColor" strokeOpacity="0.28" />
-          <rect x="260" y="42" width="142" height="196" rx="10" stroke="var(--accent-ink)" strokeOpacity="0.65" />
-          <line x1="102" y1="80" x2="196" y2="80" stroke="currentColor" strokeOpacity="0.35" strokeWidth="2" />
-          <line x1="102" y1="106" x2="176" y2="106" stroke="currentColor" strokeOpacity="0.2" strokeWidth="2" />
-          <line x1="102" y1="132" x2="190" y2="132" stroke="currentColor" strokeOpacity="0.2" strokeWidth="2" />
-          <line x1="284" y1="80" x2="378" y2="80" stroke="var(--accent-ink)" strokeWidth="2" />
-          <line x1="284" y1="106" x2="358" y2="106" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
-          <line x1="284" y1="132" x2="372" y2="132" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
-          <path d="M220 140H260" stroke="var(--accent-ink)" strokeWidth="1.8" strokeDasharray="3 3" />
-          <circle cx="240" cy="140" r="14" fill="var(--bg)" stroke="var(--accent-ink)" strokeWidth="1.5" />
-          <path d="M235 140L239 144L246 136" stroke="var(--accent-ink)" strokeWidth="1.6" strokeLinecap="round" />
+          {/* Linked ledger blocks + verified ballot mark */}
+          <rect x="46" y="98" width="96" height="84" rx="12" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1.5" />
+          <rect x="192" y="82" width="96" height="116" rx="14" stroke="var(--accent-ink)" strokeWidth="1.8" />
+          <rect x="338" y="98" width="96" height="84" rx="12" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1.5" />
+          <line x1="142" y1="140" x2="192" y2="140" stroke="var(--accent-ink)" strokeWidth="1.6" strokeDasharray="4 4" />
+          <line x1="288" y1="140" x2="338" y2="140" stroke="var(--accent-ink)" strokeWidth="1.6" strokeDasharray="4 4" />
+          <path d="M220 142L235 157L264 124" stroke="var(--accent-ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="94" cy="140" r="14" stroke="currentColor" strokeOpacity="0.3" />
+          <circle cx="386" cy="140" r="14" stroke="currentColor" strokeOpacity="0.3" />
         </svg>
       )
 
-    case 'quad':
+    case 'retino':
       return (
         <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
-          {[
-            [68, 44],
-            [176, 44],
-            [68, 148],
-            [176, 148],
-          ].map(([x, y], i) => (
-            <g key={i}>
-              <rect x={x} y={y} width="86" height="86" rx="10" stroke="currentColor" strokeOpacity="0.24" />
-              <circle cx={x + 43} cy={y + 43} r="26" stroke="var(--accent-ink)" strokeOpacity={0.35 + i * 0.16} />
-              <circle cx={x + 43} cy={y + 43} r="10" stroke="currentColor" strokeOpacity="0.3" />
+          {/* Retinal fundus concentric scan + grading stages */}
+          <circle cx="170" cy="140" r="84" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1.5" />
+          <circle cx="170" cy="140" r="56" stroke="var(--accent-ink)" strokeOpacity="0.7" strokeWidth="1.6" strokeDasharray="5 4" />
+          <circle cx="170" cy="140" r="24" stroke="currentColor" strokeOpacity="0.4" />
+          <circle cx="170" cy="140" r="5" fill="var(--accent-ink)" />
+          <path d="M254 140H314" stroke="var(--accent-ink)" strokeWidth="1.6" strokeDasharray="3 3" />
+          {[74, 114, 154, 194].map((y, i) => (
+            <g key={y}>
+              <rect x="314" y={y} width="112" height="22" rx="6" stroke={i === 1 ? 'var(--accent-ink)' : 'currentColor'} strokeOpacity={i === 1 ? 0.9 : 0.24} />
+              <line x1="330" y1={y + 11} x2={360 + i * 12} y2={y + 11} stroke={i === 1 ? 'var(--accent-ink)' : 'currentColor'} strokeOpacity={i === 1 ? 1 : 0.35} strokeWidth="2" strokeLinecap="round" />
             </g>
           ))}
-          <path d="M278 140H334M334 140L322 128M334 140L322 152" stroke="var(--accent-ink)" strokeWidth="1.8" strokeLinecap="round" />
-          <rect x="352" y="96" width="76" height="88" rx="12" stroke="var(--accent-ink)" strokeWidth="1.6" />
-          <circle cx="390" cy="140" r="18" stroke="currentColor" strokeOpacity="0.35" strokeDasharray="4 4" />
-        </svg>
-      )
-
-    case 'device':
-      return (
-        <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
-          <rect x="164" y="64" width="152" height="152" rx="16" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.5" />
-          <rect x="196" y="96" width="88" height="88" rx="8" stroke="var(--accent-ink)" strokeWidth="1.5" />
-          {[96, 124, 152, 180].map((y) => (
-            <g key={y} stroke="currentColor" strokeOpacity="0.35">
-              <line x1="136" y1={y} x2="164" y2={y} />
-              <line x1="316" y1={y} x2="344" y2={y} />
-            </g>
-          ))}
-          <circle cx="240" cy="140" r="14" stroke="var(--accent-ink)" strokeDasharray="3 3" />
-          <circle cx="240" cy="140" r="4" fill="var(--accent-ink)" />
         </svg>
       )
 
@@ -127,6 +106,23 @@ export function ProjectArt({ variant, className = 'h-full w-full' }: Props) {
         </svg>
       )
 
+    case 'document':
+      return (
+        <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
+          <rect x="78" y="42" width="142" height="196" rx="10" stroke="currentColor" strokeOpacity="0.28" />
+          <rect x="260" y="42" width="142" height="196" rx="10" stroke="var(--accent-ink)" strokeOpacity="0.65" />
+          <line x1="102" y1="80" x2="196" y2="80" stroke="currentColor" strokeOpacity="0.35" strokeWidth="2" />
+          <line x1="102" y1="106" x2="176" y2="106" stroke="currentColor" strokeOpacity="0.2" strokeWidth="2" />
+          <line x1="102" y1="132" x2="190" y2="132" stroke="currentColor" strokeOpacity="0.2" strokeWidth="2" />
+          <line x1="284" y1="80" x2="378" y2="80" stroke="var(--accent-ink)" strokeWidth="2" />
+          <line x1="284" y1="106" x2="358" y2="106" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
+          <line x1="284" y1="132" x2="372" y2="132" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
+          <path d="M220 140H260" stroke="var(--accent-ink)" strokeWidth="1.8" strokeDasharray="3 3" />
+          <circle cx="240" cy="140" r="14" fill="var(--bg)" stroke="var(--accent-ink)" strokeWidth="1.5" />
+          <path d="M235 140L239 144L246 136" stroke="var(--accent-ink)" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+      )
+
     case 'pulse':
       return (
         <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
@@ -139,35 +135,6 @@ export function ProjectArt({ variant, className = 'h-full w-full' }: Props) {
             strokeLinejoin="round"
           />
           <circle cx="408" cy="148" r="5" fill="var(--accent-ink)" />
-        </svg>
-      )
-
-    case 'route':
-      return (
-        <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
-          <path
-            d="M72 206C128 110 188 214 248 128C304 48 358 148 408 82"
-            stroke="var(--accent-ink)"
-            strokeWidth="2"
-            strokeDasharray="6 6"
-          />
-          <circle cx="72" cy="206" r="8" stroke="currentColor" strokeOpacity="0.5" strokeWidth="2" />
-          <circle cx="248" cy="128" r="6" fill="var(--accent-ink)" />
-          <circle cx="408" cy="82" r="9" stroke="var(--accent-ink)" strokeWidth="2" />
-        </svg>
-      )
-
-    case 'feistel':
-      return (
-        <svg viewBox="0 0 480 280" fill="none" className={className} aria-hidden="true">
-          <rect x="116" y="44" width="96" height="40" rx="6" stroke="currentColor" strokeOpacity="0.32" />
-          <rect x="268" y="44" width="96" height="40" rx="6" stroke="currentColor" strokeOpacity="0.32" />
-          <rect x="116" y="196" width="96" height="40" rx="6" stroke="var(--accent-ink)" />
-          <rect x="268" y="196" width="96" height="40" rx="6" stroke="currentColor" strokeOpacity="0.32" />
-          <path d="M164 84V116L316 164V196" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1.5" />
-          <path d="M316 84V116L164 164V196" stroke="var(--accent-ink)" strokeWidth="1.6" />
-          <circle cx="240" cy="140" r="18" fill="var(--bg)" stroke="var(--accent-ink)" strokeWidth="1.5" />
-          <path d="M232 140H248M240 132V148" stroke="var(--accent-ink)" strokeWidth="1.5" />
         </svg>
       )
   }

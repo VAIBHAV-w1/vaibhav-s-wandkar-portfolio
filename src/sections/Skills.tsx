@@ -1,9 +1,9 @@
 import { useMemo, useRef, useState } from 'react'
-import { ArrowUpRight, Database, Server } from 'lucide-react'
+import { ArrowUpRight, Database, Layers, Server } from 'lucide-react'
 import { useSectionReveal } from '../animations/gsap'
 import { SectionHeader } from '../components/SectionHeader'
 import { getProject, type Project } from '../data/projects'
-import { primaryBackendGroup, skillGroups, type Skill } from '../data/skills'
+import { djangoCapabilities, primaryBackendGroup, skillGroups, type Skill } from '../data/skills'
 
 interface Props {
   reducedMotion: boolean
@@ -16,6 +16,7 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
     groupLabel: primaryBackendGroup.label,
     skill: primaryBackendGroup.skills[1], // Django highlighted by default
   }))
+  const [activeCapId, setActiveCapId] = useState<string>(djangoCapabilities[0].id)
   useSectionReveal(sectionRef, reducedMotion)
 
   const linkedProjects = useMemo(
@@ -31,17 +32,17 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
       <div className="container-x">
         <SectionHeader
           index="03"
-          kicker="Technical Stack"
+          kicker="Django & Full-Stack Engineering"
           title={
             <>
-              Centered on{' '}
+              Technical stack led by{' '}
               <span className="font-serif italic font-normal text-accent-ink">Python &amp; Django</span>
             </>
           }
-          aside={<p>Select any technology to inspect its role and jump directly into the projects where it is used.</p>}
+          aside={<p>Select any technology or Django capability to inspect its project evidence across repositories.</p>}
         />
 
-        {/* Primary Backend Spotlight + Interactive Cross-Link Inspector */}
+        {/* Primary Python & Django Spotlight + Cross-Link Panel */}
         <div
           className="mb-8 grid gap-6 rounded-3xl border border-line-strong bg-bg-2 p-6 sm:p-8 lg:grid-cols-12"
           data-reveal=""
@@ -53,7 +54,6 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
                 <p className="eyebrow text-accent-ink">{primaryBackendGroup.label}</p>
               </div>
 
-              {/* Hero Python & Django tiles */}
               <div className="grid gap-3 sm:grid-cols-2">
                 {primaryLanguages.map((skill) => {
                   const isSelected = selected.skill.name === skill.name
@@ -89,7 +89,6 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
                 })}
               </div>
 
-              {/* SQL / SQLite / MySQL primary data layer */}
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <span className="mr-1 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
                   <Database className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
@@ -148,19 +147,66 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
                       onClick={() => onOpenProject(proj)}
                       className="inline-flex min-h-[38px] items-center gap-1.5 rounded-full border border-line-strong bg-surface px-3.5 text-xs font-medium text-ink transition hover:border-accent-ink"
                     >
-                      <span>{proj.title}</span>
+                      <span>
+                        {proj.index} · {proj.title}
+                      </span>
                       <ArrowUpRight className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
                     </button>
                   ))
                 ) : (
-                  <span className="font-mono text-xs text-muted">Core technical stack</span>
+                  <span className="font-mono text-xs text-muted">Verified core competency</span>
                 )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Supporting Grouped Skill Matrix */}
+        {/* Django Engineering Capabilities Verified in Code */}
+        <div className="mb-8 rounded-3xl border border-line bg-bg-2 p-6 sm:p-8" data-reveal="">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Layers className="h-4 w-4 text-accent-ink" aria-hidden="true" />
+              <p className="eyebrow text-accent-ink">Django Full-Stack Capabilities</p>
+            </div>
+            <span className="font-mono text-[11px] text-faint">Backed by DeepVision · Lost &amp; Found · Hospital Management</span>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {djangoCapabilities.map((cap) => {
+              const active = activeCapId === cap.id
+              const capProjects = cap.projects.map((s) => getProject(s)).filter((p): p is Project => Boolean(p))
+              return (
+                <div
+                  key={cap.id}
+                  onMouseEnter={() => setActiveCapId(cap.id)}
+                  className={`flex flex-col justify-between rounded-2xl border p-5 transition ${
+                    active ? 'border-accent-ink bg-surface' : 'border-line bg-bg hover:border-line-strong'
+                  }`}
+                >
+                  <div>
+                    <h3 className="text-base font-medium text-ink">{cap.title}</h3>
+                    <p className="mt-2 text-xs leading-relaxed text-muted">{cap.summary}</p>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-1.5 border-t border-line pt-3">
+                    {capProjects.map((proj) => (
+                      <button
+                        key={proj.slug}
+                        type="button"
+                        onClick={() => onOpenProject(proj)}
+                        className="inline-flex min-h-[30px] items-center gap-1 rounded-full border border-line px-2.5 font-mono text-[10px] text-ink transition hover:border-accent-ink hover:text-accent-ink"
+                      >
+                        <span>{proj.index} {proj.title.split(' ')[0]}</span>
+                        <ArrowUpRight className="h-2.5 w-2.5" aria-hidden="true" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Supporting 7-Group Skill Matrix */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal="">
           {skillGroups.map((group) => (
             <div

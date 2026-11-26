@@ -1,35 +1,32 @@
 /**
- * Project data — the single source of truth for the Work section.
- * Prioritized to foreground backend engineering, Python/Django systems,
- * database integration and application architecture while keeping all verified
- * projects accessible and accurately described.
+ * Centralized project showcase — ordered strictly 01 → 08 as specified.
+ * Never sort automatically by date, category or technology.
+ *
+ * Verification status (checked against github.com/VAIBHAV-w1):
+ * - 01 DeepVision: Django >=5.2,<5.3, React + Vite, OpenCV, YOLO11n, PyTorch, ByteTrack, SQLite + PostgreSQL/Supabase DDL. Live demo HTTP 200 at https://vsw-deepvision.vercel.app/.
+ * - 02 CyberShield: Node.js, Express, React 18, Vite, Tailwind CSS, MongoDB, Supabase, JWT, Nodemailer. Listed Vercel URL returned 404, so no live demo is shown.
+ * - 03 Cropify: Python, FastAPI 0.135.3, Uvicorn, Scikit-learn 1.6.1, NumPy, SciPy, React 19, TypeScript, Vite, Tailwind CSS, Leaflet. Collaborative repo.
+ * - 04 Decentralized Voting System: Solidity, Hardhat, Ethers.js, Node.js, Express, Prisma (SQLite/PostgreSQL), Socket.io, React 19, TypeScript, Tailwind CSS. Fork/collaborative repo.
+ * - 05 Retino: Python, PyTorch, PyTorch Lightning, FastAPI, Uvicorn, Gradio, Scikit-learn, React 19, Vite. Fork/study repo; upstream demo omitted.
+ * - 06 Lost and Found Tracking System: Python 3.11, Django >=5.2.6, SQLite, HTML, CSS, JavaScript, Leaflet.js, gettext i18n.
+ * - 07 AI-Based Resume Screening: Python, Flask, Scikit-learn, NLTK, spaCy, BERT extractive summarizer, pdfminer.six, python-docx.
+ * - 08 Hospital Management System: Python, Django 5.0.3, SQLite, HTML, CSS, JavaScript.
  */
 
-export type FilterId = 'backend' | 'ai' | 'security' | 'web' | 'iot' | 'research'
+export type FilterId = 'django-backend' | 'ai-vision' | 'security' | 'web' | 'blockchain'
 
 export const projectFilters: { id: 'all' | FilterId; label: string }[] = [
-  { id: 'all', label: 'All' },
-  { id: 'backend', label: 'Backend & Django' },
+  { id: 'all', label: 'All Projects' },
+  { id: 'django-backend', label: 'Django & Backend' },
+  { id: 'ai-vision', label: 'AI & Vision' },
   { id: 'security', label: 'Security' },
   { id: 'web', label: 'Web' },
-  { id: 'ai', label: 'AI & Vision' },
-  { id: 'iot', label: 'IoT' },
-  { id: 'research', label: 'Research' },
+  { id: 'blockchain', label: 'Blockchain' },
 ]
 
 export type ProjectStatus = 'Ongoing' | 'Completed' | 'Research' | 'Internship project'
 
-export type ArtVariant =
-  | 'vision'
-  | 'shield'
-  | 'field'
-  | 'document'
-  | 'quad'
-  | 'device'
-  | 'map'
-  | 'pulse'
-  | 'route'
-  | 'feistel'
+export type ArtVariant = 'vision' | 'shield' | 'field' | 'vote' | 'retino' | 'map' | 'document' | 'pulse'
 
 export interface ProjectImage {
   src: string
@@ -47,139 +44,58 @@ export interface Project {
   alias?: string
   category: string
   filters: FilterId[]
-  status?: ProjectStatus
+  status: ProjectStatus
   context?: string
+  visualType: 'screenshot' | 'illustration'
   summary: string
   description: string[]
+  contribution: string
   highlightsLabel: string
   highlights: string[]
   pending?: { label: string; items: string[] }
   stack: string[]
-  repo?: string
+  repo: string
   demo?: string
   linkNote?: string
   art: ArtVariant
   image?: ProjectImage
-  featured?: boolean
 }
 
 const gh = (repo: string) => `https://github.com/VAIBHAV-w1/${repo}`
 
 export const projects: Project[] = [
   {
-    slug: 'cybershield',
-    index: '01',
-    title: 'CyberShield',
-    category: 'Backend & Cybersecurity Toolkit',
-    filters: ['backend', 'security', 'web'],
-    status: 'Completed',
-    summary:
-      'A full-stack cybersecurity toolkit featuring RESTful authentication with email OTP verification, phishing URL scanning, password strength evaluation and threat monitoring.',
-    description: [
-      'CyberShield brings everyday security checks together behind an authenticated API backend. Users sign in with JWT-backed sessions and email-delivered OTP verification, scan suspicious URLs for phishing patterns, evaluate password strength or query an AI security advisor.',
-      'The backend handles user schema persistence, bcrypt credential hashing, rate-limited Express routes, file encryption utilities and email OTP delivery.',
-    ],
-    highlightsLabel: 'Backend & Security Features',
-    highlights: [
-      'JWT-based user authentication integrated with email-delivered OTP verification.',
-      'REST API routes for phishing URL scanning, password analysis and file encryption.',
-      'Rate-limiting, Helmet security headers and bcryptjs password hashing.',
-      'Threat monitoring dashboard with honeypot alerts and AI security advisor.',
-    ],
-    stack: ['Node.js', 'Express', 'MongoDB', 'Supabase', 'JWT', 'React', 'Tailwind CSS'],
-    repo: gh('CyberShield'),
-    linkNote: 'The deployment listed on the repository is currently unavailable, so no live demo is linked.',
-    art: 'shield',
-    image: {
-      src: '/projects/cybershield-1600.webp',
-      srcSet: '/projects/cybershield-900.webp 900w, /projects/cybershield-1600.webp 1600w',
-      width: 1600,
-      height: 900,
-      alt: 'CyberShield sign-in screen with a shield logo, email and password fields and a note that the session is protected by encryption.',
-      caption: 'CyberShield — authentication portal.',
-    },
-    featured: true,
-  },
-  {
-    slug: 'lost-and-found',
-    index: '02',
-    title: 'BIET Lost & Found System',
-    category: 'Django Backend / Web Application',
-    filters: ['backend', 'web'],
-    status: 'Completed',
-    summary:
-      'A Django 5.2 campus asset-recovery platform with SQLite persistence, geospatial proximity matching within 10 km, email OTP authentication and private user-to-user chat.',
-    description: [
-      'Built in Python and Django 5.2 as a database-driven web application for reporting and recovering lost or found items on campus. Users pin locations on an interactive Leaflet map, resolve addresses via Nominatim reverse geocoding and coordinate handovers through isolated internal messaging.',
-      'The Django backend drives relational item/user/chat models in SQLite, proximity matching calculations, email-delivered OTP 2FA and English/Hindi/Kannada gettext localisation.',
-    ],
-    highlightsLabel: 'Backend & Platform Features',
-    highlights: [
-      'Django 5.2 + Python 3.11 backend with relational SQLite models and media handling.',
-      'Trigonometric proximity matching pairing lost and found reports within a 10 km radius.',
-      'Email-delivered OTP two-factor authentication and isolated P2P recovery chat.',
-      'Interactive Leaflet mapping with high-accuracy GPS and Nominatim reverse geocoding.',
-      'English, Hindi and Kannada localisation via GNU gettext catalogs.',
-    ],
-    stack: ['Python', 'Django', 'SQLite', 'JavaScript', 'HTML', 'CSS', 'Leaflet.js'],
-    repo: gh('lostandfoundtrackingpublic'),
-    art: 'map',
-    featured: true,
-  },
-  {
-    slug: 'hospital-management',
-    index: '03',
-    title: 'Hospital Management System',
-    category: 'Django Backend / Healthcare Web App',
-    filters: ['backend', 'web'],
-    status: 'Completed',
-    summary:
-      'A Django 5.0 web application managing doctors, patients and medical appointments with custom user models, doctor schedule views, JSON API endpoints and printable invoices.',
-    description: [
-      'An academic healthcare platform powered by Python and Django 5.0.3. It implements relational models for CustomUser, Doctor and Appointment records in SQLite alongside dedicated portals for patient booking and doctor schedule management.',
-      'The backend serves both server-rendered templates and JSON endpoints (/api/appointments/, /api/latest_appointment/) to power real-time client-side filtering between upcoming and completed visits.',
-    ],
-    highlightsLabel: 'Backend & Application Features',
-    highlights: [
-      'Django 5.0.3 architecture with CustomUser, Doctor and Appointment relational models.',
-      'REST JSON endpoints (/api/appointments/, /api/latest_appointment/) for dynamic dashboards.',
-      'Dedicated doctor dashboard for managing upcoming appointment schedules.',
-      'Secure registration, login and email update flows plus printable dynamic invoices.',
-    ],
-    stack: ['Python', 'Django', 'SQLite', 'HTML', 'CSS', 'JavaScript'],
-    repo: gh('Hospital-Management-System'),
-    art: 'pulse',
-    featured: true,
-  },
-  {
     slug: 'deepvision',
-    index: '04',
+    index: '01',
     title: 'DeepVision',
-    category: 'Python / Django Surveillance & AI',
-    filters: ['backend', 'ai', 'security', 'web'],
+    category: 'Django / Python AI Surveillance',
+    filters: ['django-backend', 'ai-vision', 'security', 'web'],
     status: 'Ongoing',
+    visualType: 'screenshot',
     summary:
-      'A decoupled surveillance platform pairing a Django 5.2 REST backend and 18-table relational database with a Python computer-vision pipeline (OpenCV, YOLO11n, ByteTrack) and React SPA.',
+      'A decoupled intelligent surveillance platform pairing a Django 5.2 REST backend and 18-table relational database with an OpenCV + YOLO11n + ByteTrack vision pipeline and React SPA.',
     description: [
-      'DeepVision separates a Vercel-hosted React frontend from a Django 5.2 backend and an in-process Python surveillance core. OpenCV captures frames while YOLO11n on PyTorch and ByteTrack detect and track targets across frames.',
-      'The Django layer manages 18 relational tables across SQLite and Supabase PostgreSQL migration tooling, signed-cookie sessions, PBKDF2 password hashing, rate-limited 6-digit OTP verification, HTTP 206 range-request MP4 playback and incident-scoped forensic case files.',
+      'DeepVision separates a Vercel-hosted React single-page interface from a Django 5.2 backend and an in-process Python computer-vision core. Frames captured via OpenCV / DirectShow are processed with YOLO11n on PyTorch and tracked across frames using ByteTrack.',
+      'The Django layer manages 18 relational tables across SQLite and Supabase PostgreSQL migration tooling, signed-cookie sessions, PBKDF2 password hashing, rate-limited 6-digit OTP verification, HTTP 206 MP4 range playback and incident-scoped forensic case files.',
     ],
-    highlightsLabel: "What's built",
+    contribution:
+      'Designed and implemented the Django 5.2 application architecture, relational schema and SQLite-to-PostgreSQL migration pipeline, PBKDF2/OTP authentication, OpenCV/YOLO11n/ByteTrack worker loop, React SPA and hardened Docker deployment.',
+    highlightsLabel: 'Implemented Capabilities',
     highlights: [
-      'Django 5.2 REST API & surveillance core with 18 relational tables (SQLite + Supabase PostgreSQL DDL/migration script).',
+      'Django 5.2 REST gateway with 18 relational tables and Supabase PostgreSQL schema DDL + migration script.',
       'PBKDF2 password hashing, signed-cookie sessions, CSRF protection and rate-limited 6-digit OTP verification.',
       'Three camera modes: browser webcam, OpenCV/DirectShow edge bridge to YOLO11n + ByteTrack, and synthetic calibration feed.',
-      'Incident-scoped forensic workspace with evidence snapshots, MP4 range playback, case notes and timeline.',
-      'Hardened, non-root Docker container and Vercel-deployed React SPA.',
+      'Incident-scoped forensic workspace with evidence snapshots, MP4 range playback, notes and timeline.',
+      'Hardened non-root Docker container and Vercel-deployed React SPA.',
     ],
     pending: {
-      label: 'In progress',
+      label: 'In Progress',
       items: [
-        'Moving the Django REST API to a persistent host (currently runs in a local Docker container).',
-        'Supabase PostgreSQL database and storage — schema and migration tooling ready, cut-over pending.',
+        'Moving the Django REST gateway from local Docker to a persistent cloud host.',
+        'Completing production cut-over to Supabase PostgreSQL and storage buckets.',
       ],
     },
-    stack: ['Python', 'Django', 'SQLite', 'PostgreSQL', 'Supabase', 'OpenCV', 'YOLO11n', 'React', 'Docker', 'Vercel'],
+    stack: ['Python', 'Django 5.2', 'SQLite', 'PostgreSQL', 'Supabase', 'OpenCV', 'YOLO11n', 'PyTorch', 'ByteTrack', 'React', 'Vite', 'Docker', 'Vercel'],
     repo: gh('DeepVision'),
     demo: 'https://vsw-deepvision.vercel.app/',
     art: 'vision',
@@ -188,138 +104,220 @@ export const projects: Project[] = [
       srcSet: '/projects/deepvision-900.webp 900w, /projects/deepvision-1600.webp 1600w',
       width: 1600,
       height: 900,
-      alt: 'DeepVision sign-in screen showing the "AI-Based Intelligent Surveillance System" title with live monitoring, object detection, anomaly detection and security alert features.',
-      caption: 'DeepVision — sign-in screen of the deployed frontend.',
+      alt: 'DeepVision sign-in screen showing the AI-Based Intelligent Surveillance System interface.',
+      caption: 'Actual application screenshot — DeepVision login & feature overview.',
     },
-    featured: true,
+  },
+  {
+    slug: 'cybershield',
+    index: '02',
+    title: 'CyberShield',
+    category: 'Cybersecurity Toolkit & Backend API',
+    filters: ['django-backend', 'security', 'web'],
+    status: 'Completed',
+    visualType: 'screenshot',
+    summary:
+      'A full-stack cybersecurity toolkit with Express REST APIs, JWT + email OTP authentication, phishing URL scanning, password strength evaluation and threat monitoring.',
+    description: [
+      'CyberShield consolidates practical security utilities behind an authenticated Node.js and Express backend. Users verify accounts via email-delivered OTPs and JWT sessions before accessing phishing link analysis, password strength checks, file encryption tools and an AI security advisor.',
+      'The backend enforces rate-limiting, Helmet security headers, bcryptjs credential hashing and database persistence with MongoDB and Supabase.',
+    ],
+    contribution:
+      'Built the Express API routes, JWT + Nodemailer OTP authentication flow, password and phishing analysis endpoints, file encryption helpers and React + Tailwind CSS dashboard.',
+    highlightsLabel: 'Implemented Features',
+    highlights: [
+      'JWT-based authentication integrated with email-delivered OTP verification.',
+      'Phishing URL scanner, password strength analyser and file encryption endpoints.',
+      'Rate-limiting, Helmet security headers and bcryptjs credential hashing.',
+      'Threat monitoring dashboard with honeypot alerts and AI security advisor.',
+    ],
+    stack: ['Node.js', 'Express', 'React 18', 'Vite', 'Tailwind CSS', 'MongoDB', 'Supabase', 'JWT', 'Nodemailer'],
+    repo: gh('CyberShield'),
+    linkNote: 'The Vercel deployment URL listed on the repository currently returns HTTP 404, so no live demo is linked.',
+    art: 'shield',
+    image: {
+      src: '/projects/cybershield-1600.webp',
+      srcSet: '/projects/cybershield-900.webp 900w, /projects/cybershield-1600.webp 1600w',
+      width: 1600,
+      height: 900,
+      alt: 'CyberShield authentication portal screenshot showing shield branding and sign-in form.',
+      caption: 'Actual application screenshot — CyberShield authentication portal.',
+    },
   },
   {
     slug: 'cropify',
-    index: '05',
+    index: '03',
     title: 'Cropify',
     alias: 'KisanAI',
-    category: 'Python Backend / Agricultural AI',
-    filters: ['backend', 'ai', 'web'],
+    category: 'Python FastAPI / Agricultural AI',
+    filters: ['django-backend', 'ai-vision', 'web'],
     status: 'Ongoing',
     context: 'Team project',
+    visualType: 'illustration',
     summary:
-      'A Python FastAPI and React platform that combines Scikit-learn models with live OpenWeatherMap telemetry for crop, soil fertility and irrigation recommendations.',
+      'A Python FastAPI and React + TypeScript advisory platform turning soil nutrients, field telemetry and live weather data into crop, fertility and irrigation guidance.',
     description: [
-      'Cropify (also developed under the name KisanAI) exposes trained Scikit-learn models behind a modular FastAPI backend with structured routers and external weather service integration.',
-      'A React + TypeScript interface collects soil nutrients, field metrics and uploaded crop images so farmers receive actionable crop, fertility and irrigation guidance.',
+      'Cropify pairs a FastAPI machine-learning server (cropify-ml-server) with a React + TypeScript interface (cropify-web-interface). Pre-trained Scikit-learn models serve crop recommendations, soil fertility regression and irrigation advisories.',
+      'The backend integrates with OpenWeatherMap by city name or GPS coordinates so recommendations adapt to live temperature, humidity and rainfall conditions.',
     ],
-    highlightsLabel: "What's built",
+    contribution:
+      'Collaborative team build contributing to the FastAPI ML endpoints, Scikit-learn model integration and React + TypeScript advisory interface.',
+    highlightsLabel: 'Implemented Features',
     highlights: [
-      'FastAPI backend with modular ML routers and OpenWeatherMap API service integration.',
-      'Crop recommendation — Random Forest classifier using N, P, K, pH and environmental factors.',
-      'Soil fertility analysis — Random Forest regressor using NDVI, soil moisture and elevation.',
-      'Irrigation advisory classifier across 19 field parameters plus crop disease upload workflow.',
+      'FastAPI (0.135.3) + Uvicorn ML backend with modular routers and external weather service integration.',
+      'Crop recommendation Random Forest classifier using N, P, K, pH and environmental metrics.',
+      'Soil fertility Random Forest regressor using NDVI, soil moisture and elevation.',
+      'Irrigation advisory classifier across 19 field parameters plus disease upload workflow.',
     ],
     pending: {
-      label: 'Planned',
+      label: 'Planned Enhancements',
       items: [
-        'Deep-learning based disease detection.',
-        'IoT sensor integration and satellite / remote-sensing support.',
-        'Multilingual voice assistant for rural accessibility.',
+        'Deep-learning based crop disease detection.',
+        'IoT sensor integration, satellite support and multilingual voice assistant.',
       ],
     },
-    stack: ['Python', 'FastAPI', 'Scikit-learn', 'Pandas', 'NumPy', 'React', 'TypeScript', 'Vite'],
+    stack: ['Python', 'FastAPI', 'Uvicorn', 'Scikit-learn', 'NumPy', 'SciPy', 'React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Leaflet'],
     repo: gh('Cropify'),
     art: 'field',
   },
   {
-    slug: 'resume-screening',
+    slug: 'decentralized-voting',
+    index: '04',
+    title: 'Decentralized Voting System',
+    category: 'Blockchain & Full-Stack Web',
+    filters: ['blockchain', 'security', 'web'],
+    status: 'Completed',
+    context: 'Collaborative repository',
+    visualType: 'illustration',
+    summary:
+      'A hybrid blockchain voting platform combining an Express + Prisma backend and SHA-256 OTP authentication with Ethereum Sepolia smart contracts and real-time Socket.io tallying.',
+    description: [
+      'The Decentralized Voting System pairs a TypeScript Node.js/Express backend (with Prisma ORM over SQLite/PostgreSQL, Zod validation and JWT + SHA-256 OTP sessions) with Solidity smart contracts on Ethereum Sepolia via Hardhat and Ethers.js.',
+      'Voters are decoupled from ballots via keccak256 cryptographic hashing, one-person-one-vote constraints are enforced at both database and contract layers, and live vote tallies stream via Socket.io and Chart.js.',
+    ],
+    contribution:
+      'Forked and studied team repository featuring Express + Prisma backend APIs, Solidity smart contract voting logic, Socket.io live updates and React + TypeScript client.',
+    highlightsLabel: 'System Capabilities',
+    highlights: [
+      'Immutable vote storage on Ethereum (Sepolia) via Solidity smart contracts and Ethers.js v6.',
+      'One-person-one-vote enforcement across Prisma database locks and smart-contract mapping.',
+      'Passwordless SHA-256 OTP + JWT authentication and keccak256 voter-ballot decoupling.',
+      'Real-time election tallies via Socket.io and Chart.js admin controls.',
+    ],
+    stack: ['Solidity', 'Hardhat', 'Ethers.js', 'Node.js', 'Express', 'Prisma', 'SQLite', 'PostgreSQL', 'Socket.io', 'React 19', 'TypeScript', 'Tailwind CSS'],
+    repo: gh('Decentralized_Voting_System'),
+    art: 'vote',
+  },
+  {
+    slug: 'retino',
+    index: '05',
+    title: 'Retino',
+    category: 'Medical AI / Diabetic Retinopathy',
+    filters: ['ai-vision', 'web'],
+    status: 'Research',
+    context: 'Deep learning study & full-stack wrapper',
+    visualType: 'illustration',
+    summary:
+      'A diabetic retinopathy detection pipeline built around PyTorch Lightning transfer learning, multiprocessing dataset preparation, FastAPI inference and a React + Vite frontend.',
+    description: [
+      'Retino explores scalable preprocessing and transfer-learning pipelines for grading diabetic retinopathy severity from retinal fundus images using PyTorch, PyTorch Lightning and pretrained vision backbones.',
+      'Alongside the training scripts and Jupyter notebook pipeline, the repository includes FastAPI/Gradio inference bindings and a React + Vite frontend directory.',
+    ],
+    contribution:
+      'Maintained fork combining PyTorch Lightning training workflows with FastAPI inference services and a React + Vite web interface for retinal classification experiments.',
+    highlightsLabel: 'Pipeline Components',
+    highlights: [
+      'Multiprocessing image cropping, resizing and train/validation dataset splitting scripts.',
+      'PyTorch Lightning model training with TensorBoard metric tracking.',
+      'FastAPI + Uvicorn and Gradio inference entry points.',
+      'React 19 + Vite frontend scaffolding with Axios and React Router.',
+    ],
+    stack: ['Python', 'PyTorch', 'PyTorch Lightning', 'FastAPI', 'Uvicorn', 'Gradio', 'Scikit-learn', 'React 19', 'Vite'],
+    repo: gh('Retino-'),
+    art: 'retino',
+  },
+  {
+    slug: 'lost-and-found',
     index: '06',
-    title: 'AI Resume Screening Tool',
+    title: 'Lost and Found Tracking System',
+    category: 'Django 5.2 Full-Stack Application',
+    filters: ['django-backend', 'web'],
+    status: 'Completed',
+    visualType: 'illustration',
+    summary:
+      'A Django 5.2 asset-recovery platform with SQLite persistence, Leaflet geolocation, 10 km proximity matching, email OTP authentication, P2P chat and multilingual i18n.',
+    description: [
+      'Built in Python 3.11 and Django 5.2 to help campus communities report and recover lost or found items. Reporters pin coordinates on an interactive Leaflet map with Nominatim reverse geocoding and attach photo evidence.',
+      'The Django backend implements relational models for reports, users and isolated user-to-user messaging, trigonometric proximity matching within 10 km, email-delivered OTP two-factor authentication and GNU gettext translation catalogs in English, Hindi and Kannada.',
+    ],
+    contribution:
+      'Engineered the Django models, forms, views, P2P messaging flow, 10 km proximity matching logic, OTP 2FA, Leaflet map integration and multilingual translation catalogs.',
+    highlightsLabel: 'Django & Platform Features',
+    highlights: [
+      'Django 5.2 + Python 3.11 backend with relational SQLite database and media uploads.',
+      'Automated proximity matching pairing lost and found reports within a 10 km radius.',
+      'Interactive Leaflet mapping with GPS geolocation and Nominatim reverse geocoding.',
+      'Isolated user-to-user verification chat and email-delivered OTP two-factor authentication.',
+      'English, Hindi and Kannada localisation via polib / GNU gettext i18n.',
+    ],
+    stack: ['Python', 'Django 5.2', 'SQLite', 'HTML', 'CSS', 'JavaScript', 'Leaflet.js', 'gettext i18n'],
+    repo: gh('lostandfoundtrackingpublic'),
+    linkNote: 'GitHub Pages on this repo renders documentation only; full Django app runs locally.',
+    art: 'map',
+  },
+  {
+    slug: 'resume-screening',
+    index: '07',
+    title: 'AI-Based Resume Screening',
     category: 'Python / NLP Web Application',
-    filters: ['backend', 'ai'],
+    filters: ['django-backend', 'ai-vision'],
     status: 'Internship project',
     context: 'AI Internship · Internz Learn',
-    summary: 'A Python Flask web app that extracts text from PDF/DOCX resumes and scores similarity against job descriptions.',
+    visualType: 'illustration',
+    summary:
+      'A Python Flask web application that extracts text from uploaded PDF and DOCX resumes and computes TF-IDF cosine similarity against a target job description.',
     description: [
-      'Built during the AI internship at Internz Learn. A Flask server accepts uploaded PDF or DOCX resumes alongside a job description, extracts clean text using pdfminer.six and python-docx, and computes a match score.',
-      'Matching uses TF-IDF vectorization with English stop-word filtering and cosine similarity from Scikit-learn, supported by NLTK, spaCy and BERT extractive summarization.',
+      'Developed during the Internz Learn AI internship. A Flask server provides an upload form accepting PDF/DOCX resumes and job descriptions, extracts structured text with pdfminer.six and python-docx, and computes a candidate match score.',
+      'Text normalization and similarity scoring are powered by Scikit-learn TfidfVectorizer and cosine_similarity alongside NLTK, spaCy and BERT extractive summarization dependencies.',
     ],
-    highlightsLabel: "What's built",
+    contribution:
+      'Implemented the Flask routing and templates, PDF/DOCX text extraction helpers and TF-IDF cosine similarity scoring pipeline.',
+    highlightsLabel: 'Implemented Features',
     highlights: [
-      'Flask upload and scoring routes for resumes and job descriptions.',
-      'Document parsing pipeline with pdfminer.six and python-docx.',
-      'Resume-to-job match scoring using TF-IDF + cosine similarity.',
+      'Flask upload and evaluation routes for PDF and DOCX resume files.',
+      'Document text extraction via pdfminer.six and python-docx.',
+      'Resume-to-job match scoring with Scikit-learn TF-IDF and cosine similarity.',
     ],
     stack: ['Python', 'Flask', 'Scikit-learn', 'NLTK', 'spaCy', 'BERT', 'pdfminer.six', 'python-docx'],
     repo: gh('Ai-Resume-Screening'),
     art: 'document',
   },
   {
-    slug: 'medidispense',
-    index: '07',
-    title: 'MediDispense',
-    category: 'IoT / Embedded Systems',
-    filters: ['iot'],
-    summary: 'An automated medicine dispenser built around ESP32 hardware, firmware and connected-device workflows.',
-    description: [
-      'MediDispense automates medicine dispensing with ESP32-based hardware. The project spans the physical device, its firmware and the connected-device workflow around it.',
-    ],
-    highlightsLabel: 'Scope',
-    highlights: ['ESP32-based dispensing hardware.', 'Device firmware.', 'Connected-device workflows.'],
-    stack: ['ESP32', 'Embedded firmware', 'IoT'],
-    linkNote: 'Detailed documentation and repository have not been published yet.',
-    art: 'device',
-  },
-  {
-    slug: 'visionguard-kc',
+    slug: 'hospital-management',
     index: '08',
-    title: 'VisionGuard-KC',
-    category: 'Medical AI / Computer Vision',
-    filters: ['ai', 'research'],
-    status: 'Research',
-    summary: 'Research into classifying keratoconus from Pentacam four-map (Quad-Map) corneal scans.',
+    title: 'Hospital Management System',
+    category: 'Django 5.0 Full-Stack Application',
+    filters: ['django-backend', 'web'],
+    status: 'Completed',
+    visualType: 'illustration',
+    summary:
+      'A Django 5.0.3 healthcare web application with custom user/doctor/appointment models, booking workflows, doctor schedule dashboards, JSON APIs and printable invoices.',
     description: [
-      'A research-oriented project exploring how deep learning can support keratoconus classification from Pentacam Quad-Map analysis, where four corneal maps are read together.',
-      'The architecture below is the proposed research design. It is presented as research work, not as a finished or deployed system.',
+      'Built with Python and Django 5.0.3 to coordinate hospital operations between patients and doctors. The backend defines CustomUser, Doctor and Appointment models backed by SQLite with registration, login and email update flows.',
+      'Alongside server-rendered views and printable dynamic invoices, Django exposes JSON endpoints (/api/appointments/, /api/latest_appointment/) powering real-time JavaScript filtering between upcoming and completed visits.',
     ],
-    highlightsLabel: 'Proposed architecture',
+    contribution:
+      'Built the Django models, authentication views, appointment booking CRUD workflows, doctor schedule dashboard, JSON API endpoints and printable HTML invoice generator.',
+    highlightsLabel: 'Django & Full-Stack Features',
     highlights: [
-      'Four map-specific CNN branches — one per Pentacam map.',
-      'Hybrid feature fusion across the branches.',
-      'CBAM (Convolutional Block Attention Module) attention.',
-      'Multi-class classification head.',
-      'Grad-CAM visualisation to explain predictions.',
+      'Django 5.0.3 architecture with CustomUser, Doctor and Appointment relational models.',
+      'REST JSON endpoints (/api/appointments/, /api/latest_appointment/) for live schedule filtering.',
+      'Dedicated doctor dashboard to review and manage upcoming appointments.',
+      'Secure registration/login workflows and automatic printable booking invoices.',
     ],
-    stack: ['CNN', 'Feature fusion', 'CBAM attention', 'Grad-CAM'],
-    linkNote: 'Research in progress — no public repository yet.',
-    art: 'quad',
-  },
-  {
-    slug: 'roam-rover',
-    index: '09',
-    title: 'Roam Rover',
-    category: 'Travel / Frontend Development',
-    filters: ['web'],
-    summary: 'A travel-themed website built with hand-written HTML and CSS.',
-    description: ['Roam Rover is a travel-oriented website project developed using HTML and CSS — an exercise in layout, structure and visual presentation without frameworks.'],
-    highlightsLabel: 'Focus',
-    highlights: ['Semantic page structure in HTML.', 'Layout and styling written in plain CSS.'],
-    stack: ['HTML', 'CSS'],
-    linkNote: 'No public repository yet.',
-    art: 'route',
-  },
-  {
-    slug: 'feistel-cipher',
-    index: '10',
-    title: 'Generic Feistel Cipher',
-    category: 'Cryptography / Network Security',
-    filters: ['security'],
-    summary: 'An academic implementation demonstrating the structure of a generic Feistel cipher.',
-    description: [
-      'A cryptography project demonstrating a generic Feistel network: a block is split into two halves, and each round applies a round function with a round key to one half, combines it with the other, and swaps them.',
-      'The same structure runs in reverse with the round keys in the opposite order to decrypt — the property that makes Feistel networks a foundation of block-cipher design.',
-    ],
-    highlightsLabel: 'Concepts demonstrated',
-    highlights: ['Block splitting into left and right halves.', 'Round function with per-round keys.', 'Decryption by reversing the key order.'],
-    stack: ['Cryptography', 'Network Security'],
-    linkNote: 'No public repository yet.',
-    art: 'feistel',
+    stack: ['Python', 'Django 5.0.3', 'SQLite', 'HTML', 'CSS', 'JavaScript'],
+    repo: gh('Hospital-Management-System'),
+    art: 'pulse',
   },
 ]
 

@@ -5,6 +5,7 @@ import type { Theme } from '../hooks/useTheme'
 interface Props {
   theme: Theme
   reducedMotion: boolean
+  className?: string
 }
 
 function getScenePalette(theme: Theme) {
@@ -12,37 +13,21 @@ function getScenePalette(theme: Theme) {
     return {
       ink: '#1b1c18',
       accent: '#5c7d00',
-      outerOpacity: 0.44,
-      ringOpacity: 0.28,
+      outerOpacity: 0.28,
+      ringOpacity: 0.18,
     }
   }
   return {
     ink: '#ece8dc',
     accent: '#c8f34a',
-    outerOpacity: 0.34,
-    ringOpacity: 0.2,
+    outerOpacity: 0.22,
+    ringOpacity: 0.14,
   }
 }
 
-function FallbackDiagram() {
-  return (
-    <svg viewBox="0 0 360 360" fill="none" className="h-full w-full max-w-[340px]" aria-hidden="true">
-      <circle cx="180" cy="180" r="142" stroke="currentColor" strokeOpacity="0.16" strokeDasharray="4 6" />
-      <circle cx="180" cy="180" r="98" stroke="var(--accent-ink)" strokeOpacity="0.55" strokeWidth="1.25" />
-      <polygon points="180,52 292,180 180,308 68,180" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1.2" />
-      <polygon points="180,96 248,180 180,264 112,180" stroke="var(--accent-ink)" strokeOpacity="0.7" strokeWidth="1.2" />
-      <circle cx="180" cy="180" r="5" fill="var(--accent-ink)" />
-      <circle cx="180" cy="52" r="3" fill="currentColor" fillOpacity="0.6" />
-      <circle cx="292" cy="180" r="3" fill="currentColor" fillOpacity="0.6" />
-      <circle cx="180" cy="308" r="3" fill="currentColor" fillOpacity="0.6" />
-      <circle cx="68" cy="180" r="3" fill="currentColor" fillOpacity="0.6" />
-    </svg>
-  )
-}
-
-export default function HeroScene({ theme, reducedMotion }: Props) {
+export default function HeroScene({ theme, reducedMotion, className = '' }: Props) {
   const hostRef = useRef<HTMLDivElement | null>(null)
-  const [fallback, setFallback] = useState(reducedMotion)
+  const [desktopEnabled, setDesktopEnabled] = useState(false)
   const themeRef = useRef<Theme>(theme)
   themeRef.current = theme
 
@@ -54,11 +39,15 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
   }>({})
 
   useEffect(() => {
-    if (reducedMotion) {
-      setFallback(true)
+    if (reducedMotion || typeof window === 'undefined') {
+      setDesktopEnabled(false)
       return
     }
-    setFallback(false)
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const sync = () => setDesktopEnabled(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
   }, [reducedMotion])
 
   useEffect(() => {
@@ -85,7 +74,7 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
   }, [theme])
 
   useEffect(() => {
-    if (reducedMotion) return
+    if (!desktopEnabled || reducedMotion) return
     const host = hostRef.current
     if (!host) return
 
@@ -93,7 +82,6 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
     } catch {
-      setFallback(true)
       return
     }
 
@@ -101,8 +89,8 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
     renderer.setPixelRatio(dpr)
     renderer.setClearColor(0x000000, 0)
 
-    const width = Math.max(host.clientWidth, 280)
-    const height = Math.max(host.clientHeight, 280)
+    const width = Math.max(host.clientWidth, 320)
+    const height = Math.max(host.clientHeight, 320)
     renderer.setSize(width, height)
     renderer.domElement.style.width = '100%'
     renderer.domElement.style.height = '100%'
@@ -118,18 +106,18 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
 
     const { ink, accent, outerOpacity, ringOpacity } = getScenePalette(themeRef.current)
 
-    const outerGeo = new THREE.IcosahedronGeometry(1.65, 1)
+    const outerGeo = new THREE.IcosahedronGeometry(1.72, 1)
     const outerEdges = new THREE.EdgesGeometry(outerGeo)
     const outerMat = new THREE.LineBasicMaterial({ color: new THREE.Color(ink), transparent: true, opacity: outerOpacity })
     const outerWire = new THREE.LineSegments(outerEdges, outerMat)
     group.add(outerWire)
 
     const innerGeo = new THREE.OctahedronGeometry(0.95, 0)
-    const innerMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(accent), wireframe: true, transparent: true, opacity: 0.72 })
+    const innerMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(accent), wireframe: true, transparent: true, opacity: 0.48 })
     const innerMesh = new THREE.Mesh(innerGeo, innerMat)
     group.add(innerMesh)
 
-    const ringCurve = new THREE.EllipseCurve(0, 0, 2.18, 2.18, 0, Math.PI * 2, false, 0)
+    const ringCurve = new THREE.EllipseCurve(0, 0, 2.25, 2.25, 0, Math.PI * 2, false, 0)
     const ringPts = ringCurve.getPoints(96).map((p) => new THREE.Vector3(p.x, p.y, 0))
     const ringGeo = new THREE.BufferGeometry().setFromPoints(ringPts)
     const ringMat = new THREE.LineBasicMaterial({ color: new THREE.Color(ink), transparent: true, opacity: ringOpacity })
@@ -141,7 +129,7 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
     const posAttr = outerGeo.getAttribute('position')
     const pointsGeo = new THREE.BufferGeometry()
     pointsGeo.setAttribute('position', posAttr.clone())
-    const pointsMat = new THREE.PointsMaterial({ color: new THREE.Color(accent), size: 0.06, transparent: true, opacity: 0.85 })
+    const pointsMat = new THREE.PointsMaterial({ color: new THREE.Color(accent), size: 0.05, transparent: true, opacity: 0.7 })
     const nodes = new THREE.Points(pointsGeo, pointsMat)
     group.add(nodes)
 
@@ -184,11 +172,11 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
       raf = window.requestAnimationFrame(renderFrame)
       if (!inView || document.hidden) return
       const elapsed = clock.getElapsedTime()
-      group.rotation.y = elapsed * 0.16 + pointerX * 0.25
-      group.rotation.x = Math.sin(elapsed * 0.3) * 0.12 + pointerY * 0.18
-      innerMesh.rotation.y = -elapsed * 0.28
-      innerMesh.rotation.z = elapsed * 0.14
-      ring.rotation.z = elapsed * 0.08
+      group.rotation.y = elapsed * 0.14 + pointerX * 0.22
+      group.rotation.x = Math.sin(elapsed * 0.28) * 0.1 + pointerY * 0.16
+      innerMesh.rotation.y = -elapsed * 0.24
+      innerMesh.rotation.z = elapsed * 0.12
+      ring.rotation.z = elapsed * 0.07
       renderer.render(scene, camera)
     }
     renderFrame()
@@ -213,15 +201,9 @@ export default function HeroScene({ theme, reducedMotion }: Props) {
       }
       colorsRef.current = {}
     }
-  }, [reducedMotion])
+  }, [desktopEnabled, reducedMotion])
 
-  return (
-    <div
-      ref={hostRef}
-      className="relative flex h-[280px] w-full items-center justify-center text-ink sm:h-[340px] lg:h-[420px]"
-      aria-hidden="true"
-    >
-      {fallback ? <FallbackDiagram /> : null}
-    </div>
-  )
+  if (!desktopEnabled || reducedMotion) return null
+
+  return <div ref={hostRef} className={className} aria-hidden="true" />
 }

@@ -79,11 +79,9 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 <span className="font-mono text-xs text-accent-ink">{project.index}</span>
                 <span aria-hidden="true" className="text-faint">/</span>
                 <span className="eyebrow text-muted">{project.category}</span>
-                {project.status ? (
-                  <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink">
-                    {project.status}
-                  </span>
-                ) : null}
+                <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink">
+                  {project.status}
+                </span>
               </div>
               <button
                 ref={closeBtnRef}
@@ -103,7 +101,9 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   {project.title}
                   {project.alias ? <span className="ml-2 font-serif italic font-normal text-muted">/ {project.alias}</span> : null}
                 </h2>
-                {project.context ? <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.context}</p> : null}
+                {project.context ? (
+                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.context}</p>
+                ) : null}
                 <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{project.summary}</p>
               </div>
 
@@ -124,9 +124,14 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   </figcaption>
                 </figure>
               ) : (
-                <div className="flex h-52 items-center justify-center overflow-hidden rounded-2xl border border-line bg-surface p-6 text-ink">
-                  <ProjectArt variant={project.art} className="h-full max-h-40 w-auto" />
-                </div>
+                <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
+                  <div className="flex h-52 items-center justify-center p-6 text-ink">
+                    <ProjectArt variant={project.art} className="h-full max-h-40 w-auto" />
+                  </div>
+                  <figcaption className="border-t border-line px-4 py-2.5 font-mono text-[11px] text-muted">
+                    Architecture illustration — {project.title} system topology.
+                  </figcaption>
+                </figure>
               )}
 
               {/* Actions */}
@@ -142,18 +147,16 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </a>
                 ) : null}
-                {project.repo ? (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-5 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
-                  >
-                    <GithubIcon className="h-4 w-4" aria-hidden="true" />
-                    <span>View Repository</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
-                  </a>
-                ) : null}
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-5 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
+                >
+                  <GithubIcon className="h-4 w-4" aria-hidden="true" />
+                  <span>View Repository</span>
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
+                </a>
                 {project.linkNote ? <p className="text-xs text-muted">{project.linkNote}</p> : null}
               </div>
 
@@ -166,6 +169,11 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                       {paragraph}
                     </p>
                   ))}
+
+                  <div className="rounded-2xl border border-line bg-bg-2 p-5">
+                    <h3 className="eyebrow mb-2 text-accent-ink">Contribution &amp; Implementation</h3>
+                    <p className="text-sm leading-relaxed text-ink">{project.contribution}</p>
+                  </div>
                 </div>
 
                 <div className="space-y-6 md:col-span-5">
@@ -199,7 +207,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
 
               {/* Stack */}
               <div className="border-t border-line pt-6">
-                <p className="eyebrow mb-3 text-faint">Technologies</p>
+                <p className="eyebrow mb-3 text-faint">Verified Technologies</p>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((tech) => (
                     <span
@@ -221,14 +229,18 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                     className="group inline-flex min-h-[44px] items-center gap-2 text-left text-sm text-muted transition hover:text-ink"
                   >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
-                    <span className="truncate max-w-[160px] sm:max-w-xs">{prevProject.title}</span>
+                    <span className="max-w-[160px] truncate sm:max-w-xs">
+                      {prevProject.index} · {prevProject.title}
+                    </span>
                   </button>
                   <button
                     type="button"
                     onClick={() => onSelect(nextProject)}
                     className="group inline-flex min-h-[44px] items-center gap-2 text-right text-sm text-muted transition hover:text-ink"
                   >
-                    <span className="truncate max-w-[160px] sm:max-w-xs">{nextProject.title}</span>
+                    <span className="max-w-[160px] truncate sm:max-w-xs">
+                      {nextProject.index} · {nextProject.title}
+                    </span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                   </button>
                 </div>
