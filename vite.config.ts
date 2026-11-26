@@ -30,6 +30,7 @@ function siteMeta(siteUrl: string): Plugin {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: profile.name,
+        alternateName: 'VSW',
         ...(siteUrl ? { url: `${siteUrl}/` } : {}),
         jobTitle: 'Python & Django Full-Stack Developer',
         description: profile.positioning,

@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <rect width="64" height="64" rx="14" fill="#0d0e0c"/>
-  <rect x="2.5" y="2.5" width="59" height="59" rx="11.5" stroke="#ece8dc" stroke-opacity="0.16" stroke-width="1.5"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" stroke="#ece8dc" stroke-opacity="0.18" stroke-width="1.5"/>
   <!-- V -->
-  <path d="M12 20L21 44L30 20" stroke="#ece8dc" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- W interlocking cleanly -->
-  <path d="M29 20L35.5 44L41.5 27L47.5 44L54 20" stroke="#c8f34a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M9 21L15 43L21 21" stroke="#ece8dc" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- S (electric lime geometric curve) -->
+  <path d="M36 23.5C36 21.8 34.4 21 32 21H28.8C26.7 21 25.2 22.3 25.2 24.4C25.2 26.8 26.8 28 30.8 29.2C34.8 30.4 36.4 31.8 36.4 35.2C36.4 39.2 34.3 43 30 43H25" stroke="#c8f34a" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- W -->
+  <path d="M40.5 21L44 43L48.2 27.5L52.4 43L55.8 21" stroke="#ece8dc" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

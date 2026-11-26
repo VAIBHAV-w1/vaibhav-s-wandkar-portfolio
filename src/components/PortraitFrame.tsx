@@ -10,31 +10,31 @@ export function PortraitFrame({ className = '' }: Props) {
   const [errored, setErrored] = useState(false)
 
   return (
-    <figure className={`relative overflow-hidden rounded-3xl border border-line-strong bg-bg-2 ${className}`}>
-      {/* Top header bar */}
+    <figure className={`relative overflow-hidden rounded-2xl border border-line-strong bg-bg-2 ${className}`}>
+      {/* Minimal VSW studio header */}
       <div className="flex items-center justify-between border-b border-line px-5 py-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
         <span className="inline-flex items-center gap-2">
-          <span className="pulse-dot h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-          <span className="font-medium text-ink">V. S. WANDKAR</span>
+          <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
+          <span className="font-semibold text-ink">{profile.initials}</span>
         </span>
         <span className="text-accent-ink">PYTHON · DJANGO</span>
       </div>
 
-      {/* Dedicated unobstructed portrait surface — preserves crisp white studio background */}
+      {/* Dedicated unobstructed portrait surface — preserves natural 782:1024 proportions & white studio backdrop */}
       <div className="p-3">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-line bg-white">
+        <div className="relative aspect-[782/1024] w-full overflow-hidden rounded-xl border border-line bg-white">
           {!errored ? (
             <picture>
               <source
                 type="image/webp"
-                srcSet="/images/vaibhav-portrait-480.webp 480w, /images/vaibhav-portrait-800.webp 800w"
+                srcSet="/images/vaibhav-portrait-480.webp 480w, /images/vaibhav-portrait-782.webp 782w"
                 sizes="(max-width: 1024px) 90vw, 400px"
               />
               <img
-                src="/images/vaibhav-portrait-800.jpg"
-                width={800}
-                height={1000}
-                alt={`Portrait of ${profile.name}`}
+                src="/images/vaibhav-portrait-original.jpg"
+                width={782}
+                height={1024}
+                alt={`Studio portrait of ${profile.name}`}
                 fetchPriority="high"
                 decoding="async"
                 onError={() => setErrored(true)}
