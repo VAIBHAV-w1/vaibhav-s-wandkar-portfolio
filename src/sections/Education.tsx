@@ -1,0 +1,52 @@
+import { useRef } from 'react'
+import { useSectionReveal } from '../animations/gsap'
+import { SectionHeader } from '../components/SectionHeader'
+import { education } from '../data/education'
+
+interface Props {
+  reducedMotion: boolean
+}
+
+export function Education({ reducedMotion }: Props) {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  useSectionReveal(sectionRef, reducedMotion)
+
+  return (
+    <section id="education" ref={sectionRef} className="section-y border-t border-line">
+      <div className="container-x">
+        <SectionHeader
+          index="05"
+          kicker="Education"
+          title={
+            <>
+              Academic{' '}
+              <span className="font-serif italic font-normal text-accent-ink">foundation</span>
+            </>
+          }
+        />
+
+        <ol className="relative space-y-6 border-l border-line pl-6 sm:pl-8" data-reveal="">
+          {education.map((item) => (
+            <li key={item.qualification} className="relative rounded-3xl border border-line bg-bg-2 p-6 sm:p-7">
+              <span
+                aria-hidden="true"
+                className={`absolute -left-[31px] top-8 h-3 w-3 rounded-full border-2 border-bg sm:-left-[39px] ${
+                  item.current ? 'bg-accent' : 'bg-line-strong'
+                }`}
+              />
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="eyebrow text-accent-ink">{item.stage}</span>
+                <span className="font-mono text-xs text-faint">
+                  {item.place}
+                  {item.affiliation ? ` · ${item.affiliation}` : ''}
+                </span>
+              </div>
+              <h3 className="mt-2 text-xl font-medium tracking-tight text-ink sm:text-2xl">{item.qualification}</h3>
+              <p className="mt-1 text-sm text-muted">{item.institution}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )
+}
