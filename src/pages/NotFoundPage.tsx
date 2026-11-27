@@ -11,8 +11,8 @@ export function NotFoundPage({ onNavigate }: Props) {
     <section className="section-y">
       <div className="container-x max-w-2xl">
         <div className="rounded-2xl border border-line bg-bg-2 p-8 sm:p-12">
-          <div className="mb-6 flex items-center gap-3">
-            <BrandLogo size="md" />
+          <div className="mb-6 flex items-center gap-4">
+            <BrandLogo variant="full" size="md" />
             <span className="eyebrow text-accent-ink">HTTP 404 · Route Not Found</span>
           </div>
           <h1 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">

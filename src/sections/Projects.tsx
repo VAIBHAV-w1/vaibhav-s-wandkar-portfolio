@@ -149,7 +149,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
         <div
           role="tablist"
           aria-label="Filter projects by category"
-          className="mb-10 flex flex-wrap items-center gap-2"
+          className="mb-7 flex flex-wrap items-center gap-2"
           data-reveal=""
         >
           {projectFilters.map((tab) => {
@@ -290,7 +290,7 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
         </div>
 
         {/* Additional verified GitHub repositories */}
-        <div className="mt-12 rounded-2xl border border-line bg-bg-2 p-6 sm:p-8" data-reveal="">
+        <div className="mt-9 rounded-2xl border border-line bg-bg-2 p-5 sm:p-6" data-reveal="">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="eyebrow text-accent-ink">More on GitHub</p>

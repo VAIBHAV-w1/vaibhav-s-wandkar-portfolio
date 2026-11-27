@@ -1,11 +1,15 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 @theme {
-  --font-sans: 'Inter Tight Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans:
+    "Inter Tight Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono:
+    "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
 
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
@@ -27,17 +31,17 @@
 }
 
 :root,
-[data-theme='dark'] {
+[data-theme="dark"] {
   --bg: #0d0e0c;
   --bg-2: #121310;
   --surface: #181915;
   --ink: #ece8dc;
   --muted: #b3b0a6;
-  --faint: #7d7a72;
+  --faint: #848178;
   --line: rgb(236 232 220 / 0.11);
-  --line-strong: rgb(236 232 220 / 0.24);
-  --accent: #c8f34a;
-  --accent-ink: #c8f34a;
+  --line-strong: rgb(212 175 55 / 0.28);
+  --accent: #d4af37;
+  --accent-ink: #e2bf63;
   --on-accent: #0d0e0c;
   --invert-bg: #ece8dc;
   --invert-ink: #121310;
@@ -45,17 +49,17 @@
   color-scheme: dark;
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --bg: #f2efe6;
   --bg-2: #ebe7dc;
   --surface: #e4e0d3;
   --ink: #141512;
   --muted: #4a4842;
-  --faint: #77746b;
+  --faint: #6c6960;
   --line: rgb(20 21 18 / 0.12);
-  --line-strong: rgb(20 21 18 / 0.26);
-  --accent: #c8f34a;
-  --accent-ink: #4a6400;
+  --line-strong: rgb(120 86 11 / 0.28);
+  --accent: #cfa63c;
+  --accent-ink: #78560b;
   --on-accent: #141512;
   --invert-bg: #151612;
   --invert-ink: #ece8dc;
@@ -71,7 +75,7 @@
 }
 
 @utility section-y {
-  padding-block: clamp(5rem, 11vw, 10rem);
+  padding-block: clamp(3.25rem, 5.5vw, 5.25rem);
 }
 
 @utility eyebrow {
@@ -115,7 +119,7 @@
   }
 
   button,
-  [role='button'] {
+  [role="button"] {
     cursor: pointer;
   }
 
@@ -130,7 +134,7 @@
 
 /* Grain — a single fixed, composited layer. */
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   z-index: 95;
@@ -139,7 +143,7 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-[data-theme='light'] body::after {
+[data-theme="light"] body::after {
   opacity: 0.06;
 }
 

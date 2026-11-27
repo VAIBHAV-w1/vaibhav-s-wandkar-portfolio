@@ -86,7 +86,7 @@ export function Navbar({
             className="group inline-flex shrink-0 items-center gap-2.5 text-left xl:gap-3"
             aria-label={`${profile.name} — back to top`}
           >
-            <BrandLogo size="md" />
+            <BrandLogo variant="compact" />
             <span className="hidden text-[15px] font-semibold tracking-tight text-ink sm:inline lg:hidden xl:inline xl:text-base">
               {profile.name}
             </span>

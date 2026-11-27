@@ -1,5 +1,5 @@
 /**
- * Academic timeline verified directly from VaibhavSWandkarResume (2).pdf.
+ * Academic qualifications, institutions and education timelines.
  */
 export interface EducationItem {
   stage: string
@@ -7,7 +7,6 @@ export interface EducationItem {
   institution: string
   place: string
   period: string
-  score: string
   affiliation?: string
   current?: boolean
 }
@@ -19,24 +18,21 @@ export const education: EducationItem[] = [
     institution: 'Bapuji Institute of Engineering and Technology, Davangere',
     place: 'Davangere',
     period: '2024 – Expected 2027',
-    score: 'CGPA: 7.78 / 10',
     affiliation: 'VTU',
     current: true,
   },
   {
     stage: 'Diploma',
     qualification: 'Diploma in Computer Science and Engineering',
-    institution: "K.L.E. Society's Smt. C.I. Munavalli Polytechnic",
+    institution: "K.L.E. Society's Smt. C.I. Munavalli Polytechnic, Hubli",
     place: 'Hubli',
     period: '2021 – 2024',
-    score: '77.3%',
   },
   {
     stage: 'Secondary',
     qualification: 'SSLC',
-    institution: 'Chetan Public School',
+    institution: 'Chetan Public School, Hubli',
     place: 'Hubli',
     period: '2020 – 2021',
-    score: '62.24%',
   },
 ]

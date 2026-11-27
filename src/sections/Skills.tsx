@@ -44,7 +44,7 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
 
         {/* Primary Python & Django Spotlight + Cross-Link Panel */}
         <div
-          className="mb-8 grid gap-6 rounded-2xl border border-line-strong bg-bg-2 p-6 sm:p-8 lg:grid-cols-12"
+          className="mb-6 grid gap-6 rounded-2xl border border-line-strong bg-bg-2 p-5 sm:p-7 lg:grid-cols-12"
           data-reveal=""
         >
           <div className="flex flex-col justify-between gap-6 lg:col-span-7">
@@ -154,7 +154,7 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
                     </button>
                   ))
                 ) : (
-                  <span className="font-mono text-xs text-muted">Verified core competency</span>
+                  <span className="font-mono text-xs text-muted">Verified engineering skill</span>
                 )}
               </div>
             </div>
@@ -162,7 +162,7 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
         </div>
 
         {/* Django Engineering Capabilities Verified in Code */}
-        <div className="mb-8 rounded-2xl border border-line bg-bg-2 p-6 sm:p-8" data-reveal="">
+        <div className="mb-6 rounded-2xl border border-line bg-bg-2 p-5 sm:p-7" data-reveal="">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Layers className="h-4 w-4 text-accent-ink" aria-hidden="true" />
@@ -206,8 +206,8 @@ export function Skills({ reducedMotion, onOpenProject }: Props) {
           </div>
         </div>
 
-        {/* Supporting 7-Group Skill Matrix */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal="">
+        {/* Supporting 6-Group Skill Matrix (balanced 3x2 grid) */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal="">
           {skillGroups.map((group) => (
             <div
               key={group.id}

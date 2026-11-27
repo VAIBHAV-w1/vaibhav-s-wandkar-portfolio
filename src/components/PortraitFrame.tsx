@@ -43,7 +43,7 @@ export function PortraitFrame({ className = '' }: Props) {
             </picture>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-surface p-6 text-center">
-              <BrandLogo size="lg" />
+              <BrandLogo variant="full" size="lg" />
               <p className="font-mono text-xs text-muted">{profile.name}</p>
             </div>
           )}

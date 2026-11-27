@@ -24,14 +24,14 @@ export function Footer({ route, onNavigate, onScrollTo }: Props) {
   }
 
   return (
-    <footer className="border-t border-line bg-bg-2 py-12">
+    <footer className="border-t border-line bg-bg-2 py-9">
       <div className="container-x">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <div className="group flex items-center gap-3">
-            <BrandLogo size="sm" />
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+          <div className="group flex items-center gap-3.5">
+            <BrandLogo variant="full" size="md" />
             <div>
               <p className="text-sm font-medium text-ink">{profile.name}</p>
-              <p className="text-xs text-muted">Python &amp; Django Full-Stack Developer · BIET Davangere</p>
+              <p className="text-xs text-muted">Python &amp; Django Full-Stack Developer · Hubli, India</p>
             </div>
           </div>
 
@@ -59,14 +59,14 @@ export function Footer({ route, onNavigate, onScrollTo }: Props) {
             type="button"
             onClick={() => onScrollTo('#top')}
             aria-label="Back to top"
-            className="inline-flex h-11 items-center gap-2 self-start rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-accent-ink md:self-auto"
+            className="inline-flex h-10 items-center gap-2 self-start rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-accent-ink md:self-auto"
           >
             <span>Top</span>
             <ArrowUp className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
           </button>
         </div>
 
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-line pt-6 text-xs text-faint sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col justify-between gap-4 border-t border-line pt-5 text-xs text-faint sm:flex-row sm:items-center">
           <p>© {year} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a

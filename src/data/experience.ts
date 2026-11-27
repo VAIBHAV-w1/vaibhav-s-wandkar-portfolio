@@ -1,6 +1,6 @@
 /**
- * Internships, certifications and achievements verified directly from VaibhavSWandkarResume (2).pdf.
- * Written in natural, clear portfolio language while preserving exact roles, dates, organizations and verified figures.
+ * Verified internships (4 unique entries), certifications and hackathon milestones.
+ * Certifications keep a dedicated structure so they do not duplicate internship timeline descriptions.
  */
 export interface ExperienceItem {
   role: string
@@ -16,20 +16,20 @@ export const experience: ExperienceItem[] = [
     role: 'Android App Development Intern',
     org: 'Corizo Edutech Pvt. Ltd.',
     period: 'May 2025 – June 2025',
-    summary: 'Built responsive mobile interfaces and stabilized Android navigation flows across multiple screen dimensions.',
+    summary: 'Built responsive mobile interfaces and stabilized Android navigation flows across varied screen dimensions.',
     highlights: [
-      'Designed and implemented 5+ responsive Android UI screens tailored for varied device sizes and resolutions.',
-      'Diagnosed and resolved activity lifecycle issues across 3 application modules, improving navigation stability and reducing crashes.',
+      'Designed and implemented 5+ responsive Android UI screens tailored for multiple device sizes and resolutions.',
+      'Diagnosed and resolved activity lifecycle issues across 3 application modules, improving navigation stability.',
     ],
   },
   {
     role: 'Cloud Computing Intern',
     org: 'Corizo Edutech Pvt. Ltd.',
     period: 'April 2025 – June 2025',
-    summary: 'Worked hands-on with core cloud service models, virtualization and repeatable deployment setups.',
+    summary: 'Worked hands-on with core cloud service models, virtualization and repeatable environment setup.',
     highlights: [
       'Applied IaaS, PaaS, SaaS and virtualization workflows across 10+ practical cloud lab exercises.',
-      'Configured 3 cloud deployment environments and authored clear documentation to standardize team setup.',
+      'Configured 3 cloud deployment environments and authored standardized setup documentation.',
     ],
   },
   {
@@ -47,10 +47,10 @@ export const experience: ExperienceItem[] = [
     role: 'Cybersecurity Intern',
     org: 'HAEGL Technologies Pvt. Ltd.',
     period: 'January 2024 – April 2024',
-    summary: 'Conducted web application security testing and documented practical remediation steps.',
+    summary: 'Conducted web application vulnerability assessments and documented practical remediation steps.',
     highlights: [
-      'Executed vulnerability assessment and penetration testing (VAPT) against web applications, identifying SQL Injection, XSS and CSRF flaws.',
-      'Authored remediation reports covering 15+ vulnerabilities with concrete fixes to strengthen application security.',
+      'Executed vulnerability assessment and penetration testing (VAPT) across web applications, identifying SQL Injection, XSS and CSRF flaws.',
+      'Authored remediation reports covering 15+ findings with actionable fixes to harden application security.',
     ],
   },
 ]
@@ -59,13 +59,34 @@ export interface CertificationItem {
   title: string
   issuer: string
   year: string
+  credentialType: string
 }
 
 export const certifications: CertificationItem[] = [
-  { title: 'Artificial Intelligence', issuer: 'Internz Learn', year: '2024' },
-  { title: 'Cybersecurity Internship Certification', issuer: 'HAEGL Technologies Pvt. Ltd.', year: '2024' },
-  { title: 'Cloud Computing', issuer: 'Corizo Edutech', year: '2025' },
-  { title: 'Android App Development', issuer: 'Corizo Edutech and Wipro DICE', year: '2025' },
+  {
+    title: 'Android App Development',
+    issuer: 'Corizo Edutech & Wipro DICE',
+    year: '2025',
+    credentialType: 'Industry Program Credential',
+  },
+  {
+    title: 'Cloud Computing',
+    issuer: 'Corizo Edutech',
+    year: '2025',
+    credentialType: 'Completion Certificate',
+  },
+  {
+    title: 'Artificial Intelligence',
+    issuer: 'Internz Learn',
+    year: '2024',
+    credentialType: 'Program Certificate',
+  },
+  {
+    title: 'Cybersecurity Internship Certification',
+    issuer: 'HAEGL Technologies Pvt. Ltd.',
+    year: '2024',
+    credentialType: 'Internship Completion',
+  },
 ]
 
 export interface Achievement {

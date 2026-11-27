@@ -97,7 +97,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
               </button>
             </div>
 
-            <div className="space-y-8 p-6 sm:p-8 md:p-10">
+            <div className="space-y-6 p-5 sm:p-7">
               {/* Heading */}
               <div>
                 <h2 id="modal-project-title" className="text-3xl font-medium tracking-tight text-ink sm:text-4xl">
@@ -105,7 +105,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   {project.alias ? <span className="ml-2 font-serif italic font-normal text-muted">/ {project.alias}</span> : null}
                 </h2>
                 <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.ownership}</p>
-                <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{project.summary}</p>
+                <p className="mt-3 text-base leading-relaxed text-muted sm:text-lg">{project.summary}</p>
               </div>
 
               {/* Media preview */}
@@ -126,11 +126,11 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 </figure>
               ) : (
                 <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
-                  <div className="flex h-52 items-center justify-center p-6 text-ink">
-                    <ProjectArt variant={project.art} className="h-full max-h-40 w-auto" />
+                  <div className="flex h-44 items-center justify-center p-5 text-ink">
+                    <ProjectArt variant={project.art} className="h-full max-h-36 w-auto" />
                   </div>
                   <figcaption className="border-t border-line px-4 py-2.5 font-mono text-[11px] text-muted">
-                    Architecture illustration — {project.title} system topology.
+                    Architecture illustration — {project.title} architecture overview.
                   </figcaption>
                 </figure>
               )}

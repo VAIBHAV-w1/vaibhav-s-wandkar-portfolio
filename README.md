@@ -8,14 +8,14 @@ Built with React, TypeScript, Vite, Tailwind CSS v4, GSAP (`ScrollTrigger`), Mot
 
 ## Key Architecture & Features
 
-- **VSW Brand Identity**: Original geometric **VSW** SVG monogram across navbar, loader, footer, favicon (`16px`–`64px`), Apple touch icon, and Open Graph social preview.
+- **VSW Brand Identity**: Official circular silver-and-gold **VSW** logo (`vsw-official-logo.webp`), compact cropped navbar emblem, crisp simplified favicon/app-icon derivatives (`16px`–`180px`), and Open Graph social preview.
 - **Unobstructed Studio Portrait**: Preserves the original high-resolution studio photograph (`vaibhav-portrait-original.jpg` alongside non-upscaled `480w` and `782w` WebP variants) inside a clean, unobstructed gallery frame.
-- **Resume-Synced Content (`VaibhavSWandkarResume (2).pdf`)**:
-  - **Education**: B.E. Computer Science and Design at B.I.E.T., Davangere (`2024 – Expected 2027`, CGPA `7.78 / 10`), Diploma at K.L.E. Society's Smt. C.I. Munavalli Polytechnic (`2021 – 2024`, `77.3%`), SSLC at Chetan Public School (`2020 – 2021`, `62.24%`).
-  - **Internships & Certifications**: Corizo Edutech (Android App Development & Cloud Computing, 2025), Internz Learn (AI, 2024), HAEGL Technologies (Cybersecurity, 2024), plus Wipro DICE.
+- **Verified Profile & Credentials**:
+  - **Education**: B.E. Computer Science and Design at Bapuji Institute of Engineering and Technology, Davangere (`2024 – Expected 2027`), Diploma in Computer Science and Engineering at K.L.E. Society's Smt. C.I. Munavalli Polytechnic, Hubli (`2021 – 2024`), SSLC at Chetan Public School, Hubli (`2020 – 2021`).
+  - **Internships & Certifications**: Corizo Edutech (Android App Development & Cloud Computing, 2025), Internz Learn (AI, 2024), HAEGL Technologies Pvt. Ltd. (Cybersecurity, 2024), plus Wipro DICE.
   - **Achievements**: CodeFury 8.0 National-Level Finalist, SIH Internal Round Qualifier, Build for Bengaluru, CBIT Hacktoberfest, NAIN 2.0 Project Contributor.
   - **Languages**: English, Hindi, Kannada, Marathi.
-- **Exact 8-Project Showcase**: `01` DeepVision · `02` CyberShield · `03` Cropify · `04` Decentralized Voting System · `05` Retino · `06` Lost and Found Tracking System · `07` AI-Based Resume Screening · `08` Hospital Management System — with verified repositories, authorship badges, and transparent Screenshot vs Illustration labels.
+- **Exact 8-Project Showcase**: `01` DeepVision · `02` CyberShield · `03` Cropify · `04` Decentralized Voting System · `05` Retino · `06` Lost and Found Tracking System · `07` AI-Based Resume Screening · `08` Hospital Management System (HAEGL Technologies internship-associated) — with verified repositories, authorship badges, and transparent Screenshot vs Illustration labels.
 - **Security & Production Readiness**: Compatible Content Security Policy (`vercel.json`), HSTS, `X-Frame-Options: DENY`, `rel="noopener noreferrer"` on external tabs, zero client-side secret exposure, spam-protected contact form, `/privacy` disclosure, custom HTTP 404 route, `robots.txt`, and dynamic `sitemap.xml`.
 
 ---

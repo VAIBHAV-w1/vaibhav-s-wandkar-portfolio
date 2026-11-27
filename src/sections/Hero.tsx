@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { ArrowDownRight, Mail } from 'lucide-react'
 import { gsap } from '../animations/gsap'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
+import { BrandLogo } from '../components/BrandLogo'
 import { Magnetic } from '../components/Magnetic'
 import { PortraitFrame } from '../components/PortraitFrame'
 import { profile } from '../data/profile'
@@ -34,40 +35,48 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
   }, [reducedMotion])
 
   return (
-    <section id="top" ref={heroRef} className="relative border-b border-line pt-10 pb-12 sm:pt-14 md:pt-18 md:pb-16">
+    <section id="top" ref={heroRef} className="relative border-b border-line pt-7 pb-10 sm:pt-9 md:pt-11 md:pb-12">
       <div className="container-x">
         {/* Top identity bar */}
-        <div data-hero-in="" className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5">
+        <div data-hero-in="" className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
           <div className="flex items-center gap-2.5">
             <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-            <span className="eyebrow text-muted">{profile.initials} · {profile.education.institution}</span>
+            <span className="eyebrow text-muted">
+              {profile.initials} · Open to Internships &amp; Engineering Roles
+            </span>
           </div>
           <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
             {profile.location}
           </p>
         </div>
 
-        {/* Editorial split: Left copy & CTAs, Right dedicated portrait */}
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+        {/* Editorial split: Left brand lockup + copy & CTAs, Right dedicated portrait */}
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
-            <p data-hero-in="" className="eyebrow mb-4 text-accent-ink">
-              {profile.positioning}
-            </p>
+            {/* Official VSW logo presentation lockup */}
+            <div data-hero-in="" className="mb-5 flex items-center gap-3.5 sm:gap-4">
+              <BrandLogo variant="full" size="xl" />
+              <div className="min-w-0">
+                <p className="text-sm font-semibold tracking-tight text-ink sm:text-base">{profile.name}</p>
+                <p className="eyebrow mt-1 text-accent-ink">{profile.positioning}</p>
+              </div>
+            </div>
+
             <h1
               data-hero-in=""
-              className="text-[clamp(2.4rem,5.3vw,4.6rem)] font-medium leading-[1.03] tracking-[-0.035em] text-ink"
+              className="text-[clamp(2.3rem,5vw,4.35rem)] font-medium leading-[1.04] tracking-[-0.035em] text-ink"
             >
               Building{' '}
               <span className="font-serif italic font-normal text-accent-ink">intelligent</span>{' '}
               applications through thoughtful engineering.
             </h1>
 
-            <p data-hero-in="" className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            <p data-hero-in="" className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               {profile.intro}
             </p>
 
             {/* Primary CTAs + Verified social links */}
-            <div data-hero-in="" className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div data-hero-in="" className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
               <Magnetic reducedMotion={reducedMotion}>
                 <button
                   type="button"
@@ -121,16 +130,16 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
           </div>
 
           <div data-hero-in="" className="lg:col-span-5">
-            <PortraitFrame className="mx-auto max-w-[390px] lg:ml-auto lg:mr-0" />
+            <PortraitFrame className="mx-auto max-w-[380px] lg:ml-auto lg:mr-0" />
           </div>
         </div>
 
-        {/* Quiet 4-column Engineering Focus Bar */}
-        <div data-hero-in="" className="mt-14 grid divide-y divide-line border-t border-line sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
+        {/* 4-column Engineering Focus Bar */}
+        <div data-hero-in="" className="mt-10 grid divide-y divide-line border-t border-line sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
           {profile.focusAreas.map((area, idx) => (
             <div
               key={area.index}
-              className={`pt-5 pb-3 sm:py-5 ${idx > 0 ? 'lg:border-l lg:border-line lg:pl-6' : ''} ${
+              className={`pt-4 pb-2.5 sm:py-4 ${idx > 0 ? 'lg:border-l lg:border-line lg:pl-6' : ''} ${
                 idx % 2 === 1 ? 'sm:border-l sm:border-line sm:pl-6 lg:pl-6' : 'sm:pr-6'
               }`}
             >

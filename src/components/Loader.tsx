@@ -55,9 +55,9 @@ export function Loader({ reducedMotion, onDone }: Props) {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-5"
           >
-            <div className="flex items-center gap-3">
-              <BrandLogo size="md" />
-              <span className="font-mono text-xs tracking-[0.24em] text-muted">{profile.initials}</span>
+            <div className="flex flex-col items-center gap-3">
+              <BrandLogo variant="full" size="lg" />
+              <span className="font-mono text-xs tracking-[0.24em] text-accent-ink">{profile.initials}</span>
             </div>
             <div className="h-[1px] w-36 overflow-hidden bg-line">
               <div className="loader-line h-full w-full bg-accent" />

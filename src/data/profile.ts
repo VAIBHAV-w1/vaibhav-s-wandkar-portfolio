@@ -1,6 +1,6 @@
 /**
- * Core personal identity & editorial narrative — synced with VaibhavSWandkarResume (2).pdf
- * and verified public GitHub repositories (github.com/VAIBHAV-w1).
+ * Core personal identity & editorial narrative — verified against public
+ * GitHub repositories (github.com/VAIBHAV-w1) and portfolio records.
  */
 export const profile = {
   name: 'Vaibhav S. Wandkar',
@@ -12,11 +12,11 @@ export const profile = {
   positioning: 'Python Developer | Django Full-Stack Developer | Software Engineer',
   headline: 'Building intelligent applications through thoughtful engineering.',
   intro:
-    "I'm a Computer Science and Design undergraduate focused on Python, Django and full-stack development. I enjoy turning ideas into practical software through reliable backend systems, thoughtful interfaces and emerging technologies.",
+    "I'm a Computer Science and Design undergraduate focused on Python, Django and full-stack software engineering — turning ideas into dependable systems with clean relational schemas and purposeful interfaces.",
   focusAreas: [
     { index: '01', label: 'Python & Django', detail: 'Full-stack architecture & server logic' },
-    { index: '02', label: 'Database Systems', detail: 'Relational schemas with MySQL & SQLite' },
-    { index: '03', label: 'Web Engineering', detail: 'Responsive interfaces & secure auth' },
+    { index: '02', label: 'Database Systems', detail: 'Relational schemas with PostgreSQL, MySQL & SQLite' },
+    { index: '03', label: 'Web Engineering', detail: 'Responsive interfaces & OTP/session auth' },
     { index: '04', label: 'AI & Security', detail: 'Computer vision, ML & web security' },
   ],
   education: {
@@ -24,30 +24,27 @@ export const profile = {
     institution: 'Bapuji Institute of Engineering and Technology, Davangere',
     university: 'VTU',
     period: '2024 – Expected 2027',
-    score: 'CGPA: 7.78 / 10',
   },
   languages: ['English', 'Hindi', 'Kannada', 'Marathi'],
   interests: [
-    'Python & Django Development',
-    'Backend Architecture',
-    'Full-Stack Application Development',
-    'Database Design',
-    'Artificial Intelligence & Machine Learning',
-    'Computer Vision',
-    'Cybersecurity',
+    'Python & Django Backend Engineering',
+    'Relational Database Architecture',
+    'Applied AI & Computer Vision',
+    'Application Security & VAPT',
+    'Full-Stack Web Systems',
+    'Cloud Deployment Workflows',
   ],
   exploring: [
-    'Production backend architecture',
-    'Applied AI & computer vision systems',
-    'Secure web application engineering',
-    'Cloud deployment workflows',
+    'Multi-camera AI & cloud inference runtimes',
+    'PostgreSQL performance & REST security hardening',
+    'Cross-browser accessibility & UI verification',
   ],
   about: {
     statement:
-      'I build dependable, database-driven software with Python and Django — bridging structured backend engineering with interfaces designed for everyday clarity.',
+      'I build dependable, database-driven software with Python and Django — pairing structured backend architecture with interfaces designed for clarity.',
     background:
-      'Currently pursuing a B.E. in Computer Science and Design at Bapuji Institute of Engineering and Technology, Davangere (expected 2027), I built my programming foundation through a Diploma in Computer Science and Engineering at K.L.E. Society’s Smt. C.I. Munavalli Polytechnic. Studying both design and systems engineering shapes how I plan data models alongside user flows.',
+      'Studying both computer science and interaction design shapes how I plan data models alongside user workflows, building directly on my Diploma foundation in software and networking.',
     approach:
-      'Across projects spanning surveillance intelligence, campus recovery portals, hospital scheduling and web security, I focus on clean schema design, role-based access control, input validation and maintainable code — complemented by internships in AI, cloud infrastructure, Android UI and vulnerability assessment.',
+      'Across surveillance intelligence, campus recovery portals, healthcare scheduling and security tooling, I prioritize clean schema design, role-based access control, input validation and maintainable delivery — backed by internships across AI, cloud, Android UI and VAPT.',
   },
 } as const

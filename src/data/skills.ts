@@ -1,6 +1,7 @@
 /**
- * Verified skill groups synced strictly with VaibhavSWandkarResume (2).pdf
- * and repository evidence. Zero unverified additions or proficiency bars.
+ * Verified skill groups synced with portfolio repositories and internship records.
+ * Each technology appears once to prevent duplication between the core Django spotlight
+ * and the supporting 6-group skill matrix.
  */
 export interface Skill {
   name: string
@@ -61,14 +62,14 @@ export const djangoCapabilities: DjangoCapability[] = [
   {
     id: 'arch',
     title: 'Application Architecture & Routing',
-    summary: 'Modular multi-app Django project layouts separating auth, domain models, views and media services.',
+    summary: 'Modular multi-app Django layouts separating auth, domain models, views and media delivery.',
     evidence: 'DeepVision, Lost and Found Tracking System, Hospital Management System',
     projects: ['deepvision', 'lost-and-found', 'hospital-management'],
   },
   {
     id: 'models',
     title: 'Models & Relational Schemas',
-    summary: 'CustomUser, Doctor, Appointment, Item report and 18-table surveillance schemas with PostgreSQL DDL.',
+    summary: 'CustomUser, Doctor, Appointment, item reports and 18-table surveillance schemas with PostgreSQL DDL.',
     evidence: 'DeepVision, Lost and Found Tracking System, Hospital Management System',
     projects: ['deepvision', 'hospital-management', 'lost-and-found'],
   },
@@ -81,8 +82,8 @@ export const djangoCapabilities: DjangoCapability[] = [
   },
   {
     id: 'apis',
-    title: 'Views, Templates, Forms & Data Flows',
-    summary: 'Server-rendered forms with validation, printable HTML invoices, P2P messaging and JSON endpoints.',
+    title: 'Views, Templates, Forms & JSON APIs',
+    summary: 'Validated server forms, printable HTML invoices, P2P messaging and /api/ JSON endpoints.',
     evidence: 'Hospital Management (/api/appointments/), Lost & Found, DeepVision',
     projects: ['hospital-management', 'lost-and-found', 'deepvision'],
   },
@@ -90,33 +91,49 @@ export const djangoCapabilities: DjangoCapability[] = [
 
 export const skillGroups: SkillGroup[] = [
   {
-    id: 'programming',
-    label: 'Programming',
+    id: 'languages-web',
+    label: 'Languages & Web UI',
     skills: [
-      { name: 'Python', usedIn: ['deepvision', 'cropify', 'retino', 'lost-and-found', 'resume-screening', 'hospital-management'] },
       { name: 'Java', note: 'Tripillar DSA workshop and Java practice repositories on GitHub.' },
-      { name: 'SQL', usedIn: ['deepvision', 'lost-and-found', 'hospital-management'] },
+      { name: 'TypeScript', usedIn: ['cropify', 'decentralized-voting'] },
+      { name: 'JavaScript', usedIn: ['lost-and-found', 'hospital-management', 'cybershield'] },
+      { name: 'HTML5', usedIn: ['lost-and-found', 'hospital-management'] },
+      { name: 'CSS3', usedIn: ['lost-and-found', 'hospital-management'] },
+      { name: 'React', usedIn: ['deepvision', 'cybershield', 'cropify'] },
     ],
   },
   {
-    id: 'web-development',
-    label: 'Web Development',
+    id: 'cloud-delivery',
+    label: 'Cloud & Platforms',
     skills: [
-      { name: 'HTML', usedIn: ['lost-and-found', 'hospital-management', 'deepvision'] },
-      { name: 'CSS', usedIn: ['lost-and-found', 'hospital-management', 'deepvision'] },
-      { name: 'Django', usedIn: ['deepvision', 'lost-and-found', 'hospital-management'] },
-      { name: 'Streamlit' },
-    ],
-  },
-  {
-    id: 'databases-cloud',
-    label: 'Databases & Cloud',
-    skills: [
-      { name: 'MySQL', usedIn: ['lost-and-found'] },
-      { name: 'SQLite', usedIn: ['deepvision', 'decentralized-voting', 'lost-and-found', 'hospital-management'] },
+      { name: 'PostgreSQL', usedIn: ['deepvision', 'decentralized-voting'] },
       { name: 'Supabase', usedIn: ['deepvision', 'cybershield'] },
       { name: 'Cloud Computing', note: 'Corizo Edutech Cloud Computing Internship (IaaS, PaaS, SaaS, virtualization).' },
+      { name: 'Render', usedIn: ['deepvision'] },
       { name: 'Vercel', usedIn: ['deepvision'] },
+    ],
+  },
+  {
+    id: 'ai-ml',
+    label: 'AI / ML & Vision',
+    skills: [
+      { name: 'OpenCV', usedIn: ['deepvision'] },
+      { name: 'PyTorch', usedIn: ['deepvision', 'retino'] },
+      { name: 'FastAPI', usedIn: ['cropify', 'retino'] },
+      { name: 'Scikit-learn', usedIn: ['cropify', 'retino', 'resume-screening'] },
+      { name: 'NumPy', usedIn: ['cropify', 'deepvision'] },
+      { name: 'Generative AI', usedIn: ['cybershield'] },
+    ],
+  },
+  {
+    id: 'cybersecurity',
+    label: 'Cybersecurity & VAPT',
+    skills: [
+      { name: 'Kali Linux', note: 'Security assessment environment used during VAPT coursework and internship labs.' },
+      { name: 'Burp Suite', note: 'Web request interception and parameter security testing.' },
+      { name: 'Nmap', note: 'Host discovery and service enumeration during security audits.' },
+      { name: 'SQL Injection', note: 'VAPT testing and remediation reporting during HAEGL Cybersecurity Internship.' },
+      { name: 'XSS & CSRF Testing', note: 'Web vulnerability assessment and framework defenses in HAEGL & Django builds.' },
     ],
   },
   {
@@ -124,44 +141,21 @@ export const skillGroups: SkillGroup[] = [
     label: 'Developer Tools',
     skills: [
       { name: 'Git', note: 'Version control across every project repository.' },
-      { name: 'GitHub', note: 'Every repository linked on this portfolio.' },
-      { name: 'VS Code' },
+      { name: 'GitHub', note: 'Public source hosting for every repository linked in this portfolio.' },
+      { name: 'VS Code', note: 'Primary development editor across Python, TypeScript and React projects.' },
       { name: 'Jupyter Notebook', usedIn: ['retino'] },
-      { name: 'Figma' },
-    ],
-  },
-  {
-    id: 'ai-ml',
-    label: 'AI / ML',
-    skills: [
-      { name: 'OpenCV', usedIn: ['deepvision'] },
-      { name: 'Scikit-learn', usedIn: ['cropify', 'retino', 'resume-screening'] },
-      { name: 'Pandas', usedIn: ['cropify', 'retino'] },
-      { name: 'NumPy', usedIn: ['cropify', 'retino', 'deepvision'] },
-      { name: 'Generative AI', usedIn: ['cybershield'] },
-    ],
-  },
-  {
-    id: 'cybersecurity',
-    label: 'Cybersecurity',
-    skills: [
-      { name: 'Kali Linux' },
-      { name: 'Burp Suite' },
-      { name: 'Nmap' },
-      { name: 'SQL Injection', note: 'VAPT testing and remediation reporting during HAEGL Cybersecurity Internship.' },
-      { name: 'XSS', note: 'Web vulnerability assessment and remediation during HAEGL Internship & Hospital Management System.' },
-      { name: 'CSRF', note: 'CSRF vulnerability testing & Django protection in HAEGL Internship, DeepVision & Hospital Management.' },
+      { name: 'Figma', note: 'Interface wireframing and component layout planning.' },
     ],
   },
   {
     id: 'core-cs',
-    label: 'Core CS',
+    label: 'Core CS Foundations',
     skills: [
-      { name: 'Data Structures and Algorithms', note: 'DSA workshop repository on GitHub.' },
-      { name: 'OOP' },
-      { name: 'Operating Systems' },
-      { name: 'Computer Networks' },
-      { name: 'DBMS' },
+      { name: 'Data Structures & Algorithms', note: 'DSA workshop and Java practice repositories on GitHub.' },
+      { name: 'OOP', note: 'Object-oriented design in Java, Python and Django model hierarchies.' },
+      { name: 'Operating Systems', note: 'Process scheduling, memory management and threading foundations.' },
+      { name: 'Computer Networks', note: 'TCP/IP, HTTP/REST and port-level diagnostics.' },
+      { name: 'DBMS', note: 'Normalization, constraints, indexing and relational transactions.' },
     ],
   },
 ]
