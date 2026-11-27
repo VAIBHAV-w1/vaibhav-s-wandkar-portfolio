@@ -241,6 +241,24 @@ body::after {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  30%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+.scroll-cue-line {
+  animation: scroll-cue 2.1s var(--ease-expo) infinite;
+}
+
 /* Custom cursor (only when enabled from JS on fine pointers). */
 html.has-cursor,
 html.has-cursor * {

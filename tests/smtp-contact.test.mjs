@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import net from 'node:net'
 import { Readable } from 'node:stream'
-import { handleContactRequest } from '../api/contact.ts'
+import { buildContactEmailHtml, buildContactEmailText, handleContactRequest } from '../api/contact.ts'
 
 function makeReq({ method = 'POST', headers = {}, body = undefined, ip = '203.0.113.10' } = {}) {
   const payload = body === undefined ? null : typeof body === 'string' ? body : JSON.stringify(body)
@@ -44,7 +44,7 @@ function createFreshStore() {
 }
 
 /**
- * Lightweight local RFC 5321 TCP SMTP server to test real Nodemailer wire exchanges.
+ * Lightweight local RFC 5321 TCP SMTP server to verify real Nodemailer wire exchanges.
  */
 function startLocalSmtpServer({ rejectAuth = false } = {}) {
   return new Promise((resolve) => {
@@ -197,7 +197,7 @@ async function runTests() {
     console.log('PASS 5: Invalid HTTP method GET rejected (405)')
   }
 
-  // 6. Valid request over real loopback TCP SMTP server (Nodemailer wire protocol)
+  // 6. Valid request over real loopback TCP SMTP server (multipart HTML + text)
   {
     const smtp = await startLocalSmtpServer()
     try {
@@ -208,7 +208,7 @@ async function runTests() {
             name: 'Anita Rao',
             email: 'anita.rao@example.com',
             subject: 'Django internship question',
-            message: 'Hi Vaibhav, saw DeepVision on your portfolio and would like to connect.',
+            message: 'Hi Vaibhav,\nSaw DeepVision on your portfolio and would like to connect.',
             company: '',
           },
         }),
@@ -218,12 +218,16 @@ async function runTests() {
       assert.equal(res.statusCode, 200)
       assert.equal(res.parsed.ok, true)
       assert.equal(smtp.receivedMessages.length, 1)
-      const wire = smtp.receivedMessages[0]
+      const wire = smtp.receivedMessages[0].replace(/=\r\n/g, '')
+      assert.match(wire, /To: vaibhavwandkar5@gmail\.com/i)
       assert.match(wire, /Reply-To: anita\.rao@example\.com/i)
       assert.match(wire, /Subject: \[Portfolio\] Django internship question/i)
-      assert.match(wire, /Anita Rao/)
-      assert.doesNotMatch(wire, /<html>/i)
-      console.log('PASS 6: Valid request delivered over Nodemailer SMTP wire protocol (200)')
+      assert.match(wire, /Content-Type: text\/plain/i)
+      assert.match(wire, /Content-Type: text\/html/i)
+      assert.match(wire, /New Portfolio Enquiry/)
+      assert.match(wire, /Reply to Sender/)
+      assert.match(wire, /Sent through the VSW Portfolio Contact Form\./)
+      console.log('PASS 6: Valid request delivered multipart HTML + text over Nodemailer SMTP wire protocol (200)')
     } finally {
       await smtp.close()
     }
@@ -257,7 +261,6 @@ async function runTests() {
 
   // 8. SMTP connection failure / timeout
   {
-    // Grab an unused ephemeral port by binding then immediately closing
     const deadSmtp = await startLocalSmtpServer()
     const deadPort = deadSmtp.port
     await deadSmtp.close()
@@ -367,7 +370,7 @@ async function runTests() {
     }
   }
 
-  // 11. Recipient rejected by SMTP server (accepted=0 / rejected=[...]) -> 502
+  // 11. Recipient rejected check (accepted=0 / rejected=[...]) -> 502
   {
     const res = makeRes()
     await handleContactRequest(
@@ -395,7 +398,36 @@ async function runTests() {
     console.log('PASS 11: SMTP rejected recipient check returns generic 502')
   }
 
-  console.log('\nALL 11 SMTP CONTACT ENDPOINT TESTS PASSED.')
+  // 12. HTML escaping, line-break preservation, structure, Reply-To action and plain-text fallback
+  {
+    const xssParams = {
+      name: 'Mallory <script>alert(1)</script> & "Team"',
+      email: 'mallory@example.com',
+      subject: 'Test <img src=x onerror=alert(1)> Subject',
+      message: "Line one with <b>raw html</b>\nLine two with 'quotes' & ampersand",
+      submittedAt: '2026-11-27T12:20:00.000Z',
+    }
+    const html = buildContactEmailHtml(xssParams)
+    const text = buildContactEmailText(xssParams)
+
+    assert.doesNotMatch(html, /<script>/i)
+    assert.doesNotMatch(html, /<img\s/i)
+    assert.doesNotMatch(html, /<b>raw html<\/b>/i)
+    assert.match(html, /&lt;script&gt;alert\(1\)&lt;\/script&gt; &amp; &quot;Team&quot;/)
+    assert.match(html, /&lt;img src=x onerror=alert\(1\)&gt;/)
+    assert.match(html, /Line one with &lt;b&gt;raw html&lt;\/b&gt;<br \/>Line two with &#39;quotes&#39; &amp; ampersand/)
+    assert.match(html, /href="mailto:mallory%40example\.com\?subject=Re%3A%20Test/)
+    assert.match(html, /New Portfolio Enquiry/)
+    assert.match(html, /You have received a new message through your portfolio contact form\./)
+    assert.match(html, /Reply to Sender/)
+    assert.match(html, /Sent through the VSW Portfolio Contact Form\./)
+    assert.match(text, /New Portfolio Enquiry/)
+    assert.match(text, /Line one with <b>raw html<\/b>\nLine two/)
+    assert.match(text, /Sent through the VSW Portfolio Contact Form\./)
+    console.log('PASS 12: HTML XSS escaping, line breaks, Reply-To link, and plain-text fallback verified')
+  }
+
+  console.log('\nALL 12 SMTP & EMAIL TEMPLATE TESTS PASSED.')
 }
 
 runTests().catch((err) => {

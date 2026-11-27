@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
-import { ArrowUpRight, Check, Copy, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { ArrowUpRight, Check, Copy, Loader2, Mail, MapPin, Send } from 'lucide-react'
 import { useSectionReveal } from '../animations/gsap'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { SectionHeader } from '../components/SectionHeader'
@@ -138,7 +139,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
 
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-5" data-reveal="">
-            <div className="rounded-2xl border border-line bg-bg-2 p-6">
+            <div className="rounded-2xl border border-line bg-bg-2 p-6 transition duration-200 hover:border-line-strong">
               <p className="eyebrow text-faint">Direct Email</p>
               <a
                 href={social.email.href}
@@ -149,7 +150,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
               <div className="mt-4 flex flex-wrap gap-2">
                 <a
                   href={social.email.href}
-                  className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-accent px-4 text-xs font-semibold text-on-accent transition hover:opacity-90"
+                  className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-accent px-4 text-xs font-semibold text-on-accent transition duration-200 hover:opacity-90 active:scale-[0.97]"
                 >
                   <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Send Email Directly</span>
@@ -157,7 +158,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-accent-ink"
+                  className="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition duration-200 hover:border-accent-ink active:scale-[0.97]"
                 >
                   {copied ? <Check className="h-3.5 w-3.5 text-accent-ink" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied ? 'Copied' : 'Copy Address'}</span>
@@ -165,33 +166,26 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
               </div>
             </div>
 
-            <a
-              href={social.phone.href}
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
-            >
+            <div className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition duration-200 hover:border-line-strong">
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
-                  <Phone className="h-4 w-4 text-ink" />
+                  <MapPin className="h-4 w-4 text-accent-ink" aria-hidden="true" />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-ink">Phone</p>
-                  <p className="font-mono text-xs text-muted">{social.phone.handle}</p>
+                  <p className="text-sm font-medium text-ink">Location</p>
+                  <p className="font-mono text-xs text-muted">{social.location}</p>
                 </div>
               </div>
-              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-faint">
-                <MapPin className="h-3.5 w-3.5 text-accent-ink" aria-hidden="true" />
-                <span>{social.location}</span>
-              </span>
-            </a>
+            </div>
 
             <a
               href={social.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
+              className="group flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent/45"
             >
               <div className="flex items-center gap-3.5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface transition-colors duration-200 group-hover:border-accent/45">
                   <GithubIcon className="h-4 w-4 text-ink" />
                 </span>
                 <div>
@@ -199,17 +193,20 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   <p className="font-mono text-xs text-muted">@{social.github.handle}</p>
                 </div>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-muted" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-4 w-4 text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent-ink"
+                aria-hidden="true"
+              />
             </a>
 
             <a
               href={social.linkedin.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
+              className="group flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent/45"
             >
               <div className="flex items-center gap-3.5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface transition-colors duration-200 group-hover:border-accent/45">
                   <LinkedinIcon className="h-4 w-4 text-ink" />
                 </span>
                 <div>
@@ -217,11 +214,14 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   <p className="font-mono text-xs text-muted">/in/{social.linkedin.handle}</p>
                 </div>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-muted" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-4 w-4 text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent-ink"
+                aria-hidden="true"
+              />
             </a>
           </div>
 
-          <div className="rounded-2xl border border-line bg-bg-2 p-6 sm:p-8 lg:col-span-7" data-reveal="">
+          <div className="rounded-2xl border border-line bg-bg-2 p-6 transition-colors duration-200 hover:border-line-strong sm:p-8 lg:col-span-7" data-reveal="">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="contact-company">Leave this blank</label>
@@ -252,7 +252,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                     placeholder="Your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
+                    className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink transition duration-150 placeholder:text-faint hover:border-line-strong focus:border-accent-ink focus:ring-2 focus:ring-accent/15 focus:outline-none"
                   />
                 </div>
 
@@ -270,7 +270,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                     placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
+                    className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink transition duration-150 placeholder:text-faint hover:border-line-strong focus:border-accent-ink focus:ring-2 focus:ring-accent/15 focus:outline-none"
                   />
                 </div>
               </div>
@@ -289,7 +289,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   placeholder="Internship inquiry, project question or collaboration"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
+                  className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink transition duration-150 placeholder:text-faint hover:border-line-strong focus:border-accent-ink focus:ring-2 focus:ring-accent/15 focus:outline-none"
                 />
               </div>
 
@@ -307,29 +307,52 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   placeholder="Write your message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full resize-y rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
+                  className="w-full resize-y rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink transition duration-150 placeholder:text-faint hover:border-line-strong focus:border-accent-ink focus:ring-2 focus:ring-accent/15 focus:outline-none"
                 />
               </div>
 
-              {status === 'error' && feedback ? (
-                <p role="alert" className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-xs text-ink">
-                  {feedback}
-                </p>
-              ) : null}
+              <AnimatePresence mode="wait">
+                {status === 'error' && feedback ? (
+                  <motion.p
+                    key="contact-error"
+                    role="alert"
+                    initial={reducedMotion ? false : { opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reducedMotion ? undefined : { opacity: 0, y: -4 }}
+                    transition={{ duration: 0.2 }}
+                    className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-xs text-ink"
+                  >
+                    {feedback}
+                  </motion.p>
+                ) : null}
 
-              {status === 'sent' && feedback ? (
-                <p role="status" className="rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-xs text-ink">
-                  {feedback}
-                </p>
-              ) : null}
+                {status === 'sent' && feedback ? (
+                  <motion.p
+                    key="contact-sent"
+                    role="status"
+                    initial={reducedMotion ? false : { opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reducedMotion ? undefined : { opacity: 0, y: -4 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2 rounded-xl border border-accent/45 bg-accent/10 px-4 py-3 text-xs text-ink"
+                  >
+                    <Check className="h-4 w-4 shrink-0 text-accent-ink" aria-hidden="true" />
+                    <span>{feedback}</span>
+                  </motion.p>
+                ) : null}
+              </AnimatePresence>
 
               <div className="flex flex-col justify-between gap-4 pt-1 sm:flex-row sm:items-center">
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-on-accent transition hover:opacity-90 disabled:opacity-60"
+                  className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-on-accent transition duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-60"
                 >
-                  <Send className="h-4 w-4" aria-hidden="true" />
+                  {status === 'sending' ? (
+                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Send className="h-4 w-4" aria-hidden="true" />
+                  )}
                   <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                 </button>
 
@@ -338,7 +361,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   <button
                     type="button"
                     onClick={() => onNavigate('/privacy')}
-                    className="underline decoration-line-strong underline-offset-4 hover:text-ink"
+                    className="underline decoration-line-strong underline-offset-4 transition hover:text-ink"
                   >
                     Privacy disclosure
                   </button>

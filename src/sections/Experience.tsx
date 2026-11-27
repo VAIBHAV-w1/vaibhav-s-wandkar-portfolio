@@ -24,17 +24,18 @@ export function Experience({ reducedMotion, onOpenProject }: Props) {
           aside={<p>Four completed internships across mobile UI, cloud setup, AI and web security.</p>}
         />
 
-        <ol className="relative space-y-4 border-l border-line pl-6 sm:pl-7" data-reveal="">
+        <ol className="relative space-y-4 border-l border-line pl-6 sm:pl-7">
           {experience.map((item, idx) => {
             const related = item.relatedProject ? getProject(item.relatedProject) : undefined
             return (
               <li
                 key={`${item.role}-${item.org}-${item.period}`}
-                className="relative rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong sm:p-6"
+                data-reveal=""
+                className="group relative rounded-2xl border border-line bg-bg-2 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 sm:p-6"
               >
                 <span
                   aria-hidden="true"
-                  className={`absolute -left-[30px] top-6 h-3 w-3 rounded-full border-2 border-bg sm:-left-[34px] ${
+                  className={`absolute -left-[30px] top-6 h-3 w-3 rounded-full border-2 border-bg transition-colors duration-200 group-hover:bg-accent sm:-left-[34px] ${
                     idx === 0 ? 'bg-accent' : 'bg-line-strong'
                   }`}
                 />
@@ -51,10 +52,13 @@ export function Experience({ reducedMotion, onOpenProject }: Props) {
                       <button
                         type="button"
                         onClick={() => onOpenProject(related)}
-                        className="inline-flex min-h-[32px] items-center gap-1 rounded-full border border-line-strong px-3 text-xs font-medium text-ink transition hover:border-accent-ink"
+                        className="group/btn inline-flex min-h-[32px] items-center gap-1 rounded-full border border-line-strong px-3 text-xs font-medium text-ink transition duration-200 hover:border-accent-ink active:scale-[0.97]"
                       >
                         <span>{related.title}</span>
-                        <ArrowUpRight className="h-3 w-3 text-accent-ink" aria-hidden="true" />
+                        <ArrowUpRight
+                          className="h-3 w-3 text-accent-ink transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                          aria-hidden="true"
+                        />
                       </button>
                     ) : null}
                   </div>

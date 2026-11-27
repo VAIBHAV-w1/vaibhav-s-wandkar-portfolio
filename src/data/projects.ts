@@ -255,10 +255,10 @@ export const projects: Project[] = [
     category: 'Django 5.0 Full-Stack Application',
     filters: ['django-backend', 'web'],
     status: 'Internship project',
-    ownership: 'Internship-Associated · HAEGL Technologies Pvt. Ltd.',
+    ownership: 'HAEGL Technologies Pvt. Ltd. — Internship Project',
     visualType: 'illustration',
     summary:
-      'A Django 5.0.3 healthcare web application associated with HAEGL Technologies Pvt. Ltd. for patient appointments, doctor schedules and printable invoices.',
+      'A Django 5.0.3 healthcare web application completed as an HAEGL Technologies Pvt. Ltd. internship project for managing patient appointments, doctor schedules and printable invoices.',
     problem:
       'Clinics need a single workflow to coordinate patient registrations, doctor schedules and appointment billing without manual paperwork.',
     implemented: [
@@ -267,7 +267,7 @@ export const projects: Project[] = [
       'Session authentication with CSRF/XSS safeguards and printable HTML appointment invoices.',
     ],
     contribution:
-      'Completed in association with HAEGL Technologies Pvt. Ltd., implementing the Django models, authentication views, appointment APIs, doctor dashboard and invoice templates.',
+      'Built during my HAEGL Technologies Pvt. Ltd. internship engagement, implementing Django 5.0.3 models (CustomUser, Doctor, Appointment), user authentication, appointment JSON endpoints, the doctor schedule dashboard and printable invoice templates.',
     stack: ['Python', 'Django 5.0.3', 'SQLite', 'HTML5', 'CSS3', 'JavaScript'],
     repo: gh('Hospital-Management-System'),
     art: 'pulse',

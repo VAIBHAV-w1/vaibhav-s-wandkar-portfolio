@@ -68,6 +68,162 @@ function sanitizeMultilineBody(value: string): string {
   return value.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\0/g, '').trim()
 }
 
+export function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
+export function buildContactEmailText(params: {
+  name: string
+  email: string
+  subject: string
+  message: string
+  submittedAt: string
+}): string {
+  return [
+    'VSW — New Portfolio Enquiry',
+    'You have received a new message through your portfolio contact form.',
+    '--------------------------------------------------',
+    `Sender Name:  ${params.name}`,
+    `Sender Email: ${params.email}`,
+    `Subject:      ${params.subject}`,
+    `Submitted:    ${params.submittedAt}`,
+    '--------------------------------------------------',
+    '',
+    params.message,
+    '',
+    '--------------------------------------------------',
+    'Sent through the VSW Portfolio Contact Form.',
+  ].join('\n')
+}
+
+export function buildContactEmailHtml(params: {
+  name: string
+  email: string
+  subject: string
+  message: string
+  submittedAt: string
+}): string {
+  const safeName = escapeHtml(params.name)
+  const safeEmail = escapeHtml(params.email)
+  const safeSubject = escapeHtml(params.subject)
+  const safeSubmittedAt = escapeHtml(params.submittedAt)
+  const safeMessageHtml = escapeHtml(params.message).replace(/\n/g, '<br />')
+  const replyHref = `mailto:${encodeURIComponent(params.email)}?subject=${encodeURIComponent(`Re: ${params.subject}`)}`
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Portfolio Enquiry</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f0e7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#141512;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f3f0e7;padding:28px 14px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;width:100%;background-color:#ffffff;border:1px solid #dfd8c8;border-radius:14px;overflow:hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#0d0e0c;padding:24px 28px;border-bottom:2px solid #d4af37;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="vertical-align:middle;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="border:1.5px solid #d4af37;border-radius:999px;padding:7px 14px;background-color:#151612;">
+                          <span style="font-size:15px;font-weight:700;letter-spacing:0.12em;color:#ece8dc;">V<span style="color:#d4af37;">S</span>W</span>
+                        </td>
+                        <td style="padding-left:14px;">
+                          <div style="font-size:15px;font-weight:600;color:#ece8dc;line-height:1.25;">Vaibhav S. Wandkar</div>
+                          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#d4af37;margin-top:2px;">Portfolio Notification</div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Intro & Heading -->
+          <tr>
+            <td style="padding:28px 28px 18px 28px;background-color:#ffffff;">
+              <h1 style="margin:0 0 8px 0;font-size:22px;line-height:1.25;font-weight:600;color:#141512;">New Portfolio Enquiry</h1>
+              <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4842;">
+                You have received a new message through your portfolio contact form.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Sender Metadata Table -->
+          <tr>
+            <td style="padding:0 28px 20px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#faf8f2;border:1px solid #e6dfd0;border-radius:10px;">
+                <tr>
+                  <td style="padding:12px 16px;border-bottom:1px solid #ebe5d8;width:110px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#78560b;">Sender Name</td>
+                  <td style="padding:12px 16px;border-bottom:1px solid #ebe5d8;font-size:14px;font-weight:600;color:#141512;">${safeName}</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;border-bottom:1px solid #ebe5d8;width:110px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#78560b;">Sender Email</td>
+                  <td style="padding:12px 16px;border-bottom:1px solid #ebe5d8;font-size:14px;color:#141512;">
+                    <a href="mailto:${safeEmail}" style="color:#78560b;text-decoration:underline;">${safeEmail}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;width:110px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#78560b;">Subject</td>
+                  <td style="padding:12px 16px;font-size:14px;font-weight:500;color:#141512;">${safeSubject}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Message Body Panel -->
+          <tr>
+            <td style="padding:0 28px 24px 28px;">
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#78560b;margin-bottom:8px;">Message</div>
+              <div style="background-color:#faf8f2;border:1px solid #e6dfd0;border-left:3px solid #d4af37;border-radius:8px;padding:16px 18px;font-size:14px;line-height:1.65;color:#141512;word-break:break-word;">
+                ${safeMessageHtml}
+              </div>
+            </td>
+          </tr>
+
+          <!-- Reply CTA -->
+          <tr>
+            <td style="padding:0 28px 28px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="border-radius:999px;background-color:#0d0e0c;border:1px solid #d4af37;">
+                    <a href="${replyHref}" style="display:inline-block;padding:12px 24px;font-size:13px;font-weight:600;color:#f3d98b;text-decoration:none;letter-spacing:0.02em;">Reply to Sender</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#faf8f2;border-top:1px solid #e6dfd0;padding:16px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="font-size:12px;color:#5a574f;">Sent through the VSW Portfolio Contact Form.</td>
+                  <td align="right" style="font-size:11px;color:#7a766c;font-family:Consolas,Menlo,monospace;">${safeSubmittedAt}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`
+}
+
 function extractClientIp(req: ContactRequest): string {
   const xff = req.headers['x-forwarded-for']
   if (typeof xff === 'string' && xff.trim()) {
@@ -328,17 +484,15 @@ export async function handleContactRequest(
   pruneMapIfNeeded(store.ipHits)
 
   const submittedAt = new Date(currentMs).toISOString()
-  const textBody = [
-    'New message from VSW Portfolio contact form',
-    '--------------------------------------------------',
-    `Visitor Name:    ${cleanName}`,
-    `Visitor Email:   ${cleanEmail}`,
-    `Subject:         ${cleanSubject}`,
-    `Submitted (UTC): ${submittedAt}`,
-    '--------------------------------------------------',
-    '',
-    cleanMessage,
-  ].join('\n')
+  const emailParams = {
+    name: cleanName,
+    email: cleanEmail,
+    subject: cleanSubject,
+    message: cleanMessage,
+    submittedAt,
+  }
+  const textBody = buildContactEmailText(emailParams)
+  const htmlBody = buildContactEmailHtml(emailParams)
 
   try {
     const transporter = createTransport({
@@ -360,6 +514,7 @@ export async function handleContactRequest(
       replyTo: cleanEmail,
       subject: `[Portfolio] ${cleanSubject}`,
       text: textBody,
+      html: htmlBody,
     })
 
     const accepted = Array.isArray(info.accepted) ? info.accepted.length : 0

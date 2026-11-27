@@ -22,17 +22,17 @@ export function Recognition({ reducedMotion }: Props) {
           aside={<p>Program certificates and hackathon participation.</p>}
         />
 
-        <div className="grid items-start gap-8 lg:grid-cols-12" data-reveal="">
-          <div className="lg:col-span-6">
+        <div className="grid items-start gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-6" data-reveal="">
             <h3 className="eyebrow mb-4 flex items-center gap-2 text-accent-ink">
               <Award className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Certifications</span>
             </h3>
-            <div className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-bg-2">
+            <div className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-bg-2 transition-colors duration-200 hover:border-line-strong">
               {certifications.map((cert) => (
                 <div
                   key={`${cert.title}-${cert.issuer}`}
-                  className="flex items-start justify-between gap-4 px-5 py-4"
+                  className="flex items-start justify-between gap-4 px-5 py-4 transition-colors duration-200 hover:bg-surface/45"
                 >
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent-ink">
@@ -47,7 +47,7 @@ export function Recognition({ reducedMotion }: Props) {
             </div>
           </div>
 
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6" data-reveal="">
             <h3 className="eyebrow mb-4 flex items-center gap-2 text-accent-ink">
               <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Hackathons &amp; Project Recognition</span>
@@ -56,7 +56,7 @@ export function Recognition({ reducedMotion }: Props) {
               {achievements.map((item) => (
                 <div
                   key={`${item.event}-${item.year}`}
-                  className="flex flex-col justify-between gap-2 rounded-2xl border border-line bg-bg-2 px-5 py-3.5 sm:flex-row sm:items-center"
+                  className="flex flex-col justify-between gap-2 rounded-2xl border border-line bg-bg-2 px-5 py-3.5 transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 sm:flex-row sm:items-center"
                 >
                   <div>
                     <p className="text-sm font-medium text-ink">{item.event}</p>

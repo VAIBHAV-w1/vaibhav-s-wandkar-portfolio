@@ -26,7 +26,7 @@ export function About({ reducedMotion }: Props) {
           <div className="flex flex-col gap-5 lg:col-span-6" data-reveal="">
             <p className="text-base leading-relaxed text-ink sm:text-lg">{profile.about}</p>
             <div className="flex items-center gap-3.5 pt-1">
-              <BrandLogo variant="full" size="md" />
+              <BrandLogo variant="full" size="md" className="transition-transform duration-300 hover:scale-[1.03]" />
               <div>
                 <p className="text-sm font-medium text-ink">{profile.name}</p>
                 <p className="text-xs text-muted">Languages: {profile.languages.join(' · ')}</p>
@@ -34,12 +34,21 @@ export function About({ reducedMotion }: Props) {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-line bg-bg-2 p-6 lg:col-span-6" data-reveal="">
+          <div
+            className="rounded-2xl border border-line bg-bg-2 p-6 transition-colors duration-300 hover:border-line-strong lg:col-span-6"
+            data-reveal=""
+          >
             <p className="eyebrow mb-4 text-accent-ink">Areas of Interest</p>
             <ul className="grid gap-x-6 gap-y-2.5 text-sm text-ink sm:grid-cols-2">
               {profile.interests.map((item) => (
-                <li key={item} className="flex items-start gap-2.5">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <li
+                  key={item}
+                  className="group flex items-start gap-2.5 transition-transform duration-200 hover:translate-x-0.5"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent transition-transform duration-200 group-hover:scale-125"
+                  />
                   <span>{item}</span>
                 </li>
               ))}

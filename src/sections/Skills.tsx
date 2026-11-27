@@ -21,18 +21,19 @@ export function Skills({ reducedMotion }: Props) {
           aside={<p>Technologies used across projects, coursework and internships.</p>}
         />
 
-        <div className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-bg-2" data-reveal="">
+        <div className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-bg-2">
           {skillGroups.map((group) => (
             <div
               key={group.id}
-              className="grid items-baseline gap-3 px-5 py-4 sm:grid-cols-12 sm:gap-6 sm:px-7 sm:py-5"
+              data-reveal=""
+              className="grid items-baseline gap-3 px-5 py-4 transition-colors duration-200 hover:bg-surface/45 sm:grid-cols-12 sm:gap-6 sm:px-7 sm:py-5"
             >
               <h3 className="eyebrow text-accent-ink sm:col-span-4 lg:col-span-3">{group.label}</h3>
               <div className="flex flex-wrap gap-2 sm:col-span-8 lg:col-span-9">
                 {group.skills.map((skill) => (
                   <span
                     key={`${group.id}-${skill}`}
-                    className="inline-flex items-center rounded-full border border-line bg-bg px-3.5 py-1.5 text-xs font-medium text-ink"
+                    className="inline-flex items-center rounded-full border border-line bg-bg px-3.5 py-1.5 text-xs font-medium text-ink transition duration-200 hover:-translate-y-0.5 hover:border-accent/55 hover:bg-surface"
                   >
                     {skill}
                   </span>

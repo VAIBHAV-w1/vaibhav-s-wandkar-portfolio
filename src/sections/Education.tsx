@@ -21,18 +21,21 @@ export function Education({ reducedMotion }: Props) {
           aside={<p>Degrees, diplomas and school education.</p>}
         />
 
-        <div className="grid gap-6 md:grid-cols-3" data-reveal="">
+        <div className="grid gap-6 md:grid-cols-3">
           {education.map((item) => (
             <article
               key={item.qualification}
-              className="flex flex-col justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              data-reveal=""
+              className="group flex flex-col justify-between rounded-2xl border border-line bg-bg-2 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-accent/40"
             >
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3.5">
                   <span className="eyebrow inline-flex items-center gap-2 text-accent-ink">
                     <span
                       aria-hidden="true"
-                      className={`h-2 w-2 rounded-full ${item.current ? 'bg-accent' : 'bg-line-strong'}`}
+                      className={`h-2 w-2 rounded-full transition-colors duration-200 group-hover:bg-accent ${
+                        item.current ? 'bg-accent' : 'bg-line-strong'
+                      }`}
                     />
                     {item.stage}
                   </span>
