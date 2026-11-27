@@ -367,7 +367,35 @@ async function runTests() {
     }
   }
 
-  console.log('\nALL 10 SMTP CONTACT ENDPOINT TESTS PASSED.')
+  // 11. Recipient rejected by SMTP server (accepted=0 / rejected=[...]) -> 502
+  {
+    const res = makeRes()
+    await handleContactRequest(
+      makeReq({
+        body: {
+          name: 'Tester',
+          email: 't@example.com',
+          subject: 'Rejected recipient test',
+          message: 'Ensure partial or rejected SMTP recipients fail safely.',
+        },
+      }),
+      res,
+      {
+        store: createFreshStore(),
+        env: validEnv(587),
+        createTransport: () => ({
+          async sendMail() {
+            return { accepted: [], rejected: ['vaibhavwandkar5@gmail.com'], response: '550 Rejected' }
+          },
+        }),
+      },
+    )
+    assert.equal(res.statusCode, 502)
+    assert.equal(res.parsed.ok, false)
+    console.log('PASS 11: SMTP rejected recipient check returns generic 502')
+  }
+
+  console.log('\nALL 11 SMTP CONTACT ENDPOINT TESTS PASSED.')
 }
 
 runTests().catch((err) => {

@@ -43,7 +43,14 @@ After configuring credentials and redeploying:
 2. Confirm the server returns HTTP `200` (`Message sent successfully...`).
 3. Confirm the notification arrives in `MAIL_TO` with `Reply-To` set to the visitor's email address.
 
-## 6. Rotating Compromised Credentials
+## 6. Troubleshooting Missing Inbox Emails (After `200 OK`)
+
+If `/api/contact` returns `200 OK` (SMTP accepted by provider) and you do not see the email in Gmail Primary Inbox:
+- **Gmail self-send behavior (`smtp.gmail.com`):** When `SMTP_USER`, `MAIL_FROM`, and `MAIL_TO` are the exact same `@gmail.com` address, Gmail saves the sent copy directly into **Sent** / **All Mail** and often suppresses a duplicate **Inbox** notification (or places messages with external `Reply-To` addresses into **Spam**). Check **All Mail**, **Sent**, and **Spam**, or use a dedicated transactional sender address for `MAIL_FROM` / SMTP relay.
+- **Sandbox hosts (e.g. Mailtrap Testing):** Sandbox hosts return `250 OK` while capturing emails inside their web inbox rather than forwarding to `MAIL_TO`.
+- **DMARC / Sender mismatch:** Ensure `MAIL_FROM` belongs to a sender/domain authorized by your `SMTP_HOST`.
+
+## 7. Rotating Compromised Credentials
 
 If an `SMTP_PASS` or API token is ever leaked or suspected exposed:
 1. Immediately revoke or delete the old App Password / SMTP key in your email provider's dashboard.

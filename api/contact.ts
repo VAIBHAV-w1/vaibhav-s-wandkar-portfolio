@@ -202,6 +202,12 @@ function pruneMapIfNeeded(map: Map<string, unknown>) {
   }
 }
 
+function extractEmailDomain(addr: string): string {
+  const at = addr.lastIndexOf('@')
+  if (at === -1) return 'unknown'
+  return addr.slice(at + 1).replace(/[>\s].*$/, '').toLowerCase() || 'unknown'
+}
+
 export async function handleContactRequest(
   req: ContactRequest,
   res: ContactResponse,
@@ -348,13 +354,27 @@ export async function handleContactRequest(
       socketTimeout: 15000,
     })
 
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: smtp.from,
       to: smtp.to,
       replyTo: cleanEmail,
       subject: `[Portfolio] ${cleanSubject}`,
       text: textBody,
     })
+
+    const accepted = Array.isArray(info.accepted) ? info.accepted.length : 0
+    const rejected = Array.isArray(info.rejected) ? info.rejected.length : 0
+    const smtpResponse = typeof info.response === 'string' ? info.response.slice(0, 80) : ''
+
+    if (accepted === 0 || rejected > 0) {
+      const rejErr = new Error('SMTP recipient rejected') as Error & { code?: string }
+      rejErr.code = 'ERECIPIENT'
+      throw rejErr
+    }
+
+    console.info(
+      `[CONTACT_SMTP_SENT] host=${smtp.host} port=${smtp.port} secure=${smtp.secure} fromDomain=${extractEmailDomain(smtp.from)} toDomain=${extractEmailDomain(smtp.to)} accepted=${accepted} rejected=${rejected} response="${smtpResponse}"`,
+    )
 
     store.recentFingerprints.set(fingerprint, currentMs)
     pruneMapIfNeeded(store.recentFingerprints)
@@ -364,8 +384,11 @@ export async function handleContactRequest(
       message: 'Message sent successfully. Thank you for reaching out.',
     })
   } catch (err) {
-    const code = err && typeof err === 'object' && 'code' in err ? String((err as { code?: unknown }).code) : 'SMTP_ERROR'
-    console.error(`[CONTACT_SMTP_FAILED] code=${code}`)
+    const errObj = err && typeof err === 'object' ? (err as { code?: unknown; responseCode?: unknown; command?: unknown }) : {}
+    const code = errObj.code ? String(errObj.code) : 'SMTP_ERROR'
+    const responseCode = errObj.responseCode ? String(errObj.responseCode) : ''
+    const command = errObj.command ? String(errObj.command) : ''
+    console.error(`[CONTACT_SMTP_FAILED] host=${smtp.host} port=${smtp.port} secure=${smtp.secure} code=${code} responseCode=${responseCode} command=${command}`)
     sendJson(res, 502, {
       ok: false,
       error: 'Unable to send your message right now. Please try again later or email vaibhavwandkar5@gmail.com directly.',
