@@ -130,17 +130,11 @@ export function Projects({ reducedMotion, onOpenProject }: Props) {
       <div className="container-x">
         <SectionHeader
           index="02"
-          kicker="Selected Work"
-          title={
-            <>
-              Eight verified{' '}
-              <span className="font-serif italic font-normal text-accent-ink">engineering builds</span>
-            </>
-          }
+          kicker="Projects"
+          title="Selected Projects"
           aside={
             <p>
-              Ordered 01 through 08 across AI surveillance, cybersecurity, agricultural ML, blockchain voting,
-              medical imaging, Django portals and NLP. Every stack and link is verified against its repository.
+              Ordered 01 to 08 across web systems, AI, computer vision and security. Each entry notes ownership, status and repository links.
             </p>
           }
         />

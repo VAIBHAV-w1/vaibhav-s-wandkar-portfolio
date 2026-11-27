@@ -17,13 +17,8 @@ export function Education({ reducedMotion }: Props) {
         <SectionHeader
           index="05"
           kicker="Education"
-          title={
-            <>
-              Academic{' '}
-              <span className="font-serif italic font-normal text-accent-ink">foundation</span>
-            </>
-          }
-          aside={<p>Academic qualifications, institutions and study timelines.</p>}
+          title="Academic History"
+          aside={<p>Degrees, diplomas and school education.</p>}
         />
 
         <div className="grid gap-6 md:grid-cols-3" data-reveal="">

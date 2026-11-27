@@ -33,7 +33,7 @@ function siteMeta(siteUrl: string): Plugin {
         alternateName: 'VSW',
         ...(siteUrl ? { url: `${siteUrl}/` } : {}),
         jobTitle: 'Python & Django Full-Stack Developer',
-        description: profile.positioning,
+        description: profile.intro,
         email: `mailto:${social.email.handle}`,
         sameAs: [social.github.href, social.linkedin.href],
         affiliation: {

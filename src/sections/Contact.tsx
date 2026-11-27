@@ -3,7 +3,6 @@ import { ArrowUpRight, Check, Copy, Mail, MapPin, Phone, Send } from 'lucide-rea
 import { useSectionReveal } from '../animations/gsap'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { SectionHeader } from '../components/SectionHeader'
-import { contactProvider } from '../data/site'
 import { social } from '../data/social'
 import type { RoutePath } from '../hooks/useRouter'
 
@@ -14,20 +13,22 @@ interface Props {
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 export function Contact({ reducedMotion, onNavigate }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null)
-  const mountedAtRef = useRef<number>(Date.now())
   useSectionReveal(sectionRef, reducedMotion)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<Status>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [feedback, setFeedback] = useState('')
   const [copied, setCopied] = useState(false)
+  const submittingRef = useRef(false)
+  const lastSubmittedRef = useRef<{ signature: string; at: number } | null>(null)
 
   const handleCopy = async () => {
     try {
@@ -35,91 +36,93 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2200)
     } catch {
-      // Fallback: focus mailto
+      // Clipboard unavailable; mailto remains visible
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setErrorMsg('')
+    if (submittingRef.current) return
 
-    // Spam guards: honeypot and minimum interaction dwell time (1.5s)
-    if (honeypot.trim() !== '') {
-      setStatus('sent')
-      return
-    }
-    if (Date.now() - mountedAtRef.current < 1500) {
-      setErrorMsg('Please wait a moment before sending your message.')
-      setStatus('error')
-      return
-    }
+    setFeedback('')
 
     const cleanName = name.trim()
     const cleanEmail = email.trim()
+    const cleanSubject = subject.trim()
     const cleanMessage = message.trim()
 
-    if (cleanName.length < 2) {
-      setErrorMsg('Please enter your name (at least 2 characters).')
+    if (cleanName.length < 2 || cleanName.length > 100) {
+      setFeedback('Please enter your name (2 to 100 characters).')
       setStatus('error')
       return
     }
-    if (!EMAIL_RE.test(cleanEmail)) {
-      setErrorMsg('Please enter a valid email address.')
+    if (!EMAIL_RE.test(cleanEmail) || cleanEmail.length > 160) {
+      setFeedback('Please enter a valid email address.')
       setStatus('error')
       return
     }
-    if (cleanMessage.length < 10) {
-      setErrorMsg('Please write a brief message (at least 10 characters).')
+    if (cleanSubject.length < 3 || cleanSubject.length > 150) {
+      setFeedback('Please enter a subject (3 to 150 characters).')
+      setStatus('error')
+      return
+    }
+    if (cleanMessage.length < 10 || cleanMessage.length > 2500) {
+      setFeedback('Please enter a message (10 to 2500 characters).')
       setStatus('error')
       return
     }
 
+    const signature = `${cleanEmail.toLowerCase()}|${cleanSubject}|${cleanMessage}`
+    const prev = lastSubmittedRef.current
+    if (prev && prev.signature === signature && Date.now() - prev.at < 90_000) {
+      setFeedback('This message was just sent. Please wait before submitting the same message again.')
+      setStatus('error')
+      return
+    }
+
+    submittingRef.current = true
     setStatus('sending')
 
     try {
-      let res: Response
-      if (contactProvider.kind === 'web3forms') {
-        res = await fetch(contactProvider.endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: contactProvider.accessKey,
-            name: cleanName,
-            email: cleanEmail,
-            message: cleanMessage,
-            subject: `Portfolio inquiry from ${cleanName}`,
-          }),
-        })
-      } else {
-        res = await fetch(contactProvider.endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            name: cleanName,
-            email: cleanEmail,
-            message: cleanMessage,
-            _subject: `Portfolio inquiry from ${cleanName}`,
-            _captcha: 'false',
-          }),
-        })
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: cleanName,
+          email: cleanEmail,
+          subject: cleanSubject,
+          message: cleanMessage,
+          company: honeypot,
+        }),
+      })
+
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; message?: string }
+
+      if (!res.ok || data.ok !== true) {
+        throw new Error(
+          data.error || `Unable to deliver your message right now. Please email ${social.email.handle} directly.`,
+        )
       }
 
-      const data = (await res.json().catch(() => ({}))) as { success?: boolean | string; message?: string }
-      if (!res.ok || data.success === false || data.success === 'false') {
-        throw new Error(data.message || 'Unable to deliver your message right now.')
-      }
-
+      lastSubmittedRef.current = { signature, at: Date.now() }
       setStatus('sent')
+      setFeedback(data.message || 'Message sent successfully.')
       setName('')
       setEmail('')
+      setSubject('')
       setMessage('')
     } catch (err) {
       setStatus('error')
-      setErrorMsg(
+      setFeedback(
         err instanceof Error
-          ? `${err.message} You can also email directly at ${social.email.handle}.`
+          ? err.message
           : `Delivery failed. Please email directly at ${social.email.handle}.`,
       )
+    } finally {
+      submittingRef.current = false
     }
   }
 
@@ -127,19 +130,13 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
     <section id="contact" ref={sectionRef} className="section-y border-t border-line">
       <div className="container-x">
         <SectionHeader
-          index="06"
+          index="07"
           kicker="Contact"
-          title={
-            <>
-              Let&apos;s build{' '}
-              <span className="font-serif italic font-normal text-accent-ink">something meaningful</span>
-            </>
-          }
-          aside={<p>Open to engineering internships, project collaborations and technical conversations.</p>}
+          title="Get in Touch"
+          aside={<p>Reach out regarding internships, software projects or technical collaborations.</p>}
         />
 
         <div className="grid gap-10 lg:grid-cols-12">
-          {/* Direct channels */}
           <div className="space-y-4 lg:col-span-5" data-reveal="">
             <div className="rounded-2xl border border-line bg-bg-2 p-6">
               <p className="eyebrow text-faint">Direct Email</p>
@@ -155,7 +152,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-accent px-4 text-xs font-semibold text-on-accent transition hover:opacity-90"
                 >
                   <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span>Open Mail App</span>
+                  <span>Send Email Directly</span>
                 </a>
                 <button
                   type="button"
@@ -170,7 +167,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
 
             <a
               href={social.phone.href}
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -191,7 +188,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
               href={social.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -209,7 +206,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
               href={social.linkedin.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-6 transition hover:border-line-strong"
+              className="flex items-center justify-between rounded-2xl border border-line bg-bg-2 p-5 transition hover:border-line-strong"
             >
               <div className="flex items-center gap-3.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface">
@@ -224,10 +221,8 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
             </a>
           </div>
 
-          {/* Form */}
           <div className="rounded-2xl border border-line bg-bg-2 p-6 sm:p-8 lg:col-span-7" data-reveal="">
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              {/* Honeypot anti-spam field */}
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="contact-company">Leave this blank</label>
                 <input
@@ -241,7 +236,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                 />
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label htmlFor="contact-name" className="eyebrow mb-2 block text-muted">
                     Name
@@ -252,7 +247,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                     type="text"
                     required
                     minLength={2}
-                    maxLength={120}
+                    maxLength={100}
                     autoComplete="name"
                     placeholder="Your name"
                     value={name}
@@ -281,6 +276,24 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
               </div>
 
               <div>
+                <label htmlFor="contact-subject" className="eyebrow mb-2 block text-muted">
+                  Subject
+                </label>
+                <input
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  required
+                  minLength={3}
+                  maxLength={150}
+                  placeholder="Internship inquiry, project question or collaboration"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
+                />
+              </div>
+
+              <div>
                 <label htmlFor="contact-message" className="eyebrow mb-2 block text-muted">
                   Message
                 </label>
@@ -290,23 +303,23 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                   required
                   minLength={10}
                   maxLength={2500}
-                  rows={5}
-                  placeholder="Tell me about the project, role or question..."
+                  rows={4}
+                  placeholder="Write your message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full resize-y rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent-ink focus:outline-none"
                 />
               </div>
 
-              {status === 'error' && errorMsg ? (
+              {status === 'error' && feedback ? (
                 <p role="alert" className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-xs text-ink">
-                  {errorMsg}
+                  {feedback}
                 </p>
               ) : null}
 
-              {status === 'sent' ? (
+              {status === 'sent' && feedback ? (
                 <p role="status" className="rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-xs text-ink">
-                  Message delivered via {contactProvider.name}. Thank you for reaching out.
+                  {feedback}
                 </p>
               ) : null}
 
@@ -321,7 +334,7 @@ export function Contact({ reducedMotion, onNavigate }: Props) {
                 </button>
 
                 <p className="text-xs text-muted">
-                  Delivered via {contactProvider.name}.{' '}
+                  Sent securely via server-side SMTP.{' '}
                   <button
                     type="button"
                     onClick={() => onNavigate('/privacy')}

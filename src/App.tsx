@@ -22,6 +22,7 @@ import { Experience } from './sections/Experience'
 import { Footer } from './sections/Footer'
 import { Hero } from './sections/Hero'
 import { Projects } from './sections/Projects'
+import { Recognition } from './sections/Recognition'
 import { Skills } from './sections/Skills'
 
 export default function App() {
@@ -100,9 +101,10 @@ export default function App() {
                   <Hero reducedMotion={reducedMotion} onScrollTo={scrollTo} />
                   <About reducedMotion={reducedMotion} />
                   <Projects reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
-                  <Skills reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
+                  <Skills reducedMotion={reducedMotion} />
                   <Experience reducedMotion={reducedMotion} onOpenProject={setActiveProject} />
                   <Education reducedMotion={reducedMotion} />
+                  <Recognition reducedMotion={reducedMotion} />
                   <Contact reducedMotion={reducedMotion} onNavigate={navigate} />
                 </motion.div>
               )}

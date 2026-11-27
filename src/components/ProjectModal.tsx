@@ -67,14 +67,13 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
             initial={{ opacity: 0, y: 24, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.985 }}
-            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
             data-lenis-prevent
             ref={scrollAreaRef}
             className="relative max-h-[92svh] w-full max-w-4xl overflow-y-auto rounded-t-3xl border border-line-strong bg-bg text-ink shadow-2xl sm:rounded-3xl"
           >
-            {/* Top bar */}
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-bg/95 px-6 py-4 backdrop-blur-sm sm:px-8">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-bg/95 px-6 py-4 backdrop-blur-sm sm:px-7">
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="font-mono text-xs text-accent-ink">{project.index}</span>
                 <span aria-hidden="true" className="text-faint">/</span>
@@ -82,9 +81,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink">
                   {project.status}
                 </span>
-                {project.period ? (
-                  <span className="font-mono text-[11px] text-faint">{project.period}</span>
-                ) : null}
+                {project.period ? <span className="font-mono text-[11px] text-faint">{project.period}</span> : null}
               </div>
               <button
                 ref={closeBtnRef}
@@ -98,17 +95,14 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
             </div>
 
             <div className="space-y-6 p-5 sm:p-7">
-              {/* Heading */}
               <div>
-                <h2 id="modal-project-title" className="text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+                <h2 id="modal-project-title" className="text-2xl font-medium tracking-tight text-ink sm:text-3xl">
                   {project.title}
                   {project.alias ? <span className="ml-2 font-serif italic font-normal text-muted">/ {project.alias}</span> : null}
                 </h2>
-                <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.ownership}</p>
-                <p className="mt-3 text-base leading-relaxed text-muted sm:text-lg">{project.summary}</p>
+                <p className="mt-1.5 font-mono text-xs uppercase tracking-[0.14em] text-accent-ink">{project.ownership}</p>
               </div>
 
-              {/* Media preview */}
               {project.image ? (
                 <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
                   <img
@@ -120,29 +114,28 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                     alt={project.image.alt}
                     className="aspect-video w-full object-cover"
                   />
-                  <figcaption className="border-t border-line px-4 py-2.5 font-mono text-[11px] text-muted">
+                  <figcaption className="border-t border-line px-4 py-2 font-mono text-[11px] text-muted">
                     {project.image.caption}
                   </figcaption>
                 </figure>
               ) : (
                 <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
-                  <div className="flex h-44 items-center justify-center p-5 text-ink">
-                    <ProjectArt variant={project.art} className="h-full max-h-36 w-auto" />
+                  <div className="flex h-40 items-center justify-center p-5 text-ink">
+                    <ProjectArt variant={project.art} className="h-full max-h-32 w-auto" />
                   </div>
-                  <figcaption className="border-t border-line px-4 py-2.5 font-mono text-[11px] text-muted">
-                    Architecture illustration — {project.title} architecture overview.
+                  <figcaption className="border-t border-line px-4 py-2 font-mono text-[11px] text-muted">
+                    Architecture illustration — {project.title} overview.
                   </figcaption>
                 </figure>
               )}
 
-              {/* Actions */}
               <div className="flex flex-wrap items-center gap-3">
                 {project.demo ? (
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 text-sm font-medium text-on-accent transition hover:opacity-90"
+                    className="inline-flex min-h-[42px] items-center gap-2 rounded-full bg-accent px-5 text-sm font-medium text-on-accent transition hover:opacity-90"
                   >
                     <span>Live Demo</span>
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -152,7 +145,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   href={project.repo}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-5 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
+                  className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-line-strong px-5 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
                 >
                   <GithubIcon className="h-4 w-4" aria-hidden="true" />
                   <span>View Repository</span>
@@ -161,54 +154,34 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 {project.linkNote ? <p className="text-xs text-muted">{project.linkNote}</p> : null}
               </div>
 
-              {/* Body */}
-              <div className="grid gap-8 md:grid-cols-12">
-                <div className="space-y-4 md:col-span-7">
-                  <h3 className="eyebrow text-faint">Overview</h3>
-                  {project.description.map((paragraph, i) => (
-                    <p key={i} className="text-sm leading-relaxed text-muted sm:text-[15px]">
-                      {paragraph}
-                    </p>
-                  ))}
+              <div className="grid gap-6 md:grid-cols-12">
+                <div className="space-y-4 md:col-span-6">
+                  <div className="rounded-2xl border border-line bg-bg-2 p-5">
+                    <h3 className="eyebrow mb-2 text-accent-ink">Problem Addressed</h3>
+                    <p className="text-sm leading-relaxed text-ink">{project.problem}</p>
+                  </div>
 
                   <div className="rounded-2xl border border-line bg-bg-2 p-5">
-                    <h3 className="eyebrow mb-2 text-accent-ink">Contribution &amp; Implementation</h3>
-                    <p className="text-sm leading-relaxed text-ink">{project.contribution}</p>
+                    <h3 className="eyebrow mb-2 text-accent-ink">Contribution</h3>
+                    <p className="text-sm leading-relaxed text-muted">{project.contribution}</p>
                   </div>
                 </div>
 
-                <div className="space-y-6 md:col-span-5">
-                  <div className="rounded-2xl border border-line bg-surface p-5">
-                    <h3 className="eyebrow mb-3 text-accent-ink">{project.highlightsLabel}</h3>
-                    <ul className="space-y-2.5 text-sm leading-relaxed text-ink">
-                      {project.highlights.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5">
-                          <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {project.pending ? (
-                    <div className="rounded-2xl border border-line bg-bg-2 p-5">
-                      <h3 className="eyebrow mb-3 text-muted">{project.pending.label}</h3>
-                      <ul className="space-y-2 text-xs leading-relaxed text-muted">
-                        {project.pending.items.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-faint" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
+                <div className="rounded-2xl border border-line bg-surface p-5 md:col-span-6">
+                  <h3 className="eyebrow mb-3 text-accent-ink">What Was Implemented</h3>
+                  <ul className="space-y-2.5 text-sm leading-relaxed text-ink">
+                    {project.implemented.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              {/* Stack */}
-              <div className="border-t border-line pt-6">
-                <p className="eyebrow mb-3 text-faint">Verified Technologies</p>
+              <div className="border-t border-line pt-5">
+                <p className="eyebrow mb-3 text-faint">Technologies</p>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((tech) => (
                     <span
@@ -221,13 +194,12 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                 </div>
               </div>
 
-              {/* Prev / Next */}
               {prevProject && nextProject ? (
-                <div className="flex items-center justify-between gap-4 border-t border-line pt-6">
+                <div className="flex items-center justify-between gap-4 border-t border-line pt-5">
                   <button
                     type="button"
                     onClick={() => onSelect(prevProject)}
-                    className="group inline-flex min-h-[44px] items-center gap-2 text-left text-sm text-muted transition hover:text-ink"
+                    className="group inline-flex min-h-[42px] items-center gap-2 text-left text-sm text-muted transition hover:text-ink"
                   >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
                     <span className="max-w-[160px] truncate sm:max-w-xs">
@@ -237,7 +209,7 @@ export function ProjectModal({ project, onClose, onSelect, onModalChange }: Prop
                   <button
                     type="button"
                     onClick={() => onSelect(nextProject)}
-                    className="group inline-flex min-h-[44px] items-center gap-2 text-right text-sm text-muted transition hover:text-ink"
+                    className="group inline-flex min-h-[42px] items-center gap-2 text-right text-sm text-muted transition hover:text-ink"
                   >
                     <span className="max-w-[160px] truncate sm:max-w-xs">
                       {nextProject.index} · {nextProject.title}

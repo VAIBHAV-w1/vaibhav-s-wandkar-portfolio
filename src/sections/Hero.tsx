@@ -24,8 +24,8 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
       gsap.from('[data-hero-in]', {
         y: 22,
         opacity: 0,
-        duration: 0.78,
-        stagger: 0.07,
+        duration: 0.72,
+        stagger: 0.06,
         ease: 'power3.out',
         clearProps: 'transform,opacity',
       })
@@ -35,56 +35,38 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
   }, [reducedMotion])
 
   return (
-    <section id="top" ref={heroRef} className="relative border-b border-line pt-7 pb-10 sm:pt-9 md:pt-11 md:pb-12">
+    <section id="top" ref={heroRef} className="relative border-b border-line pt-8 pb-10 sm:pt-10 md:pt-12 md:pb-14">
       <div className="container-x">
-        {/* Top identity bar */}
-        <div data-hero-in="" className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
-          <div className="flex items-center gap-2.5">
-            <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-            <span className="eyebrow text-muted">
-              {profile.initials} · Open to Internships &amp; Engineering Roles
-            </span>
-          </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-            {profile.location}
-          </p>
-        </div>
-
-        {/* Editorial split: Left brand lockup + copy & CTAs, Right dedicated portrait */}
-        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            {/* Official VSW logo presentation lockup */}
             <div data-hero-in="" className="mb-5 flex items-center gap-3.5 sm:gap-4">
               <BrandLogo variant="full" size="xl" />
               <div className="min-w-0">
-                <p className="text-sm font-semibold tracking-tight text-ink sm:text-base">{profile.name}</p>
-                <p className="eyebrow mt-1 text-accent-ink">{profile.positioning}</p>
+                <p className="eyebrow text-accent-ink">{profile.positioning}</p>
+                <p className="mt-1 font-mono text-xs text-faint">{profile.location}</p>
               </div>
             </div>
 
             <h1
               data-hero-in=""
-              className="text-[clamp(2.3rem,5vw,4.35rem)] font-medium leading-[1.04] tracking-[-0.035em] text-ink"
+              className="text-[clamp(2.25rem,4.8vw,4.1rem)] font-medium leading-[1.06] tracking-[-0.03em] text-ink"
             >
-              Building{' '}
-              <span className="font-serif italic font-normal text-accent-ink">intelligent</span>{' '}
-              applications through thoughtful engineering.
+              {profile.greeting}
             </h1>
 
             <p data-hero-in="" className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               {profile.intro}
             </p>
 
-            {/* Primary CTAs + Verified social links */}
             <div data-hero-in="" className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
               <Magnetic reducedMotion={reducedMotion}>
                 <button
                   type="button"
                   onClick={() => onScrollTo('#work')}
                   data-cursor="View"
-                  className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-accent px-6 text-sm font-semibold text-on-accent transition hover:opacity-90"
+                  className="inline-flex min-h-[46px] items-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-on-accent transition hover:opacity-90"
                 >
-                  <span>Explore Projects</span>
+                  <span>View Projects</span>
                   <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
                 </button>
               </Magnetic>
@@ -93,7 +75,7 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
                 <button
                   type="button"
                   onClick={() => onScrollTo('#contact')}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line-strong bg-bg-2 px-6 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
+                  className="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-line-strong bg-bg-2 px-6 text-sm font-medium text-ink transition hover:border-accent-ink hover:bg-surface"
                 >
                   <span>Contact Me</span>
                 </button>
@@ -130,24 +112,8 @@ export function Hero({ reducedMotion, onScrollTo }: Props) {
           </div>
 
           <div data-hero-in="" className="lg:col-span-5">
-            <PortraitFrame className="mx-auto max-w-[380px] lg:ml-auto lg:mr-0" />
+            <PortraitFrame className="mx-auto max-w-[370px] lg:ml-auto lg:mr-0" />
           </div>
-        </div>
-
-        {/* 4-column Engineering Focus Bar */}
-        <div data-hero-in="" className="mt-10 grid divide-y divide-line border-t border-line sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
-          {profile.focusAreas.map((area, idx) => (
-            <div
-              key={area.index}
-              className={`pt-4 pb-2.5 sm:py-4 ${idx > 0 ? 'lg:border-l lg:border-line lg:pl-6' : ''} ${
-                idx % 2 === 1 ? 'sm:border-l sm:border-line sm:pl-6 lg:pl-6' : 'sm:pr-6'
-              }`}
-            >
-              <p className="font-mono text-[11px] font-semibold text-accent-ink">{area.index}</p>
-              <p className="mt-1 text-sm font-medium text-ink">{area.label}</p>
-              <p className="mt-0.5 text-xs text-muted">{area.detail}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>

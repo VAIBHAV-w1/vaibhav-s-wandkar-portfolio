@@ -92,7 +92,7 @@ export function Navbar({
             </span>
           </button>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex xl:gap-2">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-0.5 lg:flex xl:gap-1.5">
             {navItems.map((item) => {
               const isActive = route === '/' && activeSection === item.id
               return (
@@ -100,13 +100,13 @@ export function Navbar({
                   key={item.id}
                   type="button"
                   onClick={() => handleNavClick(item.id)}
-                  className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
+                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition xl:px-3.5 xl:text-sm ${
                     isActive
                       ? 'bg-surface text-ink ring-1 ring-line-strong'
                       : 'text-ink/80 hover:bg-surface/60 hover:text-ink'
                   }`}
                 >
-                  <span className="font-mono text-[11px] font-semibold text-accent-ink">{item.index}</span>
+                  <span className="font-mono text-[10px] font-semibold text-accent-ink xl:text-[11px]">{item.index}</span>
                   <span>{item.label}</span>
                 </button>
               )

@@ -1,50 +1,30 @@
 /**
- * Core personal identity & editorial narrative — verified against public
- * GitHub repositories (github.com/VAIBHAV-w1) and portfolio records.
+ * Personal identity and profile summary verified from public repositories and resume records.
  */
 export const profile = {
   name: 'Vaibhav S. Wandkar',
-  firstName: 'Vaibhav',
-  middleInitial: 'S.',
-  lastName: 'Wandkar',
+  shortName: 'Vaibhav Wandkar',
   initials: 'VSW',
   location: 'Hubli, Karnataka, India',
-  positioning: 'Python Developer | Django Full-Stack Developer | Software Engineer',
-  headline: 'Building intelligent applications through thoughtful engineering.',
+  greeting: "Hi, I'm Vaibhav Wandkar.",
+  positioning: 'Python Developer | Django Full-Stack Developer',
   intro:
-    "I'm a Computer Science and Design undergraduate focused on Python, Django and full-stack software engineering — turning ideas into dependable systems with clean relational schemas and purposeful interfaces.",
-  focusAreas: [
-    { index: '01', label: 'Python & Django', detail: 'Full-stack architecture & server logic' },
-    { index: '02', label: 'Database Systems', detail: 'Relational schemas with PostgreSQL, MySQL & SQLite' },
-    { index: '03', label: 'Web Engineering', detail: 'Responsive interfaces & OTP/session auth' },
-    { index: '04', label: 'AI & Security', detail: 'Computer vision, ML & web security' },
+    "I'm a Computer Science and Design student interested in building web applications using Python and Django. I also work on projects involving AI, computer vision and cybersecurity.",
+  about:
+    "I'm pursuing a B.E. in Computer Science and Design at Bapuji Institute of Engineering and Technology, Davangere, after completing a Diploma in Computer Science and Engineering in Hubli. Most of my coursework and project time goes into building Python and Django web applications backed by relational databases, alongside practical work in machine learning, computer vision and web security testing.",
+  languages: ['English', 'Hindi', 'Kannada', 'Marathi'],
+  interests: [
+    'Python & Django Development',
+    'Full-Stack Web Applications',
+    'Relational Databases',
+    'AI & Machine Learning',
+    'Computer Vision',
+    'Cybersecurity',
   ],
   education: {
     degree: 'B.E. Computer Science and Design',
     institution: 'Bapuji Institute of Engineering and Technology, Davangere',
     university: 'VTU',
     period: '2024 – Expected 2027',
-  },
-  languages: ['English', 'Hindi', 'Kannada', 'Marathi'],
-  interests: [
-    'Python & Django Backend Engineering',
-    'Relational Database Architecture',
-    'Applied AI & Computer Vision',
-    'Application Security & VAPT',
-    'Full-Stack Web Systems',
-    'Cloud Deployment Workflows',
-  ],
-  exploring: [
-    'Multi-camera AI & cloud inference runtimes',
-    'PostgreSQL performance & REST security hardening',
-    'Cross-browser accessibility & UI verification',
-  ],
-  about: {
-    statement:
-      'I build dependable, database-driven software with Python and Django — pairing structured backend architecture with interfaces designed for clarity.',
-    background:
-      'Studying both computer science and interaction design shapes how I plan data models alongside user workflows, building directly on my Diploma foundation in software and networking.',
-    approach:
-      'Across surveillance intelligence, campus recovery portals, healthcare scheduling and security tooling, I prioritize clean schema design, role-based access control, input validation and maintainable delivery — backed by internships across AI, cloud, Android UI and VAPT.',
   },
 } as const

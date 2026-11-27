@@ -1,22 +1,17 @@
 # VSW — Vaibhav S. Wandkar Portfolio
 
-Personal developer portfolio for **Vaibhav S. Wandkar (VSW)** — **Python Developer | Django Full-Stack Developer | Software Engineer** (B.E. Computer Science and Design, Bapuji Institute of Engineering and Technology, Davangere — VTU).
+Personal portfolio for **Vaibhav S. Wandkar (VSW)** — Computer Science and Design student focusing on **Python** and **Django** full-stack web development, alongside projects in AI, computer vision and cybersecurity.
 
-Built with React, TypeScript, Vite, Tailwind CSS v4, GSAP (`ScrollTrigger`), Motion for React, Lenis, and self-hosted variable typography (`Inter Tight`, `Instrument Serif`, `JetBrains Mono`).
+Built with React, TypeScript, Vite, Tailwind CSS v4, GSAP, Motion for React, Lenis and a Vercel Node.js serverless SMTP backend (`api/contact.ts` with Nodemailer).
 
 ---
 
-## Key Architecture & Features
+## Sections & Highlights
 
-- **VSW Brand Identity**: Official circular silver-and-gold **VSW** logo (`vsw-official-logo.webp`), compact cropped navbar emblem, crisp simplified favicon/app-icon derivatives (`16px`–`180px`), and Open Graph social preview.
-- **Unobstructed Studio Portrait**: Preserves the original high-resolution studio photograph (`vaibhav-portrait-original.jpg` alongside non-upscaled `480w` and `782w` WebP variants) inside a clean, unobstructed gallery frame.
-- **Verified Profile & Credentials**:
-  - **Education**: B.E. Computer Science and Design at Bapuji Institute of Engineering and Technology, Davangere (`2024 – Expected 2027`), Diploma in Computer Science and Engineering at K.L.E. Society's Smt. C.I. Munavalli Polytechnic, Hubli (`2021 – 2024`), SSLC at Chetan Public School, Hubli (`2020 – 2021`).
-  - **Internships & Certifications**: Corizo Edutech (Android App Development & Cloud Computing, 2025), Internz Learn (AI, 2024), HAEGL Technologies Pvt. Ltd. (Cybersecurity, 2024), plus Wipro DICE.
-  - **Achievements**: CodeFury 8.0 National-Level Finalist, SIH Internal Round Qualifier, Build for Bengaluru, CBIT Hacktoberfest, NAIN 2.0 Project Contributor.
-  - **Languages**: English, Hindi, Kannada, Marathi.
-- **Exact 8-Project Showcase**: `01` DeepVision · `02` CyberShield · `03` Cropify · `04` Decentralized Voting System · `05` Retino · `06` Lost and Found Tracking System · `07` AI-Based Resume Screening · `08` Hospital Management System (HAEGL Technologies internship-associated) — with verified repositories, authorship badges, and transparent Screenshot vs Illustration labels.
-- **Security & Production Readiness**: Compatible Content Security Policy (`vercel.json`), HSTS, `X-Frame-Options: DENY`, `rel="noopener noreferrer"` on external tabs, zero client-side secret exposure, spam-protected contact form, `/privacy` disclosure, custom HTTP 404 route, `robots.txt`, and dynamic `sitemap.xml`.
+- **VSW Brand & Portrait**: Official circular **VSW** logo (`vsw-official-logo.webp`), compact cropped navbar emblem, simplified favicon/app-icon derivatives (`16px`–`180px`), Open Graph social preview, and studio portrait (`vaibhav-portrait-original.jpg` + `480w`/`782w` WebP).
+- **8-Section Layout**: Hero · About · Projects (`01`–`08`) · Skills (7 clean groups) · Experience (4 internships) · Education · Certifications & Achievements · Contact.
+- **Projects (`01`–`08`)**: DeepVision · CyberShield · Cropify · Decentralized Voting System · Retino · Lost and Found Tracking System · AI-Based Resume Screening · Hospital Management System (HAEGL Technologies internship-associated) — with verified ownership labels, repository links, and live demos where available.
+- **Server-Side SMTP Contact (`api/contact.ts`)**: `POST /api/contact` validated endpoint with honeypot guard, IP rate limiting, duplicate-submit guard, header injection protection, same-origin CSP (`vercel.json`), and Nodemailer SMTP delivery. See [docs/email-setup.md](docs/email-setup.md).
 
 ---
 
@@ -29,22 +24,17 @@ npm install
 npm run dev
 ```
 
-### Typecheck, Build & Preview
+### Verification Commands
 
 ```bash
 npm run typecheck
 npm run build
 npm run preview
+node tests/smtp-contact.test.mjs
 ```
 
 ---
 
 ## Environment Configuration
 
-Copy `.env.example` to `.env` (never commit `.env`):
-
-```ini
-VITE_SITE_URL=
-VITE_WEB3FORMS_ACCESS_KEY=
-VITE_FORMSUBMIT_ID=
-```
+See `.env.example` and [docs/email-setup.md](docs/email-setup.md) for configuring `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, and `MAIL_TO` in Vercel Project Settings (never prefix SMTP secrets with `VITE_`).

@@ -1,35 +1,14 @@
 import { social } from './social'
 
 /**
- * Site-level configuration. The production URL is never hard-coded — see
- * vite.config.ts and .env.example.
+ * Site-level configuration. The production URL is resolved from VITE_SITE_URL or
+ * VERCEL_PROJECT_PRODUCTION_URL during the build.
  */
 export const site = {
   url: __SITE_URL__,
-  title: 'VSW — Vaibhav S. Wandkar | Python & Django Full-Stack Developer',
+  title: 'Vaibhav S. Wandkar | Python & Django Full-Stack Developer',
   description:
-    'VSW portfolio of Vaibhav S. Wandkar — Python Developer, Django Full-Stack Developer and Software Engineer building dependable backend systems, full-stack applications, AI/ML and security software.',
+    'Portfolio of Vaibhav S. Wandkar (VSW) — Computer Science and Design student building web applications with Python and Django, alongside AI, computer vision and cybersecurity projects.',
   privacyUpdated: '27 November 2026',
+  fallbackEmail: social.email.handle,
 }
-
-export type ContactProvider =
-  | { kind: 'web3forms'; name: 'Web3Forms'; endpoint: string; accessKey: string; policy: string }
-  | { kind: 'formsubmit'; name: 'FormSubmit'; endpoint: string; policy: string }
-
-const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim()
-const formSubmitId = import.meta.env.VITE_FORMSUBMIT_ID?.trim() || social.email.handle
-
-export const contactProvider: ContactProvider = web3Key
-  ? {
-      kind: 'web3forms',
-      name: 'Web3Forms',
-      endpoint: 'https://api.web3forms.com/submit',
-      accessKey: web3Key,
-      policy: 'https://web3forms.com/privacy',
-    }
-  : {
-      kind: 'formsubmit',
-      name: 'FormSubmit',
-      endpoint: `https://formsubmit.co/ajax/${encodeURIComponent(formSubmitId)}`,
-      policy: 'https://formsubmit.co/privacy.pdf',
-    }
